@@ -1,0 +1,468 @@
+// Reading ชุดที่ 4 — 5 passages × 10 ข้อ = 50 ข้อ (หมวด: วิศวกรรมพลังงาน/การแพทย์/โรคเขตร้อน/การเมืองท้องถิ่น/เทคโนโลยี)
+window.TUGET_DATA = window.TUGET_DATA || [];
+window.TUGET_DATA.push({
+  part: "reading",
+  set: 4,
+  passages: [
+    {
+      title: "Passage 1: Storing the Sun and the Wind",
+      text: `Solar panels and wind turbines have become dramatically cheaper over the past decade, and in many places they now generate electricity more cheaply than coal or gas. Yet renewable energy faces one stubborn problem: it is not always available when it is needed. The sun does not shine at night, and the wind does not blow on demand. A power grid, however, must match supply to demand at every moment, because electricity is extremely difficult to store in large amounts.
+
+For most of the past century, this was not a serious issue. Power plants burning coal or gas could simply increase or decrease their output to follow demand. As renewables make up a larger share of the grid, though, the mismatch grows. On a sunny, windy afternoon, far more electricity may be generated than is needed, while on a still evening, supply can fall short. Without a way to store the surplus, much of this clean energy is simply wasted.
+
+The most familiar solution is the battery. Giant battery installations, some the size of several football fields, can absorb excess electricity during the day and release it after dark. Battery costs have fallen steeply, making this approach increasingly practical. But batteries are still expensive for storing energy over many days, and they rely on materials that are limited and costly to extract.
+
+Engineers are therefore pursuing other methods. One of the oldest and most effective is pumped hydro storage, which uses surplus electricity to pump water uphill into a reservoir; when power is needed, the water is released to drive turbines. Other ideas include compressing air in underground caverns and using surplus electricity to produce hydrogen gas, which can be stored and later burned or converted back into electricity. No single technology is likely to solve the problem alone. Instead, a future powered largely by renewables will probably depend on a mix of storage methods, each suited to a different need.`,
+      questions: [
+        { id: "RD4-01", tag: "Main Idea",
+          question: "What is the passage mainly about?",
+          questionTH: "บทความนี้กล่าวถึงเรื่องใดเป็นหลัก?",
+          choices: ["The challenge of storing renewable energy and possible solutions", "Why coal is better than solar power", "How to build a wind turbine", "The history of electricity"],
+          choicesTH: ["ความท้าทายในการกักเก็บพลังงานหมุนเวียนและทางออกที่เป็นไปได้", "เหตุใดถ่านหินดีกว่าพลังงานแสงอาทิตย์", "วิธีสร้างกังหันลม", "ประวัติของไฟฟ้า"],
+          answer: 0,
+          explanation: "บทความเน้นปัญหาการกักเก็บพลังงานหมุนเวียน (ผลิตไม่ตรงเวลาที่ต้องใช้) และวิธีแก้หลายแบบ ตัวเลือก 1 จึงครอบคลุม"
+        },
+        { id: "RD4-02", tag: "Detail",
+          question: "According to the passage, what is the 'stubborn problem' with renewable energy?",
+          questionTH: "ตามบทความ 'ปัญหาที่แก้ยาก' ของพลังงานหมุนเวียนคืออะไร?",
+          choices: ["It is too expensive", "It is not always available when needed", "It damages the grid", "It produces too little power"],
+          choicesTH: ["มันแพงเกินไป", "มันไม่ได้มีให้ใช้ตลอดเวลาที่ต้องการ", "มันทำลายโครงข่ายไฟฟ้า", "ผลิตไฟได้น้อยเกินไป"],
+          answer: 1,
+          explanation: "ย่อหน้า 1: 'it is not always available when it is needed' — แดดไม่ส่องตอนกลางคืน ลมไม่พัดตามสั่ง"
+        },
+        { id: "RD4-03", tag: "Detail",
+          question: "Why was matching supply to demand easier in the past?",
+          questionTH: "เหตุใดการจับคู่อุปทานกับอุปสงค์จึงง่ายกว่าในอดีต?",
+          choices: ["There was no electricity demand", "Coal or gas plants could increase or decrease their output", "Batteries were free", "The sun shone at night"],
+          choicesTH: ["ไม่มีความต้องการไฟฟ้า", "โรงไฟฟ้าถ่านหิน/ก๊าซเพิ่มหรือลดกำลังผลิตได้", "แบตเตอรี่ฟรี", "ดวงอาทิตย์ส่องตอนกลางคืน"],
+          answer: 1,
+          explanation: "ย่อหน้า 2: 'Power plants burning coal or gas could simply increase or decrease their output to follow demand' — ปรับตามได้ง่าย"
+        },
+        { id: "RD4-04", tag: "Detail",
+          question: "What happens to surplus clean energy if it cannot be stored?",
+          questionTH: "พลังงานสะอาดส่วนเกินจะเป็นอย่างไรหากกักเก็บไม่ได้?",
+          choices: ["It is sold abroad", "It is simply wasted", "It is turned into coal", "It powers the sun"],
+          choicesTH: ["ถูกขายไปต่างประเทศ", "ถูกปล่อยทิ้งเปล่า ๆ", "ถูกเปลี่ยนเป็นถ่านหิน", "ไปให้พลังงานแก่ดวงอาทิตย์"],
+          answer: 1,
+          explanation: "ย่อหน้า 2: 'Without a way to store the surplus, much of this clean energy is simply wasted' — ตอบตรงตัว"
+        },
+        { id: "RD4-05", tag: "Detail",
+          question: "What is described as the most familiar storage solution?",
+          questionTH: "อะไรถูกบรรยายว่าเป็นทางออกการกักเก็บที่คุ้นเคยที่สุด?",
+          choices: ["The battery", "Burning hydrogen", "Pumped hydro", "Compressed air"],
+          choicesTH: ["แบตเตอรี่", "การเผาไฮโดรเจน", "พลังน้ำแบบสูบกลับ", "อากาศอัด"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'The most familiar solution is the battery' — แบตขนาดยักษ์เก็บไฟกลางวันปล่อยกลางคืน"
+        },
+        { id: "RD4-06", tag: "Vocabulary in Context",
+          question: "The word \"surplus\" in paragraph 4 is closest in meaning to",
+          questionTH: "คำว่า \"surplus\" ในย่อหน้าที่ 4 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["excess amount", "shortage", "weakness", "cost"],
+          choicesTH: ["ส่วนเกิน ที่เหลือมากเกิน", "การขาดแคลน", "จุดอ่อน", "ต้นทุน"],
+          answer: 0,
+          explanation: "'uses surplus electricity to pump water uphill' = ใช้ไฟส่วนเกินสูบน้ำขึ้นที่สูง <b>surplus = excess</b> (ส่วนเกิน) — shortage ตรงข้าม"
+        },
+        { id: "RD4-07", tag: "Detail",
+          question: "How does pumped hydro storage work?",
+          questionTH: "พลังน้ำแบบสูบกลับทำงานอย่างไร?",
+          choices: ["It burns water for fuel", "It pumps water uphill and later releases it to drive turbines", "It freezes water into ice", "It stores sunlight in tanks"],
+          choicesTH: ["เผาน้ำเป็นเชื้อเพลิง", "สูบน้ำขึ้นที่สูงแล้วปล่อยลงมาหมุนกังหัน", "แช่น้ำให้เป็นน้ำแข็ง", "เก็บแสงแดดไว้ในถัง"],
+          answer: 1,
+          explanation: "ย่อหน้า 4: 'pump water uphill into a reservoir; when power is needed, the water is released to drive turbines' — ตอบตรงตัว"
+        },
+        { id: "RD4-08", tag: "Detail",
+          question: "Which is mentioned as a drawback of batteries?",
+          questionTH: "ข้อใดถูกกล่าวถึงว่าเป็นข้อเสียของแบตเตอรี่?",
+          choices: ["They rely on limited and costly materials", "They are too light", "They produce coal", "They never lose charge"],
+          choicesTH: ["พึ่งพาวัสดุที่มีจำกัดและสกัดได้แพง", "เบาเกินไป", "ผลิตถ่านหิน", "ไม่เคยสูญเสียประจุ"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'they rely on materials that are limited and costly to extract' และแพงสำหรับเก็บพลังงานหลายวัน"
+        },
+        { id: "RD4-09", tag: "Inference",
+          question: "What does the author conclude about solving the storage problem?",
+          questionTH: "ผู้เขียนสรุปอย่างไรเกี่ยวกับการแก้ปัญหาการกักเก็บ?",
+          choices: ["One technology will solve it completely", "A mix of storage methods will likely be needed", "It can never be solved", "Renewables should be abandoned"],
+          choicesTH: ["เทคโนโลยีเดียวจะแก้ได้ทั้งหมด", "น่าจะต้องใช้หลายวิธีผสมกัน", "แก้ไม่ได้เลย", "ควรเลิกใช้พลังงานหมุนเวียน"],
+          answer: 1,
+          explanation: "ย่อหน้า 4: 'No single technology is likely to solve the problem alone ... depend on a mix of storage methods' — ตอบตรงตัว"
+        },
+        { id: "RD4-10", tag: "Inference",
+          question: "It can be inferred that, as renewables grow, the need for energy storage will",
+          questionTH: "อนุมานได้ว่าเมื่อพลังงานหมุนเวียนเพิ่มขึ้น ความต้องการกักเก็บพลังงานจะ",
+          choices: ["increase", "disappear", "stay the same", "become illegal"],
+          choicesTH: ["เพิ่มขึ้น", "หายไป", "คงเท่าเดิม", "กลายเป็นสิ่งผิดกฎหมาย"],
+          answer: 0,
+          explanation: "บทบอกว่ายิ่งพลังงานหมุนเวียนมีสัดส่วนมาก ความไม่สมดุลยิ่งโต ('the mismatch grows') จึงอนุมานได้ว่าความต้องการกักเก็บจะเพิ่มขึ้น"
+        },
+      ]
+    },
+    {
+      title: "Passage 2: The World Inside Us",
+      text: `The human body is home to trillions of microorganisms, most of them living in the intestines. Together, this vast community of bacteria, viruses, and fungi is known as the gut microbiome. Until recently, scientists paid little attention to these tiny residents, assuming they were either harmless passengers or occasional troublemakers. Today, however, the microbiome is recognized as one of the most exciting frontiers in medicine, with growing evidence that it influences our health in profound ways.
+
+The bacteria in our gut perform tasks that our own bodies cannot. They help break down certain fibers in our food, releasing nutrients we would otherwise be unable to absorb. They produce vitamins, and they train the immune system, teaching it to distinguish between harmful invaders and the body's own tissues. A healthy, diverse microbiome appears to be essential to overall well-being.
+
+When the balance of this community is disturbed, problems can follow. Research has linked an unhealthy microbiome to a surprising range of conditions, including obesity, diabetes, and disorders of the digestive system. More unexpectedly, studies suggest that the gut may even influence the brain. Scientists have found that the microbiome can affect mood and behavior, communicating with the brain through chemical signals — a connection sometimes called the "gut-brain axis."
+
+What shapes the microbiome? Diet plays a central role: a varied diet rich in vegetables and fiber tends to support a diverse community of bacteria, while a diet high in processed food does the opposite. Antibiotics, though often necessary, can disturb the balance by killing beneficial bacteria along with harmful ones. Researchers are now investigating whether deliberately altering the microbiome — through diet, probiotics, or other treatments — could help prevent or treat disease. The field is still young, and much remains uncertain, but it is increasingly clear that to understand human health, we must also understand the world living inside us.`,
+      questions: [
+        { id: "RD4-11", tag: "Main Idea",
+          question: "What is the passage mainly about?",
+          questionTH: "บทความนี้กล่าวถึงเรื่องใดเป็นหลัก?",
+          choices: ["The gut microbiome and its influence on health", "How to cook healthy vegetables", "Why antibiotics should never be used", "The structure of the human brain"],
+          choicesTH: ["จุลินทรีย์ในลำไส้และอิทธิพลต่อสุขภาพ", "วิธีปรุงผักเพื่อสุขภาพ", "เหตุใดไม่ควรใช้ยาปฏิชีวนะเลย", "โครงสร้างของสมองมนุษย์"],
+          answer: 0,
+          explanation: "บทความอธิบายว่าจุลินทรีย์ในลำไส้คืออะไร ทำหน้าที่อะไร ส่งผลต่อสุขภาพอย่างไร ตัวเลือก 1 จึงครอบคลุม"
+        },
+        { id: "RD4-12", tag: "Detail",
+          question: "What is the gut microbiome?",
+          questionTH: "จุลินทรีย์ในลำไส้ (gut microbiome) คืออะไร?",
+          choices: ["A single type of bacteria", "A vast community of bacteria, viruses, and fungi in the intestines", "A part of the brain", "A kind of vitamin"],
+          choicesTH: ["แบคทีเรียชนิดเดียว", "ชุมชนขนาดใหญ่ของแบคทีเรีย ไวรัส และเชื้อราในลำไส้", "ส่วนหนึ่งของสมอง", "วิตามินชนิดหนึ่ง"],
+          answer: 1,
+          explanation: "ย่อหน้า 1: 'this vast community of bacteria, viruses, and fungi is known as the gut microbiome' — ตอบตรงตัว"
+        },
+        { id: "RD4-13", tag: "Detail",
+          question: "Which task do gut bacteria perform, according to the passage?",
+          questionTH: "ตามบทความ แบคทีเรียในลำไส้ทำหน้าที่ใด?",
+          choices: ["They help break down fibers and produce vitamins", "They pump blood", "They store memories", "They control breathing"],
+          choicesTH: ["ช่วยย่อยเส้นใยและผลิตวิตามิน", "สูบฉีดเลือด", "เก็บความทรงจำ", "ควบคุมการหายใจ"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'help break down certain fibers ... They produce vitamins, and they train the immune system' — ตอบตรงตัว"
+        },
+        { id: "RD4-14", tag: "Detail",
+          question: "What does a healthy microbiome help the immune system do?",
+          questionTH: "จุลินทรีย์ที่สมดุลช่วยให้ระบบภูมิคุ้มกันทำสิ่งใด?",
+          choices: ["Distinguish harmful invaders from the body's own tissues", "Grow new bones", "Increase height", "Change eye color"],
+          choicesTH: ["แยกแยะผู้บุกรุกที่เป็นอันตรายออกจากเนื้อเยื่อของร่างกายเอง", "สร้างกระดูกใหม่", "เพิ่มความสูง", "เปลี่ยนสีตา"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'training the immune system, teaching it to distinguish between harmful invaders and the body's own tissues' — ตอบตรงตัว"
+        },
+        { id: "RD4-15", tag: "Vocabulary in Context",
+          question: "The word \"disturbed\" in paragraph 3 is closest in meaning to",
+          questionTH: "คำว่า \"disturbed\" ในย่อหน้าที่ 3 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["upset or thrown out of balance", "strengthened", "cleaned", "counted"],
+          choicesTH: ["ถูกรบกวนจนเสียสมดุล", "ถูกทำให้แข็งแรงขึ้น", "ถูกทำความสะอาด", "ถูกนับ"],
+          answer: 0,
+          explanation: "'When the balance of this community is disturbed, problems can follow' <b>disturbed = ถูกรบกวน/ทำให้เสียสมดุล</b> — strengthened ตรงข้าม"
+        },
+        { id: "RD4-16", tag: "Detail",
+          question: "Which condition has research linked to an unhealthy microbiome?",
+          questionTH: "งานวิจัยเชื่อมโยงภาวะใดกับจุลินทรีย์ที่ไม่สมดุล?",
+          choices: ["Obesity and diabetes", "Broken bones", "Color blindness", "Tooth decay only"],
+          choicesTH: ["โรคอ้วนและเบาหวาน", "กระดูกหัก", "ตาบอดสี", "ฟันผุเท่านั้น"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'linked an unhealthy microbiome to ... obesity, diabetes, and disorders of the digestive system' — ตอบตรงตัว"
+        },
+        { id: "RD4-17", tag: "Detail",
+          question: "What is the 'gut-brain axis'?",
+          questionTH: "'gut-brain axis' คืออะไร?",
+          choices: ["A connection through which the gut can influence the brain", "A type of surgery", "A new diet plan", "A brain disease"],
+          choicesTH: ["ช่องทางที่ลำไส้สามารถส่งผลต่อสมอง", "การผ่าตัดชนิดหนึ่ง", "แผนอาหารใหม่", "โรคทางสมอง"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: ลำไส้ 'can affect mood and behavior, communicating with the brain through chemical signals — a connection sometimes called the gut-brain axis' — ตอบตรงตัว"
+        },
+        { id: "RD4-18", tag: "Detail",
+          question: "According to the passage, what supports a diverse microbiome?",
+          questionTH: "ตามบทความ อะไรช่วยให้จุลินทรีย์มีความหลากหลาย?",
+          choices: ["A varied diet rich in vegetables and fiber", "A diet of processed food", "Skipping meals", "Drinking only water"],
+          choicesTH: ["อาหารหลากหลายที่มีผักและเส้นใยมาก", "อาหารแปรรูป", "การงดมื้ออาหาร", "ดื่มแต่น้ำเปล่า"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'a varied diet rich in vegetables and fiber tends to support a diverse community of bacteria' — ตรงข้ามกับอาหารแปรรูป"
+        },
+        { id: "RD4-19", tag: "Detail",
+          question: "How can antibiotics affect the microbiome?",
+          questionTH: "ยาปฏิชีวนะส่งผลต่อจุลินทรีย์ในลำไส้อย่างไร?",
+          choices: ["They can disturb the balance by killing beneficial bacteria too", "They always improve it", "They have no effect", "They create new organs"],
+          choicesTH: ["อาจทำให้เสียสมดุลเพราะฆ่าแบคทีเรียที่มีประโยชน์ไปด้วย", "ทำให้ดีขึ้นเสมอ", "ไม่มีผล", "สร้างอวัยวะใหม่"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'Antibiotics ... can disturb the balance by killing beneficial bacteria along with harmful ones' — ตอบตรงตัว"
+        },
+        { id: "RD4-20", tag: "Inference",
+          question: "What does the phrase \"the world living inside us\" refer to?",
+          questionTH: "วลี \"the world living inside us\" หมายถึงอะไร?",
+          choices: ["The gut microbiome", "The human brain", "The skeleton", "Outer space"],
+          choicesTH: ["จุลินทรีย์ในลำไส้", "สมองมนุษย์", "โครงกระดูก", "อวกาศ"],
+          answer: 0,
+          explanation: "ประโยคปิดสรุปว่าต้องเข้าใจ 'the world living inside us' ซึ่งหมายถึงชุมชนจุลินทรีย์ในร่างกาย (the microbiome) ที่บทพูดถึงมาตลอด"
+        },
+      ]
+    },
+    {
+      title: "Passage 3: The Return of Dengue Fever",
+      text: `Dengue fever, a disease spread by mosquitoes, has become one of the fastest-growing public health threats in the tropical world. Caused by a virus and transmitted mainly by the Aedes mosquito, dengue can produce high fever, severe joint pain, and in its most dangerous form, life-threatening bleeding. Although most patients recover, the sheer number of cases places an enormous burden on hospitals, especially during outbreaks that can overwhelm health systems within weeks.
+
+Several factors have driven the dramatic rise in dengue. Rapid urbanization has created crowded cities where the disease can spread easily, while the Aedes mosquito thrives in exactly the kind of environment that cities provide. It breeds in small pools of clean, still water — in flower pots, discarded tires, blocked drains, and water-storage containers. A warming climate has allowed the mosquito to expand into regions where it was once too cool to survive, carrying the disease to new populations with no previous exposure.
+
+Controlling dengue is unusually difficult. Unlike some diseases, it cannot be prevented simply by improving sanitation, because the mosquito breeds in clean rather than dirty water. For many years there was no effective vaccine, and even now the available vaccines are not suitable for everyone. As a result, the most important defenses remain practical: removing standing water where mosquitoes breed, using repellents and screens, and responding quickly when outbreaks begin.
+
+Scientists are also exploring more inventive approaches. In several countries, mosquitoes have been infected with a harmless bacterium that prevents them from transmitting the dengue virus; when released, these mosquitoes pass the bacterium to wild populations, gradually reducing the spread of disease. Early trials have produced encouraging results. While such methods offer real hope, experts caution that no single measure will be enough. For now, dengue remains a stubborn reminder of how closely human health is tied to the environment we create around us.`,
+      questions: [
+        { id: "RD4-21", tag: "Main Idea",
+          question: "What is the passage mainly about?",
+          questionTH: "บทความนี้กล่าวถึงเรื่องใดเป็นหลัก?",
+          choices: ["The rise of dengue fever, its causes, and efforts to control it", "How to treat a broken leg", "Why mosquitoes are useful", "The history of hospitals"],
+          choicesTH: ["การเพิ่มขึ้นของไข้เลือดออก สาเหตุ และความพยายามควบคุม", "วิธีรักษาขาหัก", "เหตุใดยุงจึงมีประโยชน์", "ประวัติของโรงพยาบาล"],
+          answer: 0,
+          explanation: "บทความครอบคลุมการเพิ่มขึ้นของไข้เลือดออก สาเหตุ ความยากในการควบคุม และวิธีการใหม่ ตัวเลือก 1 จึงตรงที่สุด"
+        },
+        { id: "RD4-22", tag: "Detail",
+          question: "How is dengue fever mainly transmitted?",
+          questionTH: "ไข้เลือดออกแพร่กระจายโดยหลักผ่านอะไร?",
+          choices: ["By the Aedes mosquito", "By dirty food", "Through the air", "By touching surfaces"],
+          choicesTH: ["โดยยุงลาย (Aedes)", "โดยอาหารสกปรก", "ผ่านอากาศ", "โดยการสัมผัสพื้นผิว"],
+          answer: 0,
+          explanation: "ย่อหน้า 1: 'transmitted mainly by the Aedes mosquito' — ตอบตรงตัว"
+        },
+        { id: "RD4-23", tag: "Detail",
+          question: "Where does the Aedes mosquito breed?",
+          questionTH: "ยุงลายวางไข่/เพาะพันธุ์ที่ไหน?",
+          choices: ["In small pools of clean, still water", "In the open ocean", "In dry deserts", "Inside electrical wires"],
+          choicesTH: ["ในแอ่งน้ำสะอาดที่นิ่งเล็ก ๆ", "ในมหาสมุทรเปิด", "ในทะเลทรายแห้ง", "ในสายไฟฟ้า"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'It breeds in small pools of clean, still water — in flower pots, discarded tires, blocked drains' — ตอบตรงตัว"
+        },
+        { id: "RD4-24", tag: "Detail",
+          question: "How has a warming climate affected dengue?",
+          questionTH: "ภาวะโลกร้อนส่งผลต่อไข้เลือดออกอย่างไร?",
+          choices: ["It has allowed the mosquito to spread into new, once-cooler regions", "It has killed all mosquitoes", "It has cured the disease", "It has made the virus weaker"],
+          choicesTH: ["ทำให้ยุงแพร่เข้าสู่พื้นที่ใหม่ที่เคยเย็นเกินไป", "ฆ่ายุงทั้งหมด", "รักษาโรคให้หาย", "ทำให้ไวรัสอ่อนลง"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'A warming climate has allowed the mosquito to expand into regions where it was once too cool to survive' — ตอบตรงตัว"
+        },
+        { id: "RD4-25", tag: "Detail",
+          question: "Why can dengue NOT be prevented simply by improving sanitation?",
+          questionTH: "เหตุใดไข้เลือดออกจึงป้องกันไม่ได้ด้วยแค่การปรับปรุงสุขอนามัย?",
+          choices: ["The mosquito breeds in clean, not dirty, water", "Sanitation is too expensive", "The virus lives in food", "Hospitals are too far away"],
+          choicesTH: ["ยุงเพาะพันธุ์ในน้ำสะอาด ไม่ใช่น้ำสกปรก", "สุขอนามัยแพงเกินไป", "ไวรัสอยู่ในอาหาร", "โรงพยาบาลอยู่ไกลเกินไป"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'it cannot be prevented simply by improving sanitation, because the mosquito breeds in clean rather than dirty water' — ตอบตรงตัว"
+        },
+        { id: "RD4-26", tag: "Vocabulary in Context",
+          question: "The word \"overwhelm\" in paragraph 1 is closest in meaning to",
+          questionTH: "คำว่า \"overwhelm\" ในย่อหน้าที่ 1 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["overload completely", "support", "clean", "build"],
+          choicesTH: ["ทำให้รับภาระเกินกำลังจนรับมือไม่ไหว", "สนับสนุน", "ทำความสะอาด", "สร้าง"],
+          answer: 0,
+          explanation: "'outbreaks that can overwhelm health systems within weeks' = การระบาดที่ทำให้ระบบสาธารณสุขรับไม่ไหว <b>overwhelm = ท่วมท้นเกินกำลัง</b>"
+        },
+        { id: "RD4-27", tag: "Detail",
+          question: "According to the passage, what remains the most important defense against dengue?",
+          questionTH: "ตามบทความ อะไรยังคงเป็นการป้องกันไข้เลือดออกที่สำคัญที่สุด?",
+          choices: ["Removing standing water and using repellents and screens", "Eating more fruit", "Staying indoors forever", "Taking antibiotics"],
+          choicesTH: ["กำจัดน้ำขังและใช้ยากันยุงกับมุ้งลวด", "กินผลไม้มากขึ้น", "อยู่แต่ในบ้านตลอดไป", "กินยาปฏิชีวนะ"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'removing standing water where mosquitoes breed, using repellents and screens, and responding quickly' — เป็นการป้องกันเชิงปฏิบัติที่สำคัญที่สุด"
+        },
+        { id: "RD4-28", tag: "Detail",
+          question: "What inventive approach to controlling dengue is described?",
+          questionTH: "วิธีการใหม่ในการควบคุมไข้เลือดออกที่ถูกบรรยายคืออะไร?",
+          choices: ["Infecting mosquitoes with a harmless bacterium that blocks the virus", "Spraying the ocean", "Banning all travel", "Removing all water from cities"],
+          choicesTH: ["ทำให้ยุงติดแบคทีเรียที่ไม่เป็นอันตรายซึ่งสกัดไวรัส", "ฉีดพ่นมหาสมุทร", "ห้ามการเดินทางทั้งหมด", "เอาน้ำออกจากเมืองทั้งหมด"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'mosquitoes have been infected with a harmless bacterium that prevents them from transmitting the dengue virus' แล้วปล่อยให้ส่งต่อในธรรมชาติ"
+        },
+        { id: "RD4-29", tag: "Inference",
+          question: "What do experts caution about new control methods?",
+          questionTH: "ผู้เชี่ยวชาญเตือนอะไรเกี่ยวกับวิธีควบคุมแบบใหม่?",
+          choices: ["No single measure will be enough", "They will completely end dengue this year", "They are useless", "They will replace all hospitals"],
+          choicesTH: ["ไม่มีมาตรการเดียวที่จะเพียงพอ", "จะกำจัดไข้เลือดออกหมดภายในปีนี้", "ไร้ประโยชน์", "จะแทนที่โรงพยาบาลทั้งหมด"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'experts caution that no single measure will be enough' — แม้วิธีใหม่มีความหวังแต่ต้องใช้หลายมาตรการร่วมกัน"
+        },
+        { id: "RD4-30", tag: "Inference",
+          question: "What does the final sentence suggest about human health?",
+          questionTH: "ประโยคสุดท้ายสื่ออะไรเกี่ยวกับสุขภาพมนุษย์?",
+          choices: ["It is closely tied to the environment we create", "It depends only on genetics", "It is unrelated to cities", "It cannot be improved"],
+          choicesTH: ["มันเชื่อมโยงใกล้ชิดกับสภาพแวดล้อมที่เราสร้างขึ้น", "ขึ้นกับพันธุกรรมเท่านั้น", "ไม่เกี่ยวกับเมือง", "ปรับปรุงไม่ได้"],
+          answer: 0,
+          explanation: "ประโยคปิด: 'how closely human health is tied to the environment we create around us' — เมือง/น้ำขัง/สภาพอากาศที่มนุษย์สร้างล้วนส่งผลต่อการระบาด"
+        },
+      ]
+    },
+    {
+      title: "Passage 4: Bringing Government Closer to the People",
+      text: `In many countries, important decisions about schools, hospitals, roads, and local services are made far away, in the national capital. Decentralization is the process of transferring some of this power from the central government to regional or local authorities. Supporters see it as a way to make government more responsive, while critics warn that it can create new problems of its own. The debate over how much power should be held locally is one of the oldest questions in the study of government.
+
+The case for decentralization rests largely on local knowledge. Officials in a distant capital cannot easily understand the specific needs of every town and village. A local council, by contrast, knows its own community — which roads flood in the rainy season, which schools are overcrowded, which services are most urgently needed. When decisions are made closer to the people they affect, the argument goes, those decisions are likely to be better informed. Local control can also strengthen democracy, giving citizens a more direct say and making officials easier to hold accountable.
+
+There are real drawbacks, however. Smaller local governments may lack the money, skilled staff, and technical expertise that national governments possess. If wealthy regions can raise more funds than poor ones, decentralization may widen the gap between rich and poor areas rather than narrow it. Local authorities can also be more vulnerable to corruption, particularly where independent oversight is weak. Coordinating policy across many local bodies can be slow and inconsistent.
+
+In practice, most countries seek a balance, keeping some powers central while delegating others to local control. Matters such as national defense and currency are almost always handled centrally, whereas decisions about parks, local roads, and waste collection are often left to local authorities. Finding the right balance is rarely simple, and it shifts over time as circumstances change. What works well in one country may fail in another, which is why the question of where power should lie continues to be debated around the world.`,
+      questions: [
+        { id: "RD4-31", tag: "Main Idea",
+          question: "What is the passage mainly about?",
+          questionTH: "บทความนี้กล่าวถึงเรื่องใดเป็นหลัก?",
+          choices: ["The advantages and disadvantages of decentralizing government power", "How to win a national election", "Why capitals are always corrupt", "The history of one local council"],
+          choicesTH: ["ข้อดีและข้อเสียของการกระจายอำนาจรัฐบาล", "วิธีชนะเลือกตั้งระดับชาติ", "เหตุใดเมืองหลวงจึงทุจริตเสมอ", "ประวัติของสภาท้องถิ่นหนึ่งแห่ง"],
+          answer: 0,
+          explanation: "บทความนำเสนอทั้งข้อดี (local knowledge, democracy) และข้อเสีย (เงิน/ทุจริต/ความเหลื่อมล้ำ) ของการกระจายอำนาจ ตัวเลือก 1 จึงครอบคลุม"
+        },
+        { id: "RD4-32", tag: "Detail",
+          question: "What is decentralization, according to the passage?",
+          questionTH: "ตามบทความ การกระจายอำนาจคืออะไร?",
+          choices: ["Transferring power from the central government to local authorities", "Removing all governments", "Building new capitals", "Banning local councils"],
+          choicesTH: ["การถ่ายโอนอำนาจจากรัฐบาลกลางสู่หน่วยงานท้องถิ่น", "การยกเลิกรัฐบาลทั้งหมด", "การสร้างเมืองหลวงใหม่", "การห้ามสภาท้องถิ่น"],
+          answer: 0,
+          explanation: "ย่อหน้า 1: 'transferring some of this power from the central government to regional or local authorities' — ตอบตรงตัว"
+        },
+        { id: "RD4-33", tag: "Detail",
+          question: "On what does the main case for decentralization rest?",
+          questionTH: "เหตุผลหลักที่สนับสนุนการกระจายอำนาจตั้งอยู่บนสิ่งใด?",
+          choices: ["Local knowledge of community needs", "Lower taxes for everyone", "Larger armies", "Faster internet"],
+          choicesTH: ["ความรู้ท้องถิ่นเรื่องความต้องการของชุมชน", "ภาษีที่ต่ำลงสำหรับทุกคน", "กองทัพที่ใหญ่ขึ้น", "อินเทอร์เน็ตที่เร็วขึ้น"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'The case for decentralization rests largely on local knowledge' — สภาท้องถิ่นรู้ปัญหาชุมชนของตนดีกว่า"
+        },
+        { id: "RD4-34", tag: "Detail",
+          question: "How can local control strengthen democracy?",
+          questionTH: "การควบคุมโดยท้องถิ่นช่วยเสริมประชาธิปไตยอย่างไร?",
+          choices: ["By giving citizens a more direct say and making officials accountable", "By removing all elections", "By increasing national defense", "By printing money"],
+          choicesTH: ["ให้ประชาชนมีสิทธิ์มีเสียงโดยตรงและตรวจสอบเจ้าหน้าที่ได้ง่ายขึ้น", "ยกเลิกการเลือกตั้งทั้งหมด", "เพิ่มการป้องกันประเทศ", "พิมพ์เงิน"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'giving citizens a more direct say and making officials easier to hold accountable' — ตอบตรงตัว"
+        },
+        { id: "RD4-35", tag: "Vocabulary in Context",
+          question: "The word \"accountable\" in paragraph 2 is closest in meaning to",
+          questionTH: "คำว่า \"accountable\" ในย่อหน้าที่ 2 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["responsible and answerable", "wealthy", "famous", "hidden"],
+          choicesTH: ["ต้องรับผิดชอบและถูกตรวจสอบได้", "ร่ำรวย", "มีชื่อเสียง", "ซ่อนเร้น"],
+          answer: 0,
+          explanation: "'making officials easier to hold accountable' = ทำให้ตรวจสอบความรับผิดชอบของเจ้าหน้าที่ได้ง่าย <b>accountable = ต้องรับผิดชอบ ตอบคำถามได้</b>"
+        },
+        { id: "RD4-36", tag: "Detail",
+          question: "Which drawback of decentralization is mentioned?",
+          questionTH: "ข้อเสียใดของการกระจายอำนาจที่ถูกกล่าวถึง?",
+          choices: ["Local governments may lack money and skilled staff", "Local roads are never used", "Capitals disappear", "Citizens cannot vote"],
+          choicesTH: ["รัฐบาลท้องถิ่นอาจขาดเงินและบุคลากรที่มีทักษะ", "ถนนท้องถิ่นไม่เคยถูกใช้", "เมืองหลวงหายไป", "ประชาชนลงคะแนนไม่ได้"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'Smaller local governments may lack the money, skilled staff, and technical expertise' — ตอบตรงตัว"
+        },
+        { id: "RD4-37", tag: "Detail",
+          question: "How might decentralization affect the gap between rich and poor areas?",
+          questionTH: "การกระจายอำนาจอาจส่งผลต่อช่องว่างระหว่างพื้นที่รวยกับจนอย่างไร?",
+          choices: ["It may widen the gap if wealthy regions raise more funds", "It always closes the gap", "It has no effect on money", "It makes all regions equally rich"],
+          choicesTH: ["อาจขยายช่องว่างหากพื้นที่ร่ำรวยหาเงินได้มากกว่า", "ปิดช่องว่างเสมอ", "ไม่มีผลต่อเรื่องเงิน", "ทำให้ทุกพื้นที่รวยเท่ากัน"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'If wealthy regions can raise more funds than poor ones, decentralization may widen the gap' — ตอบตรงตัว"
+        },
+        { id: "RD4-38", tag: "Detail",
+          question: "According to the passage, which matters are almost always handled centrally?",
+          questionTH: "ตามบทความ เรื่องใดที่มักจัดการโดยส่วนกลางเสมอ?",
+          choices: ["National defense and currency", "Local parks", "Waste collection", "Village roads"],
+          choicesTH: ["การป้องกันประเทศและสกุลเงิน", "สวนสาธารณะท้องถิ่น", "การเก็บขยะ", "ถนนในหมู่บ้าน"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'Matters such as national defense and currency are almost always handled centrally' — ส่วนสวน ถนนท้องถิ่น ขยะ มักให้ท้องถิ่นดูแล"
+        },
+        { id: "RD4-39", tag: "Inference",
+          question: "What does the passage suggest about the 'right balance' of power?",
+          questionTH: "บทความสื่ออะไรเกี่ยวกับ 'จุดสมดุลที่เหมาะสม' ของอำนาจ?",
+          choices: ["It is rarely simple and varies between countries", "It is the same everywhere", "It never changes", "It is decided by capitals alone"],
+          choicesTH: ["มันไม่ง่ายและต่างกันไปในแต่ละประเทศ", "เหมือนกันทุกที่", "ไม่เคยเปลี่ยน", "ตัดสินโดยเมืองหลวงเท่านั้น"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'Finding the right balance is rarely simple ... What works well in one country may fail in another' — สมดุลขึ้นกับบริบทและเปลี่ยนตามเวลา"
+        },
+        { id: "RD4-40", tag: "Inference",
+          question: "What is the author's overall approach to the topic?",
+          questionTH: "แนวทางโดยรวมของผู้เขียนต่อหัวข้อนี้เป็นอย่างไร?",
+          choices: ["Balanced, weighing both benefits and drawbacks", "Strongly against local government", "Strongly against central government", "Uninterested in the debate"],
+          choicesTH: ["เป็นกลาง ชั่งน้ำหนักทั้งข้อดีและข้อเสีย", "ต่อต้านรัฐบาลท้องถิ่นอย่างแรง", "ต่อต้านรัฐบาลกลางอย่างแรง", "ไม่สนใจการถกเถียง"],
+          answer: 0,
+          explanation: "ผู้เขียนนำเสนอทั้งข้อดี (ย่อหน้า 2) และข้อเสีย (ย่อหน้า 3) แล้วสรุปว่าต้องหาสมดุล จึงเป็นการนำเสนอแบบสมดุลเป็นกลาง"
+        },
+      ]
+    },
+    {
+      title: "Passage 5: Will Machines Take Our Jobs?",
+      text: `Few questions provoke more anxiety today than whether machines will take our jobs. As artificial intelligence grows more capable, computers are beginning to perform tasks that once seemed to require a human mind — translating languages, diagnosing illnesses, writing reports, and driving vehicles. Many people fear that this new wave of automation will throw millions out of work. History, however, offers a more complicated picture.
+
+Automation is not new. For two centuries, machines have been replacing human labor, beginning with the looms and steam engines of the Industrial Revolution. Each wave of new technology destroyed certain jobs, yet each also created others that no one could have predicted. The automobile put stable hands and carriage makers out of work, but it gave rise to entire industries of mechanics, road builders, and travel services. On the whole, automation has historically raised living standards and created more jobs than it destroyed.
+
+Some economists argue that the current wave of artificial intelligence may be different. Earlier machines mostly replaced physical labor, while leaving thinking to humans. Today's systems, by contrast, can perform mental tasks as well, potentially affecting a far wider range of occupations, including skilled professions once thought safe. If machines can do not only routine work but also analysis and decision-making, the disruption could be deeper and faster than before.
+
+What seems most likely is not that work will disappear, but that it will change. Many jobs will be transformed rather than eliminated, with machines handling routine parts of a task and humans focusing on those that require creativity, judgment, and human connection. The greatest challenge may be one of transition: helping workers gain new skills quickly enough to keep pace. Whether automation proves a threat or an opportunity will depend less on the technology itself than on how societies choose to manage the changes it brings.`,
+      questions: [
+        { id: "RD4-41", tag: "Main Idea",
+          question: "What is the main idea of the passage?",
+          questionTH: "ใจความหลักของบทความคืออะไร?",
+          choices: ["Automation will likely change work rather than simply destroy it", "Machines will never affect jobs", "All jobs will disappear next year", "Artificial intelligence is impossible"],
+          choicesTH: ["ระบบอัตโนมัติน่าจะเปลี่ยนรูปแบบงานมากกว่าทำลายงานทิ้ง", "เครื่องจักรจะไม่มีวันกระทบงาน", "งานทั้งหมดจะหายไปปีหน้า", "ปัญญาประดิษฐ์เป็นไปไม่ได้"],
+          answer: 0,
+          explanation: "บทสรุปว่างานจะ 'เปลี่ยน' ไม่ใช่ 'หายไป' (transformed rather than eliminated) ตัวเลือก 1 จึงตรง — ผู้เขียนให้มุมมองที่สมดุลจากประวัติศาสตร์"
+        },
+        { id: "RD4-42", tag: "Detail",
+          question: "Which tasks can today's AI perform, according to the passage?",
+          questionTH: "ตามบทความ AI ปัจจุบันทำงานใดได้บ้าง?",
+          choices: ["Translating languages and diagnosing illnesses", "Only lifting heavy objects", "Only cleaning floors", "Nothing useful"],
+          choicesTH: ["แปลภาษาและวินิจฉัยโรค", "ยกของหนักเท่านั้น", "ถูพื้นเท่านั้น", "ไม่มีอะไรที่เป็นประโยชน์"],
+          answer: 0,
+          explanation: "ย่อหน้า 1: 'translating languages, diagnosing illnesses, writing reports, and driving vehicles' — งานที่เคยต้องใช้สมองมนุษย์"
+        },
+        { id: "RD4-43", tag: "Detail",
+          question: "What does history show about earlier waves of automation?",
+          questionTH: "ประวัติศาสตร์แสดงอะไรเกี่ยวกับคลื่นระบบอัตโนมัติในอดีต?",
+          choices: ["Each destroyed some jobs but created others", "They created no new jobs", "They lowered living standards", "They were quickly banned"],
+          choicesTH: ["แต่ละคลื่นทำลายบางงานแต่สร้างงานใหม่", "ไม่สร้างงานใหม่เลย", "ลดมาตรฐานการครองชีพ", "ถูกแบนอย่างรวดเร็ว"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'Each wave ... destroyed certain jobs, yet each also created others' และโดยรวมยกระดับการครองชีพ"
+        },
+        { id: "RD4-44", tag: "Detail",
+          question: "What example does the passage give of automation creating new industries?",
+          questionTH: "บทความยกตัวอย่างใดของระบบอัตโนมัติที่สร้างอุตสาหกรรมใหม่?",
+          choices: ["The automobile creating mechanics and road builders", "The telephone ending farming", "The computer ending all offices", "The radio ending music"],
+          choicesTH: ["รถยนต์สร้างอาชีพช่างและคนสร้างถนน", "โทรศัพท์ทำให้เกษตรกรรมสิ้นสุด", "คอมพิวเตอร์ทำให้สำนักงานหมดไป", "วิทยุทำให้ดนตรีสิ้นสุด"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: รถยนต์ทำให้คนเลี้ยงม้า/ทำรถม้าตกงาน แต่ 'gave rise to entire industries of mechanics, road builders, and travel services'"
+        },
+        { id: "RD4-45", tag: "Detail",
+          question: "Why might the current wave of AI be different from earlier automation?",
+          questionTH: "เหตุใดคลื่น AI ปัจจุบันอาจต่างจากระบบอัตโนมัติในอดีต?",
+          choices: ["It can perform mental tasks, not just physical labor", "It is much slower", "It only affects farming", "It cannot do routine work"],
+          choicesTH: ["มันทำงานที่ใช้สมองได้ ไม่ใช่แค่แรงกาย", "มันช้ากว่ามาก", "กระทบแค่เกษตรกรรม", "ทำงานประจำไม่ได้"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'Today's systems ... can perform mental tasks as well' จึงกระทบอาชีพได้กว้างกว่า รวมถึงอาชีพทักษะสูง"
+        },
+        { id: "RD4-46", tag: "Vocabulary in Context",
+          question: "The word \"disruption\" in paragraph 3 is closest in meaning to",
+          questionTH: "คำว่า \"disruption\" ในย่อหน้าที่ 3 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["major disturbance or upheaval", "improvement", "celebration", "agreement"],
+          choicesTH: ["การปั่นป่วน/เปลี่ยนแปลงครั้งใหญ่", "การปรับปรุง", "การเฉลิมฉลอง", "การตกลงกัน"],
+          answer: 0,
+          explanation: "'the disruption could be deeper and faster than before' <b>disruption = การปั่นป่วน/พลิกผันครั้งใหญ่</b> (ต่อตลาดงาน) — improvement ไม่ตรงบริบทเชิงผลกระทบ"
+        },
+        { id: "RD4-47", tag: "Detail",
+          question: "What does the author say is most likely to happen to work?",
+          questionTH: "ผู้เขียนบอกว่าอะไรน่าจะเกิดขึ้นกับงานมากที่สุด?",
+          choices: ["It will change rather than disappear", "It will vanish entirely", "It will never change", "It will become illegal"],
+          choicesTH: ["มันจะเปลี่ยนแปลงมากกว่าหายไป", "จะหายไปทั้งหมด", "จะไม่เปลี่ยนเลย", "จะกลายเป็นสิ่งผิดกฎหมาย"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'not that work will disappear, but that it will change' — งานจะถูกแปลงรูป ไม่ใช่ถูกกำจัด"
+        },
+        { id: "RD4-48", tag: "Detail",
+          question: "In the future described, what will humans focus on while machines handle routine tasks?",
+          questionTH: "ในอนาคตที่บรรยาย มนุษย์จะมุ่งเน้นสิ่งใดขณะที่เครื่องจักรทำงานประจำ?",
+          choices: ["Creativity, judgment, and human connection", "Only physical strength", "Only memorizing facts", "Nothing at all"],
+          choicesTH: ["ความคิดสร้างสรรค์ การใช้วิจารณญาณ และการเชื่อมโยงระหว่างมนุษย์", "พละกำลังเท่านั้น", "ท่องจำข้อเท็จจริงเท่านั้น", "ไม่ทำอะไรเลย"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'humans focusing on those that require creativity, judgment, and human connection' — ตอบตรงตัว"
+        },
+        { id: "RD4-49", tag: "Detail",
+          question: "What does the author identify as the greatest challenge?",
+          questionTH: "ผู้เขียนระบุว่าอะไรเป็นความท้าทายที่ยิ่งใหญ่ที่สุด?",
+          choices: ["Helping workers gain new skills quickly enough", "Building faster machines", "Stopping all technology", "Closing schools"],
+          choicesTH: ["ช่วยให้แรงงานได้ทักษะใหม่เร็วพอ", "สร้างเครื่องจักรที่เร็วขึ้น", "หยุดเทคโนโลยีทั้งหมด", "ปิดโรงเรียน"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'The greatest challenge may be one of transition: helping workers gain new skills quickly enough to keep pace' — ตอบตรงตัว"
+        },
+        { id: "RD4-50", tag: "Inference",
+          question: "What does the author suggest determines whether automation is a threat or an opportunity?",
+          questionTH: "ผู้เขียนสื่อว่าอะไรเป็นตัวกำหนดว่าระบบอัตโนมัติเป็นภัยหรือโอกาส?",
+          choices: ["How societies choose to manage the changes", "The speed of the machines alone", "The price of computers", "The weather"],
+          choicesTH: ["การที่สังคมเลือกจะจัดการกับความเปลี่ยนแปลงอย่างไร", "ความเร็วของเครื่องจักรเพียงอย่างเดียว", "ราคาคอมพิวเตอร์", "สภาพอากาศ"],
+          answer: 0,
+          explanation: "ประโยคปิด: 'depend less on the technology itself than on how societies choose to manage the changes' — ขึ้นกับการบริหารจัดการของสังคม ไม่ใช่ตัวเทคโนโลยี"
+        },
+      ]
+    },
+  ],
+});

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TU-GET PBT Practice — ฝึกทำข้อสอบแนว TU-GET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand" onclick="goHome()">TU-GET <span>PBT Practice</span></div>
+  <button class="nav-toggle" onclick="toggleNav()" aria-label="เปิด/ปิดเมนู"><i class="ti ti-menu-2"></i></button>
+  <nav id="mainNav">
+    <button onclick="goHome()">หน้าหลัก</button>
+    <button onclick="openTagPractice()">ฝึกแยกหัวข้อ</button>
+    <button onclick="openVocabList()">คลังคำศัพท์</button>
+    <button onclick="openBookmarks()">บุ๊กมาร์ก</button>
+    <button onclick="openStats()">สถิติ</button>
+    <button onclick="openWrongBank()">สมุดข้อผิด</button>
+    <span class="fs-control" title="ปรับขนาดฟอนต์">
+      <button onclick="changeFont(-1)" aria-label="ลดขนาดฟอนต์">A−</button>
+      <button onclick="changeFont(1)" aria-label="เพิ่มขนาดฟอนต์">A+</button>
+    </span>
+    <button id="themeToggle" onclick="toggleTheme()" title="สลับโหมดมืด/สว่าง">🌙</button>
+  </nav>
+</header>
+
+<main id="app"></main>
+
+<footer>
+  เว็บฝึกฝนแนวข้อสอบเพื่อการศึกษา — โจทย์ทั้งหมดแต่งขึ้นใหม่ ไม่ใช่ข้อสอบจริง
+  และไม่มีส่วนเกี่ยวข้องกับมหาวิทยาลัยธรรมศาสตร์หรือสถาบันภาษา มธ.
+</footer>
+
+<!-- ===== ชุดข้อสอบ: เพิ่มชุดใหม่โดยเพิ่ม <script> ตรงนี้ ===== -->
+<script src="data/structure-1.js"></script>
+<script src="data/structure-2.js"></script>
+<script src="data/structure-3.js"></script>
+<script src="data/structure-4.js"></script>
+<script src="data/structure-5.js"></script>
+<script src="data/structure-6.js"></script>
+<script src="data/structure-7.js"></script>
+<script src="data/structure-8.js"></script>
+<script src="data/vocabulary-1.js"></script>
+<script src="data/vocabulary-2.js"></script>
+<script src="data/vocabulary-3.js"></script>
+<script src="data/vocabulary-4.js"></script>
+<script src="data/vocabulary-5.js"></script>
+<script src="data/vocabulary-6.js"></script>
+<script src="data/vocabulary-7.js"></script>
+<script src="data/vocabulary-8.js"></script>
+<script src="data/reading-1.js"></script>
+<script src="data/reading-2.js"></script>
+<script src="data/reading-3.js"></script>
+<script src="data/reading-4.js"></script>
+<script src="data/reading-5.js"></script>
+<script src="data/reading-6.js"></script>
+<script src="data/reading-7.js"></script>
+<script src="data/reading-8.js"></script>
+
+<script src="js/app.js"></script>
+</body>
+</html>

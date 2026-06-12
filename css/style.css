@@ -1,0 +1,426 @@
+/* ============ TU-GET PBT Practice ============ */
+:root {
+  /* พื้นอุ่นนวลลดแสงสะท้อน + สีหลักเขียว-teal สบายตาสำหรับการอ่านนานๆ */
+  --bg: #f5f4ef;
+  --surface: #ffffff;
+  --surface2: #f0efe8;
+  --text: #2b2e33;
+  --muted: #8a8d96;
+  --border: #e6e4db;
+  --primary: #2f8f73;
+  --primary-soft: #e2f0ea;
+  --accent: #bf8a36;
+  --accent-soft: #f6ecda;
+  --danger: #c66a50;
+  --danger-soft: #f5e3dc;
+  --success: #2f9e63;
+  --success-soft: #e3f3e9;
+  --warn: #bf8a36;
+  --warn-soft: #f7ecd6;
+  --shadow: 0 2px 10px rgba(43, 46, 51, .06);
+  --radius: 14px;
+  --hero: #1f2b27;
+  --hero-bright: #36b58f;
+}
+[data-theme="dark"] {
+  --bg: #1c1d22;
+  --surface: #26282f;
+  --surface2: #2f3138;
+  --text: #e7e4dc;
+  --muted: #9a9ca4;
+  --border: #3a3c44;
+  --primary: #4cbf9e;
+  --primary-soft: #22463c;
+  --accent: #d6a85a;
+  --accent-soft: #3d3320;
+  --danger: #e08469;
+  --danger-soft: #3f2820;
+  --success: #56c489;
+  --success-soft: #1f3b2b;
+  --warn: #d6a85a;
+  --warn-soft: #3d3320;
+  --shadow: 0 2px 10px rgba(0, 0, 0, .35);
+  --hero: #16211d;
+  --hero-bright: #4cbf9e;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+/* ขนาดฟอนต์ฐานปรับได้ด้วยปุ่ม A−/A+ (ตัวคูณเก็บใน --fs) — rem ทั้งเว็บจึงสเกลตาม */
+html { font-size: calc(100% * var(--fs, 1)); }
+body {
+  font-family: "IBM Plex Sans Thai Looped", "IBM Plex Sans", "Segoe UI", "Leelawadee UI", Tahoma, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+button { font-family: inherit; }
+/* ปุ่มปรับขนาดฟอนต์บน topbar */
+.fs-control { display: inline-flex; gap: 2px; align-items: center; }
+.fs-control button {
+  background: none; border: 1px solid var(--border); cursor: pointer;
+  padding: 4px 9px; border-radius: 8px; color: var(--muted); font-weight: 700; font-size: .85rem;
+}
+.fs-control button:hover { background: var(--surface2); color: var(--text); }
+
+/* ---- topbar ---- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.brand { font-weight: 800; font-size: 1.15rem; color: var(--primary); cursor: pointer; white-space: nowrap; }
+.brand span { color: var(--text); font-weight: 600; }
+.topbar nav { display: flex; gap: 6px; flex-wrap: wrap; }
+.topbar nav button {
+  background: none; border: none; cursor: pointer;
+  padding: 7px 13px; border-radius: 9px;
+  color: var(--muted); font-size: .95rem; font-weight: 600;
+}
+.topbar nav button:hover { background: var(--surface2); color: var(--text); }
+.nav-toggle {
+  display: none; background: none; border: 1px solid var(--border); border-radius: 9px;
+  padding: 5px 9px; cursor: pointer; color: var(--text); font-size: 1.3rem; line-height: 1;
+}
+.nav-toggle:hover { background: var(--surface2); }
+
+/* ---- เมนูมือถือ: ยุบเป็นแฮมเบอร์เกอร์ ---- */
+@media (max-width: 720px) {
+  .topbar { flex-wrap: wrap; padding: 10px 16px; }
+  .nav-toggle { display: inline-flex; align-items: center; }
+  .topbar nav {
+    display: none; flex-basis: 100%; flex-direction: column; align-items: stretch;
+    gap: 2px; margin-top: 10px;
+  }
+  .topbar nav.open { display: flex; }
+  .topbar nav button { text-align: left; padding: 11px 12px; font-size: 1rem; }
+  .topbar nav .fs-control { margin-top: 6px; }
+  .topbar nav .fs-control button { flex: 1; padding: 9px 0; }
+  #themeToggle { align-self: flex-start; }
+}
+
+main { max-width: 1060px; margin: 0 auto; padding: 26px 18px 60px; }
+footer {
+  text-align: center; color: var(--muted); font-size: .82rem;
+  padding: 18px; border-top: 1px solid var(--border);
+}
+
+h1 { font-size: 1.5rem; margin: 0 0 4px; }
+h2 { font-size: 1.2rem; margin: 26px 0 12px; }
+.sub { color: var(--muted); margin: 0 0 22px; }
+.hello { color: var(--muted); font-size: .95rem; margin: 0 0 2px; }
+.hello b { color: var(--primary); font-weight: 700; }
+.name-edit { color: var(--muted); font-size: .82rem; text-decoration: underline; margin-left: 6px; cursor: pointer; }
+.name-edit:hover { color: var(--primary); }
+
+/* ---- hero (เฉพาะหน้าแรก) แนว ada ---- */
+.hero {
+  background: var(--hero); color: #fff;
+  border-radius: var(--radius); padding: 32px 30px 34px; margin-bottom: 22px;
+}
+.hero .hi { color: var(--hero-bright); font-size: .92rem; margin: 0 0 8px; }
+.hero .hi .name-edit { color: #c3d6cf; }
+.hero h1 { color: #fff; font-size: 1.95rem; line-height: 1.25; margin: 0 0 10px; }
+.hero p.lead { color: #c3d6cf; margin: 0 0 20px; max-width: 540px; }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn.bright { background: var(--hero-bright); color: var(--hero); }
+.btn.ghost { background: transparent; border: 1px solid rgba(255, 255, 255, .35); color: #fff; }
+.btn.ghost:hover { background: rgba(255, 255, 255, .1); filter: none; }
+
+/* ---- cards ---- */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(235px, 1fr)); gap: 16px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+  cursor: pointer; transition: transform .12s, border-color .12s;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--primary); }
+.card .icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 12px;
+  background: var(--primary-soft); color: var(--primary);
+  font-size: 1.5rem; margin-bottom: 4px;
+}
+.card h3 { margin: 8px 0 4px; font-size: 1.05rem; }
+.card p { margin: 0; color: var(--muted); font-size: .88rem; }
+.card .badge { display: inline-block; margin-top: 10px; font-size: .78rem; font-weight: 700; color: var(--primary); background: var(--primary-soft); padding: 3px 10px; border-radius: 99px; }
+.card.resume { border: 2px dashed var(--warn); }
+
+.panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+/* ---- forms ---- */
+label.field { display: block; margin: 14px 0 6px; font-weight: 600; font-size: .92rem; }
+select, input[type="file"] {
+  width: 100%; max-width: 340px; padding: 9px 12px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-size: .95rem;
+}
+.mode-pick { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.mode-pick .opt {
+  flex: 1; min-width: 220px; border: 2px solid var(--border); border-radius: 12px;
+  padding: 14px 16px; cursor: pointer; background: var(--surface);
+}
+.mode-pick .opt.sel { border-color: var(--primary); background: var(--primary-soft); }
+.mode-pick .opt b { display: block; }
+.mode-pick .opt small { color: var(--muted); }
+
+.btn {
+  display: inline-block; border: none; cursor: pointer; font-weight: 700;
+  border-radius: 10px; padding: 11px 22px; font-size: 1rem;
+  background: var(--primary); color: #fff;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+.btn.danger { background: var(--danger); }
+.btn.small { padding: 7px 14px; font-size: .88rem; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ---- exam layout ---- */
+.exam-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap; margin-bottom: 16px;
+}
+.exam-title { font-weight: 800; font-size: 1.05rem; }
+.exam-title small { display: block; color: var(--muted); font-weight: 500; }
+.timer {
+  font-variant-numeric: tabular-nums; font-weight: 800; font-size: 1.25rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 7px 16px;
+}
+.timer.low { color: var(--danger); border-color: var(--danger); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: .55; } }
+
+.exam-body { display: grid; grid-template-columns: 1fr 232px; gap: 18px; align-items: start; }
+@media (max-width: 860px) { .exam-body { grid-template-columns: 1fr; } }
+
+.passage-box {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 16px; max-height: 330px; overflow-y: auto;
+  font-size: .95rem;
+}
+.passage-box h4 { margin: 0 0 8px; color: var(--primary); }
+.passage-box p { margin: 0 0 10px; }
+
+.q-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+.q-num { font-weight: 800; color: var(--primary); margin-bottom: 6px; }
+.q-num .tag { font-size: .75rem; font-weight: 600; color: var(--muted); background: var(--surface2); border-radius: 99px; padding: 2px 10px; margin-left: 8px; }
+.q-text { font-size: 1.05rem; margin-bottom: 16px; }
+.q-text u { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.q-text sup { color: var(--primary); font-weight: 700; }
+/* คำที่ถูกถามถึง — เน้นตัวหนาสีเข้ม + ไฮไลต์ ภายในบทความ (ไม่ใช่ในโจทย์) */
+.passage-box b.kw {
+  font-weight: 800;
+  color: var(--text);
+  background: var(--warn-soft);
+  padding: 0 3px;
+  border-radius: 4px;
+}
+/* เส้นคั่นหมวดพาร์ทในหน้าเฉลยเต็มชุด */
+.part-divider {
+  margin: 22px 0 12px;
+  padding: 10px 16px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 1.02rem;
+}
+.part-divider:first-child { margin-top: 0; }
+
+.choice {
+  display: flex; gap: 10px; align-items: flex-start;
+  border: 2px solid var(--border); border-radius: 11px; padding: 11px 14px;
+  margin-bottom: 9px; cursor: pointer; background: var(--surface);
+  transition: border-color .1s, background .1s;
+}
+.choice:hover { border-color: var(--primary); }
+.choice .no {
+  flex: 0 0 26px; height: 26px; border-radius: 50%; text-align: center; line-height: 26px;
+  background: var(--surface2); font-weight: 700; font-size: .85rem;
+}
+.choice.picked { border-color: var(--primary); background: var(--primary-soft); }
+.choice.correct { border-color: var(--success); background: var(--success-soft); }
+.choice.wrong { border-color: var(--danger); background: var(--danger-soft); }
+.choice.locked { cursor: default; }
+
+.feedback { border-radius: 11px; padding: 14px 16px; margin-top: 14px; font-size: .95rem; }
+.feedback.good { background: var(--success-soft); border: 1px solid var(--success); }
+.feedback.bad { background: var(--danger-soft); border: 1px solid var(--danger); }
+.feedback b.verdict { display: block; margin-bottom: 4px; }
+
+.exam-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.flag-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 9px 16px; cursor: pointer; color: var(--text); font-weight: 600; }
+.flag-btn.on { background: var(--warn-soft); border-color: var(--warn); }
+
+/* palette */
+.palette { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); position: sticky; top: 70px; }
+.palette h4 { margin: 0 0 10px; font-size: .9rem; }
+.pal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.pal-btn {
+  border: 1px solid var(--border); background: var(--surface2); border-radius: 8px;
+  padding: 5px 0; font-size: .8rem; cursor: pointer; color: var(--text); font-weight: 600;
+}
+.pal-btn.answered { background: var(--primary-soft); border-color: var(--primary); color: var(--primary); }
+.pal-btn.flagged { background: var(--warn-soft); border-color: var(--warn); }
+.pal-btn.current { outline: 2px solid var(--primary); }
+.pal-legend { font-size: .73rem; color: var(--muted); margin-top: 10px; }
+.pal-legend span { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+
+/* ---- exam (Stage 3): แผงข้ออยู่บนหัว ---- */
+.pal-bar {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 12px 14px; margin-bottom: 16px;
+  position: sticky; top: 58px; z-index: 20;
+}
+.pal-strip { display: flex; gap: 6px; overflow-x: auto; flex: 1 1 320px; padding-bottom: 3px; }
+.pal-strip .pal-btn { flex: 0 0 auto; width: 34px; padding: 6px 0; }
+.pal-actions { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; margin-left: auto; }
+.pal-leg { font-size: .73rem; color: var(--muted); white-space: nowrap; }
+.pal-leg .sw { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin: 0 3px 0 8px; }
+.pal-leg .sw.answered { background: var(--primary-soft); border: 1px solid var(--primary); }
+.pal-leg .sw.flagged { background: var(--warn-soft); border: 1px solid var(--warn); }
+
+/* ---- Reading: บทความซ้าย / คำถามขวา ---- */
+.reading-body { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.reading-passage { position: sticky; top: 124px; }
+.passage-wrap { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); box-shadow: var(--shadow); }
+.passage-hd {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 9px 14px; background: var(--surface2); border-bottom: 1px solid var(--border);
+  font-size: .86rem; color: var(--primary); font-weight: 600;
+}
+.passage-hd .scroll-hint { color: var(--muted); font-weight: 500; font-size: .78rem; }
+.passage-box.reading { max-height: 60vh; margin: 0; border: none; border-radius: 0; background: var(--surface); }
+.single-col { max-width: 720px; margin: 0 auto; }
+.para-no { color: var(--primary); font-weight: 700; margin-right: 5px; font-size: .8em; }
+@media (max-width: 860px) {
+  .reading-body { grid-template-columns: 1fr; }
+  .reading-passage { position: static; }
+  .passage-box.reading { max-height: 320px; }
+}
+
+/* ---- result ---- */
+.score-hero { text-align: center; padding: 30px 20px; }
+.score-hero .big { font-size: 3.1rem; font-weight: 800; color: var(--primary); line-height: 1.1; }
+.score-hero .of { color: var(--muted); font-size: 1.2rem; }
+.score-hero .pct { font-size: 1.05rem; color: var(--muted); margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.score-hero .result-label { color: var(--muted); font-size: .95rem; }
+.delta { font-size: .85rem; font-weight: 700; padding: 3px 11px; border-radius: 99px; display: inline-flex; align-items: center; gap: 4px; }
+.delta.up { color: var(--success); background: var(--success-soft); }
+.delta.down { color: var(--danger); background: var(--danger-soft); }
+.result-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 22px; }
+.result-actions .btn i { margin-right: 2px; }
+/* คะแนนรายพาร์ทแบบแถบ */
+.part-bars { display: flex; flex-direction: column; gap: 15px; }
+.pbar-top { display: flex; justify-content: space-between; gap: 10px; font-size: .94rem; margin-bottom: 6px; }
+.pbar-top .num { color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar-track { height: 9px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+.bar-track i { display: block; height: 100%; border-radius: 99px; }
+.band-bar { position: relative; height: 14px; background: var(--surface2); border-radius: 99px; margin: 26px auto 30px; max-width: 560px; }
+.band-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--primary)); }
+.band-mark { position: absolute; top: -7px; bottom: -7px; width: 3px; background: var(--warn); border-radius: 2px; }
+.band-mark i { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font-style: normal; font-size: .75rem; color: var(--muted); white-space: nowrap; }
+
+table.stat { width: 100%; border-collapse: collapse; font-size: .93rem; }
+table.stat th, table.stat td { padding: 9px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+table.stat th { color: var(--muted); font-size: .82rem; }
+table.stat td.num { font-variant-numeric: tabular-nums; }
+.bar-mini { background: var(--surface2); border-radius: 99px; height: 9px; min-width: 90px; overflow: hidden; }
+.bar-mini i { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+
+.review-filters { display: flex; gap: 8px; margin-bottom: 14px; }
+.chip { border: 1px solid var(--border); background: var(--surface); border-radius: 99px; padding: 6px 16px; cursor: pointer; font-weight: 600; font-size: .88rem; color: var(--text); }
+.chip.on { background: var(--primary); border-color: var(--primary); color: #fff; }
+.review-item { border-left: 5px solid var(--border); }
+.review-item.ok { border-left-color: var(--success); }
+.review-item.bad { border-left-color: var(--danger); }
+.review-item .ans-line { font-size: .92rem; margin: 8px 0; }
+/* รายการตัวเลือกในหน้าเฉลย — ยกช้อยมาแสดง เฉลยเป็นสีเขียว */
+.rc-list { margin: 12px 0 6px; }
+.rc { display: flex; align-items: center; gap: 10px; padding: 9px 13px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 7px; font-size: .95rem; }
+.rc-no { flex: 0 0 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 50%; background: var(--surface2); font-weight: 700; font-size: .82rem; }
+.rc-text { flex: 1; }
+.rc-gloss { color: var(--muted); }
+.rc-correct { border-color: var(--success); background: var(--success-soft); }
+.rc-correct .rc-text { color: var(--success); font-weight: 700; }
+.rc-correct .rc-gloss { color: var(--success); font-weight: 600; }
+.rc-wrong { border-color: var(--danger); background: var(--danger-soft); }
+.rc-wrong .rc-text { color: var(--danger); }
+.rc-badge { font-size: .73rem; font-weight: 700; padding: 2px 9px; border-radius: 99px; white-space: nowrap; }
+.rc-badge.ok { background: var(--success); color: #fff; }
+.rc-badge.no { background: var(--danger); color: #fff; }
+.review-item .expl { background: var(--surface2); border-radius: 10px; padding: 12px 15px; font-size: .93rem; margin-top: 10px; }
+.review-item .expl b { color: var(--accent); }
+
+/* ---- stats ---- */
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 18px; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; box-shadow: var(--shadow); }
+.kpi .v { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+.kpi .l { font-size: .82rem; color: var(--muted); }
+canvas#chart { width: 100%; max-width: 100%; }
+.empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+/* ---- ฝึกแยกตามหัวข้อ ---- */
+.tag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.tag-btn {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  border: 1px solid var(--border); background: var(--surface2); color: var(--text);
+  border-radius: 11px; padding: 12px 14px; cursor: pointer; text-align: left; font-family: inherit;
+}
+.tag-btn:hover { border-color: var(--primary); background: var(--primary-soft); }
+.tag-btn .tag-name { font-weight: 700; font-size: .95rem; flex: 1 1 100%; }
+.tag-btn .tag-count { font-size: .78rem; color: var(--muted); background: var(--surface); border-radius: 99px; padding: 2px 9px; }
+.tag-btn .tag-acc { font-size: .78rem; font-weight: 700; color: var(--accent); margin-left: auto; }
+
+/* wrong bank */
+.wrong-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: .93rem; }
+.wrong-row .streak { font-size: .8rem; color: var(--muted); white-space: nowrap; }
+
+.notice { background: var(--warn-soft); border: 1px solid var(--warn); border-radius: 10px; padding: 10px 16px; font-size: .9rem; margin-bottom: 16px; }
+
+/* ---- บุ๊กมาร์ก / โน้ต ---- */
+.mark-block { margin-top: 12px; }
+.mark-btn { border: 1px solid var(--border); background: var(--surface); color: var(--muted); border-radius: 9px; padding: 7px 14px; cursor: pointer; font-weight: 700; font-size: .88rem; }
+.mark-btn.on { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+.note-wrap { margin-top: 10px; }
+.note-area { width: 100%; max-width: 100%; min-height: 64px; resize: vertical; padding: 10px 12px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-family: inherit; font-size: .92rem; }
+
+/* ---- คลังคำศัพท์ ---- */
+.vocab-row { padding: 11px 18px; border-bottom: 1px solid var(--border); }
+.vocab-row:last-child { border-bottom: none; }
+.vocab-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.vocab-word { font-size: 1.05rem; color: var(--primary); }
+.vocab-mean { color: var(--text); }
+.vocab-set { margin-left: auto; font-size: .74rem; color: var(--muted); background: var(--surface2); padding: 2px 9px; border-radius: 99px; }
+.vocab-row details { margin-top: 4px; }
+.vocab-row summary { cursor: pointer; color: var(--muted); font-size: .82rem; }
+.vocab-ex { margin-top: 6px; padding: 8px 12px; background: var(--surface2); border-radius: 8px; font-size: .9rem; }
+.vocab-ex u { font-weight: 800; color: var(--text); background: var(--warn-soft); padding: 0 3px; border-radius: 4px; text-decoration: none; }
+.vocab-ex-th { margin-top: 6px; color: var(--muted); font-size: .88rem; }
+
+/* คำแปลไทยของโจทย์ในหน้าเฉลย */
+.q-text-th { margin: 4px 0 2px; color: var(--muted); font-size: .92rem; }
+
+/* ตัวเลือกในเกมทายคำแปล */
+.game-opts { max-width: 520px; margin: 16px auto 0; display: grid; gap: 10px; }
+.game-opt { padding: 14px 18px; border: 2px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text); font-size: 1.05rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+.game-opt:hover { border-color: var(--primary); }
+.game-opt.correct { border-color: var(--success); background: var(--success-soft); color: var(--success); }
+.game-opt.wrong { border-color: var(--danger); background: var(--danger-soft); color: var(--danger); }
+
+/* ---- Flashcard ---- */
+.flashcard { max-width: 520px; margin: 0 auto; min-height: 230px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 26px; text-align: center; }
+.flashcard:hover { border-color: var(--primary); }
+.fc-face { width: 100%; }
+.fc-word { font-size: 2rem; font-weight: 800; color: var(--primary); }
+.fc-hint { margin-top: 14px; color: var(--muted); font-size: .85rem; }
+.fc-mean { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+.fc-ex { color: var(--muted); font-size: .92rem; }
+.fc-ex u { font-weight: 700; color: var(--text); }

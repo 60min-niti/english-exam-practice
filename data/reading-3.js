@@ -1,0 +1,469 @@
+// Reading ชุดที่ 3 — 5 passages × 10 ข้อ = 50 ข้อ (หมวด: วิศวกรรม/การแพทย์/โรคภัย/การเมือง/ข่าว-สังคม)
+// questionTH = คำแปลคำถาม, choicesTH = คำแปลตัวเลือก (บทความคงเป็นอังกฤษเพื่อฝึกอ่าน)
+window.TUGET_DATA = window.TUGET_DATA || [];
+window.TUGET_DATA.push({
+  part: "reading",
+  set: 3,
+  passages: [
+    {
+      title: "Passage 1: Concrete That Heals Itself",
+      text: `Concrete is the most widely used building material on Earth, but it has a serious weakness: it cracks. Tiny cracks form as buildings settle and as temperatures change, and over time water and air seep in, corroding the steel reinforcement hidden inside. The result is crumbling bridges, roads, and buildings that cost billions to repair every year. For decades, engineers simply accepted cracking as an unavoidable part of working with concrete.
+
+A team of researchers has now developed a remarkable alternative: concrete that can repair itself. The secret lies in bacteria. When the concrete is mixed, the engineers add harmless bacteria along with tiny capsules of calcium lactate, a nutrient. The bacteria can remain dormant within the dry concrete for many years. As soon as a crack forms and water enters, however, the bacteria spring to life. Feeding on the calcium lactate, they produce limestone, which gradually fills the crack and seals it shut.
+
+The advantages of this self-healing concrete are considerable. Because cracks are sealed before water can reach the steel inside, the structure lasts far longer, reducing the need for costly inspections and repairs. This is especially valuable for structures that are difficult or dangerous to reach, such as underground tunnels, bridge supports, and offshore platforms. Over the lifetime of a building, the savings can be enormous.
+
+The technology is not yet perfect. Self-healing concrete currently costs about twice as much to produce as ordinary concrete, and the bacteria can only repair cracks up to a certain width. Yet researchers are optimistic. As production scales up, prices are expected to fall, and the long-term savings in maintenance may more than make up for the higher initial cost. If the technology lives up to its promise, the crumbling concrete that surrounds us today may one day be able to take care of itself.`,
+      questions: [
+        { id: "RD3-01", tag: "Main Idea",
+          question: "What is the passage mainly about?",
+          questionTH: "บทความนี้กล่าวถึงเรื่องใดเป็นหลัก?",
+          choices: ["A new type of concrete that can repair its own cracks", "Why concrete is the most common building material", "How bacteria cause diseases in buildings", "The cost of repairing bridges and roads"],
+          choicesTH: ["คอนกรีตชนิดใหม่ที่ซ่อมรอยร้าวของตัวเองได้", "เหตุใดคอนกรีตจึงเป็นวัสดุก่อสร้างที่พบมากที่สุด", "แบคทีเรียก่อโรคในอาคารอย่างไร", "ค่าใช้จ่ายในการซ่อมสะพานและถนน"],
+          answer: 0,
+          explanation: "ทั้งบทเน้นการพัฒนาคอนกรีตซ่อมตัวเองด้วยแบคทีเรีย ตัวเลือก 1 จึงครอบคลุม — ปัญหารอยร้าวและค่าซ่อมเป็นเพียงบริบทนำ ไม่ใช่ใจความหลัก"
+        },
+        { id: "RD3-02", tag: "Detail",
+          question: "According to the passage, what is the main weakness of ordinary concrete?",
+          questionTH: "ตามบทความ จุดอ่อนหลักของคอนกรีตธรรมดาคืออะไร?",
+          choices: ["It is too expensive", "It cracks, allowing water and air to corrode the steel inside", "It is too heavy to transport", "It cannot be used in tunnels"],
+          choicesTH: ["มันแพงเกินไป", "มันแตกร้าว ทำให้น้ำและอากาศกัดกร่อนเหล็กข้างใน", "มันหนักเกินกว่าจะขนส่ง", "ใช้ในอุโมงค์ไม่ได้"],
+          answer: 1,
+          explanation: "ย่อหน้า 1: คอนกรีตแตกร้าว แล้ว 'water and air seep in, corroding the steel reinforcement' — ตอบตรงตัว"
+        },
+        { id: "RD3-03", tag: "Detail",
+          question: "What makes the self-healing concrete able to repair itself?",
+          questionTH: "อะไรทำให้คอนกรีตซ่อมตัวเองได้?",
+          choices: ["Special steel bars", "Bacteria that produce limestone", "A layer of paint", "Heat from the sun"],
+          choicesTH: ["เหล็กเส้นพิเศษ", "แบคทีเรียที่ผลิตหินปูน", "ชั้นสีทา", "ความร้อนจากดวงอาทิตย์"],
+          answer: 1,
+          explanation: "ย่อหน้า 2: 'The secret lies in bacteria' ซึ่งกินแคลเซียมแลกเทตแล้ว 'produce limestone, which gradually fills the crack' — ตอบตรงตัว"
+        },
+        { id: "RD3-04", tag: "Detail",
+          question: "When do the bacteria in the concrete become active?",
+          questionTH: "แบคทีเรียในคอนกรีตเริ่มทำงานเมื่อใด?",
+          choices: ["When the concrete is first mixed", "When a crack forms and water enters", "When the temperature rises", "When the building is inspected"],
+          choicesTH: ["เมื่อผสมคอนกรีตครั้งแรก", "เมื่อเกิดรอยร้าวและน้ำเข้าไป", "เมื่ออุณหภูมิสูงขึ้น", "เมื่อมีการตรวจสอบอาคาร"],
+          answer: 1,
+          explanation: "ย่อหน้า 2: 'As soon as a crack forms and water enters ... the bacteria spring to life' — ก่อนหน้านั้นแบคทีเรียอยู่ในสภาพ dormant (จำศีล)"
+        },
+        { id: "RD3-05", tag: "Vocabulary in Context",
+          question: "The word \"dormant\" in paragraph 2 is closest in meaning to",
+          questionTH: "คำว่า \"dormant\" ในย่อหน้าที่ 2 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["inactive", "dangerous", "growing", "visible"],
+          choicesTH: ["ไม่เคลื่อนไหว จำศีล", "อันตราย", "กำลังเติบโต", "มองเห็นได้"],
+          answer: 0,
+          explanation: "'The bacteria can remain dormant within the dry concrete for many years' แล้วค่อย 'spring to life' เมื่อมีน้ำ <b>dormant = inactive</b> (สงบนิ่ง ไม่ทำงาน) — ตรงข้ามกับ active"
+        },
+        { id: "RD3-06", tag: "Detail",
+          question: "Why is self-healing concrete especially valuable for tunnels and offshore platforms?",
+          questionTH: "เหตุใดคอนกรีตซ่อมตัวเองจึงมีคุณค่าเป็นพิเศษสำหรับอุโมงค์และแท่นกลางทะเล?",
+          choices: ["They are built only at night", "They are difficult or dangerous to reach for repairs", "They never crack", "They are made of steel"],
+          choicesTH: ["สร้างตอนกลางคืนเท่านั้น", "เข้าถึงเพื่อซ่อมได้ยากหรืออันตราย", "ไม่เคยแตกร้าว", "ทำจากเหล็ก"],
+          answer: 1,
+          explanation: "ย่อหน้า 3: 'structures that are difficult or dangerous to reach, such as underground tunnels, bridge supports, and offshore platforms' — ซ่อมเองได้จึงคุ้มมาก"
+        },
+        { id: "RD3-07", tag: "Detail",
+          question: "Which is mentioned as a current limitation of self-healing concrete?",
+          questionTH: "ข้อใดถูกกล่าวถึงว่าเป็นข้อจำกัดในปัจจุบันของคอนกรีตซ่อมตัวเอง?",
+          choices: ["It cannot be used outdoors", "It costs about twice as much as ordinary concrete", "It cracks more easily", "It is unsafe for humans"],
+          choicesTH: ["ใช้กลางแจ้งไม่ได้", "มีต้นทุนราวสองเท่าของคอนกรีตธรรมดา", "แตกร้าวง่ายกว่า", "ไม่ปลอดภัยต่อมนุษย์"],
+          answer: 1,
+          explanation: "ย่อหน้า 4: 'costs about twice as much to produce as ordinary concrete' และซ่อมได้แค่รอยร้าวขนาดจำกัด — ตอบตรงตัว"
+        },
+        { id: "RD3-08", tag: "Vocabulary in Context",
+          question: "The phrase \"make up for\" in the last paragraph is closest in meaning to",
+          questionTH: "วลี \"make up for\" ในย่อหน้าสุดท้ายมีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["compensate for", "add to", "explain", "hide"],
+          choicesTH: ["ชดเชย ทดแทน", "เพิ่มเข้าไป", "อธิบาย", "ซ่อน"],
+          answer: 0,
+          explanation: "'the long-term savings ... may more than make up for the higher initial cost' = เงินที่ประหยัดระยะยาวชดเชยต้นทุนเริ่มต้นที่สูง <b>make up for = compensate for</b> (ชดเชย)"
+        },
+        { id: "RD3-09", tag: "Inference",
+          question: "What does the author suggest about the future cost of self-healing concrete?",
+          questionTH: "ผู้เขียนบอกเป็นนัยอย่างไรเกี่ยวกับต้นทุนของคอนกรีตซ่อมตัวเองในอนาคต?",
+          choices: ["It will rise sharply", "It is expected to fall as production scales up", "It will stay exactly the same", "It cannot be measured"],
+          choicesTH: ["จะพุ่งสูงขึ้น", "คาดว่าจะลดลงเมื่อผลิตในปริมาณมากขึ้น", "จะคงเท่าเดิมเป๊ะ", "วัดไม่ได้"],
+          answer: 1,
+          explanation: "ย่อหน้า 4: 'As production scales up, prices are expected to fall' — อนุมานได้ว่าราคาจะถูกลงเมื่อผลิตมากขึ้น"
+        },
+        { id: "RD3-10", tag: "Inference",
+          question: "The author's overall attitude toward the technology is best described as",
+          questionTH: "ทัศนคติโดยรวมของผู้เขียนต่อเทคโนโลยีนี้อธิบายได้ดีที่สุดว่าอย่างไร",
+          choices: ["doubtful", "cautiously hopeful", "completely negative", "indifferent"],
+          choicesTH: ["เคลือบแคลงสงสัย", "มีความหวังอย่างระมัดระวัง", "ลบโดยสิ้นเชิง", "เฉยเมย"],
+          answer: 1,
+          explanation: "ผู้เขียนยอมรับข้อจำกัด ('not yet perfect') แต่ปิดท้ายเชิงบวก ('researchers are optimistic', 'may one day take care of itself') จึงเป็นความหวังแบบมีเงื่อนไข ไม่ใช่มั่นใจเต็มที่หรือลบ"
+        },
+      ]
+    },
+    {
+      title: "Passage 2: The Promise of mRNA Vaccines",
+      text: `Traditional vaccines have saved countless lives, but most of them work in a similar way: a weakened or inactivated form of a virus is injected into the body, prompting the immune system to learn how to fight it. Producing these vaccines is slow and complex, often requiring the virus to be grown in large quantities. For a brand-new disease, developing a traditional vaccine can take many years — far too long to stop a fast-spreading outbreak.
+
+A newer approach, the mRNA vaccine, works on a completely different principle. Instead of introducing a weakened virus, it delivers a set of genetic instructions, written in a molecule called messenger RNA. These instructions tell the body's own cells to produce a single harmless piece of the virus, usually a protein found on its surface. The immune system detects this protein, recognizes it as foreign, and learns to attack it. If the real virus later enters the body, the immune system is already prepared.
+
+The greatest advantage of mRNA technology is speed. Because the vaccine contains only genetic instructions, scientists do not need to grow the virus itself. Once the genetic code of a new virus is known, an mRNA vaccine can be designed in a matter of days and produced relatively quickly. This flexibility proved crucial during a recent global pandemic, when mRNA vaccines were developed and distributed faster than any vaccines in history.
+
+The technology also holds promise far beyond infectious disease. Researchers are now exploring whether mRNA could be used to treat cancer by training the immune system to recognize and destroy tumor cells. Others hope it might one day help the body produce missing proteins in patients with genetic disorders. Although many challenges remain, mRNA has transformed from an obscure laboratory concept into one of the most promising tools in modern medicine.`,
+      questions: [
+        { id: "RD3-11", tag: "Main Idea",
+          question: "What is the main purpose of the passage?",
+          questionTH: "จุดประสงค์หลักของบทความคืออะไร?",
+          choices: ["To criticize traditional vaccines", "To explain how mRNA vaccines work and why they are promising", "To describe the symptoms of a pandemic", "To compare different viruses"],
+          choicesTH: ["เพื่อวิจารณ์วัคซีนแบบดั้งเดิม", "เพื่ออธิบายว่าวัคซีน mRNA ทำงานอย่างไรและเหตุใดจึงมีอนาคต", "เพื่อบรรยายอาการของการระบาด", "เพื่อเปรียบเทียบไวรัสต่าง ๆ"],
+          answer: 1,
+          explanation: "บทความอธิบายหลักการทำงานของวัคซีน mRNA ข้อดี และศักยภาพในอนาคต ตัวเลือก 2 จึงครอบคลุม — ไม่ได้มีเจตนาวิจารณ์วัคซีนเดิม (แค่เปรียบเทียบ)"
+        },
+        { id: "RD3-12", tag: "Detail",
+          question: "How do most traditional vaccines work?",
+          questionTH: "วัคซีนแบบดั้งเดิมส่วนใหญ่ทำงานอย่างไร?",
+          choices: ["By delivering genetic instructions", "By injecting a weakened or inactivated virus", "By removing infected cells", "By raising body temperature"],
+          choicesTH: ["ด้วยการส่งคำสั่งทางพันธุกรรม", "ด้วยการฉีดไวรัสที่อ่อนกำลังหรือถูกทำให้ไม่ทำงาน", "ด้วยการกำจัดเซลล์ที่ติดเชื้อ", "ด้วยการเพิ่มอุณหภูมิร่างกาย"],
+          answer: 1,
+          explanation: "ย่อหน้า 1: 'a weakened or inactivated form of a virus is injected ... prompting the immune system to learn how to fight it' — ส่วนการส่งคำสั่งพันธุกรรมเป็นของ mRNA"
+        },
+        { id: "RD3-13", tag: "Detail",
+          question: "What do mRNA vaccines deliver into the body?",
+          questionTH: "วัคซีน mRNA ส่งอะไรเข้าสู่ร่างกาย?",
+          choices: ["A weakened virus", "Genetic instructions written in messenger RNA", "Antibiotics", "White blood cells"],
+          choicesTH: ["ไวรัสที่อ่อนกำลัง", "คำสั่งทางพันธุกรรมที่เขียนใน messenger RNA", "ยาปฏิชีวนะ", "เม็ดเลือดขาว"],
+          answer: 1,
+          explanation: "ย่อหน้า 2: 'it delivers a set of genetic instructions, written in a molecule called messenger RNA' — ตอบตรงตัว"
+        },
+        { id: "RD3-14", tag: "Detail",
+          question: "According to the passage, what do the body's cells produce after receiving the mRNA instructions?",
+          questionTH: "ตามบทความ เซลล์ของร่างกายผลิตอะไรหลังได้รับคำสั่ง mRNA?",
+          choices: ["A complete virus", "A single harmless piece of the virus", "More mRNA", "Red blood cells"],
+          choicesTH: ["ไวรัสที่สมบูรณ์", "ชิ้นส่วนเล็ก ๆ ของไวรัสที่ไม่เป็นอันตราย", "mRNA เพิ่มขึ้น", "เม็ดเลือดแดง"],
+          answer: 1,
+          explanation: "ย่อหน้า 2: 'tell the body's own cells to produce a single harmless piece of the virus, usually a protein found on its surface' — ตอบตรงตัว"
+        },
+        { id: "RD3-15", tag: "Detail",
+          question: "What is described as the greatest advantage of mRNA technology?",
+          questionTH: "อะไรถูกบรรยายว่าเป็นข้อได้เปรียบที่ยิ่งใหญ่ที่สุดของเทคโนโลยี mRNA?",
+          choices: ["Its low cost", "Its speed", "Its pleasant taste", "Its small size"],
+          choicesTH: ["ต้นทุนต่ำ", "ความเร็ว", "รสชาติที่ดี", "ขนาดเล็ก"],
+          answer: 1,
+          explanation: "ย่อหน้า 3: 'The greatest advantage of mRNA technology is speed' เพราะไม่ต้องเพาะเลี้ยงไวรัส — ตอบตรงตัว"
+        },
+        { id: "RD3-16", tag: "Vocabulary in Context",
+          question: "The word \"crucial\" in paragraph 3 is closest in meaning to",
+          questionTH: "คำว่า \"crucial\" ในย่อหน้าที่ 3 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["extremely important", "slightly useful", "unnecessary", "expensive"],
+          choicesTH: ["สำคัญอย่างยิ่ง", "มีประโยชน์เล็กน้อย", "ไม่จำเป็น", "แพง"],
+          answer: 0,
+          explanation: "'This flexibility proved crucial during a recent global pandemic' <b>crucial = extremely important</b> (สำคัญยิ่ง ชี้เป็นชี้ตาย) — unnecessary ตรงข้าม"
+        },
+        { id: "RD3-17", tag: "Detail",
+          question: "Why can mRNA vaccines be developed so quickly?",
+          questionTH: "เหตุใดวัคซีน mRNA จึงพัฒนาได้รวดเร็วมาก?",
+          choices: ["Scientists do not need to grow the virus itself", "They require no testing", "They use the same code for every disease", "They are made by machines only"],
+          choicesTH: ["นักวิทยาศาสตร์ไม่ต้องเพาะเลี้ยงตัวไวรัส", "ไม่ต้องทดสอบ", "ใช้รหัสเดียวกับทุกโรค", "ผลิตด้วยเครื่องจักรล้วน"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'Because the vaccine contains only genetic instructions, scientists do not need to grow the virus itself' — จึงออกแบบได้ในไม่กี่วัน"
+        },
+        { id: "RD3-18", tag: "Detail",
+          question: "Which future use of mRNA is mentioned in the passage?",
+          questionTH: "การใช้ mRNA ในอนาคตข้อใดถูกกล่าวถึงในบทความ?",
+          choices: ["Treating cancer by training the immune system", "Replacing all surgery", "Curing broken bones", "Producing electricity"],
+          choicesTH: ["รักษามะเร็งด้วยการฝึกระบบภูมิคุ้มกัน", "แทนที่การผ่าตัดทั้งหมด", "รักษากระดูกหัก", "ผลิตไฟฟ้า"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'whether mRNA could be used to treat cancer by training the immune system to recognize and destroy tumor cells' — ตอบตรงตัว"
+        },
+        { id: "RD3-19", tag: "Inference",
+          question: "It can be inferred that, compared with traditional vaccines, mRNA vaccines are",
+          questionTH: "อนุมานได้ว่าเมื่อเทียบกับวัคซีนดั้งเดิม วัคซีน mRNA เป็นอย่างไร",
+          choices: ["slower to develop", "more flexible and faster to design", "more dangerous", "no longer used"],
+          choicesTH: ["พัฒนาช้ากว่า", "ยืดหยุ่นกว่าและออกแบบได้เร็วกว่า", "อันตรายกว่า", "เลิกใช้แล้ว"],
+          answer: 1,
+          explanation: "บทเปรียบให้เห็นว่าวัคซีนดั้งเดิมใช้เวลาหลายปี ขณะที่ mRNA ออกแบบได้ในไม่กี่วันและยืดหยุ่นกว่า — อนุมานได้ตามนี้"
+        },
+        { id: "RD3-20", tag: "Inference",
+          question: "What does the phrase \"from an obscure laboratory concept into one of the most promising tools\" suggest?",
+          questionTH: "วลี \"from an obscure laboratory concept into one of the most promising tools\" สื่อถึงอะไร",
+          choices: ["mRNA has gained importance dramatically", "mRNA has been forgotten", "mRNA is still unknown", "mRNA has failed"],
+          choicesTH: ["mRNA มีความสำคัญเพิ่มขึ้นอย่างมาก", "mRNA ถูกลืมไปแล้ว", "mRNA ยังไม่เป็นที่รู้จัก", "mRNA ล้มเหลว"],
+          answer: 0,
+          explanation: "วลีนี้สื่อการเปลี่ยนจาก 'แนวคิดในแล็บที่ไม่มีใครรู้จัก' มาเป็น 'เครื่องมือที่มีอนาคตที่สุด' = ความสำคัญเพิ่มขึ้นอย่างมาก"
+        },
+      ]
+    },
+    {
+      title: "Passage 3: The Threat of Antibiotic Resistance",
+      text: `The discovery of antibiotics in the twentieth century was one of the greatest achievements in the history of medicine. Diseases that had once killed millions became easily treatable, and routine surgery became far safer. Yet this medical triumph is now under threat. Around the world, bacteria are steadily becoming resistant to the very drugs designed to kill them, and some infections are once again becoming difficult, or even impossible, to treat.
+
+Antibiotic resistance arises through natural selection. Whenever antibiotics are used, most of the targeted bacteria die, but a few with random mutations may survive. These survivors then multiply, passing on their resistance to the next generation. Over time, an entire population of bacteria can become immune to a drug that once destroyed it. The more often antibiotics are used, the faster this process occurs.
+
+A major cause of the problem is the misuse of antibiotics. They are frequently prescribed for illnesses they cannot cure, such as common colds, which are caused by viruses rather than bacteria. Patients often fail to complete the full course of treatment, allowing the strongest bacteria to survive. Perhaps most alarming of all, vast quantities of antibiotics are given to healthy farm animals to promote growth, creating ideal conditions for resistant bacteria to develop and spread.
+
+Tackling the crisis will require action on many fronts. Doctors must prescribe antibiotics more carefully, and patients must use them exactly as directed. Farmers need to reduce their reliance on these drugs, and governments must invest in developing new ones, a costly and difficult task that few pharmaceutical companies are willing to undertake. Experts warn that without urgent and coordinated effort, we may enter a future in which a simple infection could once again become deadly.`,
+      questions: [
+        { id: "RD3-21", tag: "Main Idea",
+          question: "What is the passage mainly about?",
+          questionTH: "บทความนี้กล่าวถึงเรื่องใดเป็นหลัก?",
+          choices: ["The discovery of antibiotics", "The growing problem of antibiotic resistance and its causes", "How to perform surgery safely", "Why colds are dangerous"],
+          choicesTH: ["การค้นพบยาปฏิชีวนะ", "ปัญหาเชื้อดื้อยาที่เพิ่มขึ้นและสาเหตุ", "วิธีผ่าตัดอย่างปลอดภัย", "เหตุใดหวัดจึงอันตราย"],
+          answer: 1,
+          explanation: "บทความเน้นปัญหาเชื้อดื้อยา กลไก สาเหตุ และทางแก้ ตัวเลือก 2 จึงครอบคลุม — การค้นพบยาเป็นเพียงบริบทนำ"
+        },
+        { id: "RD3-22", tag: "Detail",
+          question: "According to the passage, how does antibiotic resistance arise?",
+          questionTH: "ตามบทความ เชื้อดื้อยาเกิดขึ้นได้อย่างไร?",
+          choices: ["Through natural selection", "Through changes in temperature", "Through poor nutrition", "Through lack of exercise"],
+          choicesTH: ["ผ่านการคัดเลือกโดยธรรมชาติ", "ผ่านการเปลี่ยนแปลงอุณหภูมิ", "ผ่านโภชนาการที่ไม่ดี", "ผ่านการขาดการออกกำลังกาย"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'Antibiotic resistance arises through natural selection' — แบคทีเรียที่กลายพันธุ์รอดแล้วขยายพันธุ์ต่อ"
+        },
+        { id: "RD3-23", tag: "Detail",
+          question: "Why are antibiotics useless against the common cold?",
+          questionTH: "เหตุใดยาปฏิชีวนะจึงไม่ได้ผลกับโรคหวัดธรรมดา?",
+          choices: ["Colds are caused by viruses, not bacteria", "Colds are too mild", "Antibiotics are too weak", "Colds last too long"],
+          choicesTH: ["หวัดเกิดจากไวรัส ไม่ใช่แบคทีเรีย", "หวัดอ่อนเกินไป", "ยาปฏิชีวนะอ่อนเกินไป", "หวัดอยู่นานเกินไป"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: colds 'are caused by viruses rather than bacteria' — ยาปฏิชีวนะฆ่าแบคทีเรีย จึงใช้กับหวัดไม่ได้"
+        },
+        { id: "RD3-24", tag: "Vocabulary in Context",
+          question: "The word \"immune\" in paragraph 2 is closest in meaning to",
+          questionTH: "คำว่า \"immune\" ในย่อหน้าที่ 2 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["resistant", "sensitive", "harmful", "weak"],
+          choicesTH: ["ต้านทานได้ ไม่ได้รับผล", "ไวต่อสิ่งกระตุ้น", "เป็นอันตราย", "อ่อนแอ"],
+          answer: 0,
+          explanation: "'an entire population of bacteria can become immune to a drug that once destroyed it' <b>immune = resistant</b> (ต้านทาน ไม่ได้รับผลจากยา) — sensitive ตรงข้าม"
+        },
+        { id: "RD3-25", tag: "Detail",
+          question: "Which of the following is mentioned as a cause of antibiotic misuse?",
+          questionTH: "ข้อใดถูกกล่าวถึงว่าเป็นสาเหตุของการใช้ยาปฏิชีวนะอย่างผิด ๆ?",
+          choices: ["Patients failing to complete the full course of treatment", "Doctors refusing to prescribe them", "Patients taking too little food", "Hospitals closing early"],
+          choicesTH: ["ผู้ป่วยไม่กินยาให้ครบคอร์ส", "แพทย์ปฏิเสธที่จะสั่งจ่าย", "ผู้ป่วยกินอาหารน้อยเกินไป", "โรงพยาบาลปิดเร็ว"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'Patients often fail to complete the full course of treatment, allowing the strongest bacteria to survive' — ตอบตรงตัว"
+        },
+        { id: "RD3-26", tag: "Detail",
+          question: "According to the passage, why are antibiotics given to healthy farm animals?",
+          questionTH: "ตามบทความ เหตุใดจึงให้ยาปฏิชีวนะแก่สัตว์ในฟาร์มที่แข็งแรง?",
+          choices: ["To cure their diseases", "To promote growth", "To improve their taste", "To keep them calm"],
+          choicesTH: ["เพื่อรักษาโรค", "เพื่อเร่งการเจริญเติบโต", "เพื่อให้รสชาติดีขึ้น", "เพื่อให้สงบ"],
+          answer: 1,
+          explanation: "ย่อหน้า 3: 'antibiotics are given to healthy farm animals to promote growth' — ซึ่งสร้างสภาพให้เชื้อดื้อยาพัฒนา"
+        },
+        { id: "RD3-27", tag: "Detail",
+          question: "Why are pharmaceutical companies reluctant to develop new antibiotics?",
+          questionTH: "เหตุใดบริษัทยาจึงไม่ค่อยเต็มใจพัฒนายาปฏิชีวนะตัวใหม่?",
+          choices: ["It is costly and difficult", "It is illegal", "There is no demand", "Bacteria no longer exist"],
+          choicesTH: ["มันแพงและยาก", "มันผิดกฎหมาย", "ไม่มีความต้องการ", "แบคทีเรียไม่มีอยู่แล้ว"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: developing new ones is 'a costly and difficult task that few pharmaceutical companies are willing to undertake' — ตอบตรงตัว"
+        },
+        { id: "RD3-28", tag: "Vocabulary in Context",
+          question: "The word \"coordinated\" in the last paragraph is closest in meaning to",
+          questionTH: "คำว่า \"coordinated\" ในย่อหน้าสุดท้ายมีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["well-organized and cooperative", "sudden", "expensive", "secret"],
+          choicesTH: ["ที่จัดระเบียบและร่วมมือกันดี", "กะทันหัน", "แพง", "ลับ"],
+          answer: 0,
+          explanation: "'without urgent and coordinated effort' = ความพยายามที่เร่งด่วนและประสานงานร่วมกัน <b>coordinated = well-organized and cooperative</b> (ทำงานสอดประสานกัน)"
+        },
+        { id: "RD3-29", tag: "Inference",
+          question: "What does the author warn could happen without urgent action?",
+          questionTH: "ผู้เขียนเตือนว่าอะไรอาจเกิดขึ้นหากไม่ลงมืออย่างเร่งด่วน?",
+          choices: ["A simple infection could once again become deadly", "All antibiotics will be free", "Surgery will become impossible to learn", "Bacteria will disappear"],
+          choicesTH: ["การติดเชื้อธรรมดาอาจกลับมาคร่าชีวิตได้อีก", "ยาปฏิชีวนะทั้งหมดจะฟรี", "การผ่าตัดจะเรียนรู้ไม่ได้", "แบคทีเรียจะหายไป"],
+          answer: 0,
+          explanation: "ประโยคปิด: 'a simple infection could once again become deadly' — เป็นคำเตือนถึงอนาคตหากไม่แก้ปัญหา"
+        },
+        { id: "RD3-30", tag: "Purpose",
+          question: "Why does the author mention the discovery of antibiotics at the beginning?",
+          questionTH: "เหตุใดผู้เขียนจึงกล่าวถึงการค้นพบยาปฏิชีวนะในตอนต้น?",
+          choices: ["To contrast a past triumph with the present threat", "To explain how to make antibiotics", "To praise modern farming", "To list famous scientists"],
+          choicesTH: ["เพื่อเปรียบความสำเร็จในอดีตกับภัยคุกคามในปัจจุบัน", "เพื่ออธิบายวิธีผลิตยาปฏิชีวนะ", "เพื่อยกย่องการเกษตรสมัยใหม่", "เพื่อระบุรายชื่อนักวิทยาศาสตร์ดัง"],
+          answer: 0,
+          explanation: "ย่อหน้า 1 ยกความสำเร็จในอดีต ('one of the greatest achievements') แล้วบอกว่า 'now under threat' — เป็นการสร้างความขัดแย้งเพื่อเน้นความร้ายแรงของปัญหาปัจจุบัน"
+        },
+      ]
+    },
+    {
+      title: "Passage 4: How Coalition Governments Work",
+      text: `In many democracies, no single political party wins enough seats in an election to govern on its own. When this happens, two or more parties may agree to share power and form what is known as a coalition government. Coalitions are common in countries that use systems of proportional representation, in which the number of seats each party receives closely matches its share of the national vote. Such systems rarely produce a clear majority for one party.
+
+Forming a coalition involves careful negotiation. The parties must agree on a shared program of policies and decide how to divide important positions, such as cabinet posts. A larger party usually takes the leading role, with its leader becoming prime minister, while smaller partners are given ministries in exchange for their support. These negotiations can take weeks or even months, and until they are complete, the country may be left without a fully functioning government.
+
+Supporters argue that coalition governments have important strengths. Because they represent a broader range of voters, decisions tend to reflect wider agreement rather than the will of a single party. Smaller parties, which might otherwise be ignored, gain a real voice in shaping policy. Compromise is built into the system, which can encourage moderation and discourage extreme measures.
+
+Critics, however, point to clear weaknesses. Coalitions can be unstable, collapsing if partners disagree on a key issue, which sometimes forces early elections. Decision-making may be slow, as every major policy must be acceptable to all partners. And voters may feel frustrated when the government that emerges from negotiations looks quite different from anything they actually voted for. Whether coalitions are a strength or a weakness, they remain a defining feature of political life in much of the democratic world.`,
+      questions: [
+        { id: "RD3-31", tag: "Main Idea",
+          question: "What is the passage mainly about?",
+          questionTH: "บทความนี้กล่าวถึงเรื่องใดเป็นหลัก?",
+          choices: ["How coalition governments form and their strengths and weaknesses", "Why one party always wins elections", "How to vote in an election", "The history of a single country"],
+          choicesTH: ["การก่อตัวของรัฐบาลผสมพร้อมจุดแข็งจุดอ่อน", "เหตุใดพรรคเดียวจึงชนะเลือกตั้งเสมอ", "วิธีลงคะแนนเลือกตั้ง", "ประวัติของประเทศหนึ่ง"],
+          answer: 0,
+          explanation: "บทความอธิบายว่ารัฐบาลผสมเกิดอย่างไร เจรจาอย่างไร พร้อมข้อดีข้อเสีย ตัวเลือก 1 จึงครอบคลุม"
+        },
+        { id: "RD3-32", tag: "Detail",
+          question: "When do parties typically form a coalition government?",
+          questionTH: "พรรคการเมืองมักจัดตั้งรัฐบาลผสมเมื่อใด?",
+          choices: ["When one party wins a large majority", "When no single party wins enough seats to govern alone", "When there is no election", "When all parties merge into one"],
+          choicesTH: ["เมื่อพรรคหนึ่งชนะเสียงข้างมากมาก", "เมื่อไม่มีพรรคใดได้ที่นั่งพอจะปกครองลำพัง", "เมื่อไม่มีการเลือกตั้ง", "เมื่อทุกพรรครวมเป็นหนึ่ง"],
+          answer: 1,
+          explanation: "ย่อหน้า 1: 'no single political party wins enough seats ... two or more parties may agree to share power' — ตอบตรงตัว"
+        },
+        { id: "RD3-33", tag: "Detail",
+          question: "According to the passage, in which electoral system are coalitions common?",
+          questionTH: "ตามบทความ รัฐบาลผสมพบบ่อยในระบบเลือกตั้งแบบใด?",
+          choices: ["Proportional representation", "A system with no parties", "Direct dictatorship", "A one-party state"],
+          choicesTH: ["ระบบสัดส่วน (proportional representation)", "ระบบที่ไม่มีพรรค", "เผด็จการโดยตรง", "รัฐพรรคเดียว"],
+          answer: 0,
+          explanation: "ย่อหน้า 1: 'common in countries that use systems of proportional representation' ซึ่งที่นั่งสะท้อนสัดส่วนคะแนน จึงไม่ค่อยมีพรรคใดได้เสียงข้างมากเด็ดขาด"
+        },
+        { id: "RD3-34", tag: "Detail",
+          question: "What must parties agree on when forming a coalition?",
+          questionTH: "พรรคการเมืองต้องตกลงกันเรื่องใดเมื่อจัดตั้งรัฐบาลผสม?",
+          choices: ["A shared program of policies and the division of positions", "The color of their flags", "Which party to ban", "How to cancel the election"],
+          choicesTH: ["โครงการนโยบายร่วมและการแบ่งตำแหน่ง", "สีของธงพรรค", "จะแบนพรรคใด", "จะยกเลิกการเลือกตั้งอย่างไร"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'agree on a shared program of policies and decide how to divide important positions, such as cabinet posts' — ตอบตรงตัว"
+        },
+        { id: "RD3-35", tag: "Vocabulary in Context",
+          question: "The word \"negotiation\" in paragraph 2 is closest in meaning to",
+          questionTH: "คำว่า \"negotiation\" ในย่อหน้าที่ 2 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["discussion to reach agreement", "a violent conflict", "a public vote", "a celebration"],
+          choicesTH: ["การพูดคุยเพื่อหาข้อตกลง", "ความขัดแย้งรุนแรง", "การลงคะแนนสาธารณะ", "การเฉลิมฉลอง"],
+          answer: 0,
+          explanation: "'Forming a coalition involves careful negotiation' ที่พรรคต้องตกลงเรื่องนโยบายและตำแหน่ง <b>negotiation = การเจรจาต่อรองเพื่อหาข้อตกลง</b>"
+        },
+        { id: "RD3-36", tag: "Detail",
+          question: "According to supporters, what is one strength of coalition governments?",
+          questionTH: "ตามฝ่ายสนับสนุน จุดแข็งหนึ่งของรัฐบาลผสมคืออะไร?",
+          choices: ["They represent a broader range of voters", "They make decisions instantly", "They never change policy", "They have only one leader"],
+          choicesTH: ["เป็นตัวแทนผู้มีสิทธิเลือกตั้งในวงกว้างกว่า", "ตัดสินใจได้ทันที", "ไม่เคยเปลี่ยนนโยบาย", "มีผู้นำเพียงคนเดียว"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'Because they represent a broader range of voters, decisions tend to reflect wider agreement' — ตอบตรงตัว"
+        },
+        { id: "RD3-37", tag: "Detail",
+          question: "Which weakness of coalitions do critics mention?",
+          questionTH: "ฝ่ายวิจารณ์กล่าวถึงจุดอ่อนใดของรัฐบาลผสม?",
+          choices: ["They can be unstable and may collapse", "They are too cheap to run", "They never hold elections", "They ignore large parties"],
+          choicesTH: ["อาจไม่มั่นคงและล่มได้", "บริหารถูกเกินไป", "ไม่เคยจัดเลือกตั้ง", "เพิกเฉยพรรคใหญ่"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'Coalitions can be unstable, collapsing if partners disagree on a key issue' — ซึ่งบางครั้งทำให้ต้องเลือกตั้งก่อนกำหนด"
+        },
+        { id: "RD3-38", tag: "Detail",
+          question: "Why might decision-making be slow in a coalition?",
+          questionTH: "เหตุใดการตัดสินใจในรัฐบาลผสมจึงอาจล่าช้า?",
+          choices: ["Every major policy must be acceptable to all partners", "There are no leaders", "Voters make every decision", "Parties never meet"],
+          choicesTH: ["ทุกนโยบายสำคัญต้องเป็นที่ยอมรับของทุกพรรคร่วม", "ไม่มีผู้นำ", "ผู้มีสิทธิเลือกตั้งตัดสินทุกเรื่อง", "พรรคไม่เคยประชุมกัน"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'Decision-making may be slow, as every major policy must be acceptable to all partners' — ต้องให้ทุกฝ่ายยอมรับ จึงช้า"
+        },
+        { id: "RD3-39", tag: "Inference",
+          question: "Why might voters feel frustrated with a coalition government?",
+          questionTH: "เหตุใดผู้มีสิทธิเลือกตั้งอาจรู้สึกผิดหวังกับรัฐบาลผสม?",
+          choices: ["The resulting government may differ from what they voted for", "They are not allowed to vote", "Elections happen too rarely", "All parties look identical"],
+          choicesTH: ["รัฐบาลที่ได้อาจต่างจากที่พวกเขาเลือก", "พวกเขาไม่ได้รับอนุญาตให้ลงคะแนน", "การเลือกตั้งเกิดขึ้นน้อยเกินไป", "ทุกพรรคหน้าตาเหมือนกันหมด"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'voters may feel frustrated when the government ... looks quite different from anything they actually voted for' — เพราะเกิดจากการต่อรองหลังเลือกตั้ง"
+        },
+        { id: "RD3-40", tag: "Inference",
+          question: "What is the author's overall position on coalition governments?",
+          questionTH: "จุดยืนโดยรวมของผู้เขียนต่อรัฐบาลผสมเป็นอย่างไร?",
+          choices: ["Strongly opposed", "Strongly in favor", "Balanced, presenting both strengths and weaknesses", "Completely uninterested"],
+          choicesTH: ["คัดค้านอย่างรุนแรง", "สนับสนุนอย่างรุนแรง", "เป็นกลาง นำเสนอทั้งจุดแข็งและจุดอ่อน", "ไม่สนใจเลย"],
+          answer: 2,
+          explanation: "ผู้เขียนเสนอทั้งมุมสนับสนุน (ย่อหน้า 3) และวิจารณ์ (ย่อหน้า 4) แล้วปิดอย่างเป็นกลาง ('Whether ... a strength or a weakness') จึงเป็นการนำเสนอแบบสมดุล"
+        },
+      ]
+    },
+    {
+      title: "Passage 5: The Spread of Misinformation Online",
+      text: `Never before in history has so much information been available to so many people. With a smartphone, anyone can access the world's knowledge in seconds. Yet the same technology that spreads valuable information also spreads falsehoods, and false stories often travel faster and reach more people than the truth. The rise of online misinformation has become one of the defining challenges of the digital age.
+
+Several factors explain why misinformation spreads so effectively. False stories are frequently designed to be sensational, shocking, or emotionally powerful, and such content is far more likely to be shared than a measured, factual report. Social media platforms make sharing effortless, allowing a single post to reach millions within hours. Their recommendation systems, built to maximize engagement, tend to promote whatever content provokes the strongest reactions, regardless of whether it is true.
+
+The consequences can be serious. False health advice can lead people to refuse effective treatments or try dangerous ones. Misleading political claims can deepen divisions within a society and undermine trust in institutions. During emergencies, rumors can spread panic and interfere with rescue efforts. Because a striking falsehood can lodge itself in the memory, even a later correction may fail to undo the damage.
+
+Combating misinformation is difficult, and there is no single solution. Technology companies can label or remove false content, but doing so raises hard questions about who decides what is true and where free expression ends. Many experts argue that the most powerful long-term defense is education. If people learn to question sources, check facts, and pause before sharing, they become far harder to deceive. In an age of information overload, the ability to think critically may be the most valuable skill of all.`,
+      questions: [
+        { id: "RD3-41", tag: "Main Idea",
+          question: "What is the main idea of the passage?",
+          questionTH: "ใจความหลักของบทความคืออะไร?",
+          choices: ["Smartphones are harmful to health", "Online misinformation spreads easily, causes harm, and is hard to combat", "Social media should be banned", "The truth always wins in the end"],
+          choicesTH: ["สมาร์ตโฟนเป็นอันตรายต่อสุขภาพ", "ข่าวลวงออนไลน์แพร่ง่าย ก่อความเสียหาย และแก้ยาก", "ควรแบนโซเชียลมีเดีย", "ความจริงชนะเสมอในที่สุด"],
+          answer: 1,
+          explanation: "บทความครอบคลุมว่าข่าวลวงแพร่อย่างไร เกิดผลเสียอย่างไร และแก้ยากเพียงใด ตัวเลือก 2 จึงตรงที่สุด — ไม่ได้เรียกร้องให้แบนโซเชียล"
+        },
+        { id: "RD3-42", tag: "Detail",
+          question: "According to the passage, how do false stories often compare with the truth online?",
+          questionTH: "ตามบทความ ข่าวเท็จมักเป็นอย่างไรเมื่อเทียบกับความจริงบนโลกออนไลน์?",
+          choices: ["They travel faster and reach more people", "They are always deleted quickly", "They are ignored by everyone", "They are harder to create"],
+          choicesTH: ["แพร่เร็วกว่าและเข้าถึงคนมากกว่า", "ถูกลบอย่างรวดเร็วเสมอ", "ถูกทุกคนเพิกเฉย", "สร้างยากกว่า"],
+          answer: 0,
+          explanation: "ย่อหน้า 1: 'false stories often travel faster and reach more people than the truth' — ตอบตรงตัว"
+        },
+        { id: "RD3-43", tag: "Detail",
+          question: "Why is sensational content more likely to be shared?",
+          questionTH: "เหตุใดเนื้อหาที่เร้าอารมณ์จึงมีแนวโน้มถูกแชร์มากกว่า?",
+          choices: ["It is emotionally powerful and provokes strong reactions", "It is always true", "It is written by experts", "It is very long"],
+          choicesTH: ["มันกระตุ้นอารมณ์รุนแรงและเร้าใจ", "มันเป็นความจริงเสมอ", "เขียนโดยผู้เชี่ยวชาญ", "มันยาวมาก"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: เนื้อหาเท็จมัก 'sensational, shocking, or emotionally powerful' จึงถูกแชร์มากกว่า — และระบบแนะนำดันเนื้อหาที่เร้าปฏิกิริยาแรง"
+        },
+        { id: "RD3-44", tag: "Detail",
+          question: "What are social media recommendation systems built to maximize?",
+          questionTH: "ระบบแนะนำของโซเชียลมีเดียถูกสร้างมาเพื่อเพิ่มสิ่งใดให้สูงสุด?",
+          choices: ["Engagement", "Accuracy", "Education", "Privacy"],
+          choicesTH: ["การมีส่วนร่วม (เอนเกจเมนต์)", "ความถูกต้องแม่นยำ", "การศึกษา", "ความเป็นส่วนตัว"],
+          answer: 0,
+          explanation: "ย่อหน้า 2: 'recommendation systems, built to maximize engagement, tend to promote whatever content provokes the strongest reactions' — ตอบตรงตัว"
+        },
+        { id: "RD3-45", tag: "Vocabulary in Context",
+          question: "The word \"sensational\" in paragraph 2 is closest in meaning to",
+          questionTH: "คำว่า \"sensational\" ในย่อหน้าที่ 2 มีความหมายใกล้เคียงกับข้อใดมากที่สุด",
+          choices: ["designed to excite strong feeling", "boring and dull", "carefully checked", "very expensive"],
+          choicesTH: ["ที่ออกแบบมาเร้าอารมณ์รุนแรง", "น่าเบื่อจืดชืด", "ตรวจสอบอย่างรอบคอบ", "แพงมาก"],
+          answer: 0,
+          explanation: "บริบทคู่กับ 'shocking, or emotionally powerful' <b>sensational = เร้าอารมณ์ ตื่นเต้นเกินจริงเพื่อดึงความสนใจ</b> — boring ตรงข้าม"
+        },
+        { id: "RD3-46", tag: "Detail",
+          question: "Which consequence of misinformation is mentioned in the passage?",
+          questionTH: "ผลกระทบใดของข่าวลวงที่ถูกกล่าวถึงในบทความ?",
+          choices: ["False health advice leading people to refuse effective treatments", "Faster internet speeds", "Cheaper smartphones", "More accurate news"],
+          choicesTH: ["คำแนะนำสุขภาพเท็จที่ทำให้คนปฏิเสธการรักษาที่ได้ผล", "อินเทอร์เน็ตเร็วขึ้น", "สมาร์ตโฟนถูกลง", "ข่าวที่แม่นยำขึ้น"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'False health advice can lead people to refuse effective treatments or try dangerous ones' — ตอบตรงตัว"
+        },
+        { id: "RD3-47", tag: "Detail",
+          question: "According to the passage, why may a later correction fail?",
+          questionTH: "ตามบทความ เหตุใดการแก้ข่าวภายหลังจึงอาจไม่ได้ผล?",
+          choices: ["A striking falsehood can lodge itself in the memory", "Corrections are illegal", "No one reads corrections aloud", "Corrections cost too much"],
+          choicesTH: ["ข่าวเท็จที่สะดุดใจฝังอยู่ในความทรงจำได้", "การแก้ข่าวผิดกฎหมาย", "ไม่มีใครอ่านคำแก้ข่าวออกเสียง", "การแก้ข่าวแพงเกินไป"],
+          answer: 0,
+          explanation: "ย่อหน้า 3: 'a striking falsehood can lodge itself in the memory, even a later correction may fail to undo the damage' — ความเท็จติดในใจไปแล้ว"
+        },
+        { id: "RD3-48", tag: "Detail",
+          question: "What do many experts consider the most powerful long-term defense against misinformation?",
+          questionTH: "ผู้เชี่ยวชาญหลายคนมองว่าอะไรเป็นเกราะป้องกันระยะยาวที่ทรงพลังที่สุดต่อข่าวลวง?",
+          choices: ["Education", "Faster computers", "More advertising", "Stricter passwords"],
+          choicesTH: ["การศึกษา", "คอมพิวเตอร์ที่เร็วขึ้น", "การโฆษณามากขึ้น", "รหัสผ่านที่เข้มงวดขึ้น"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: 'the most powerful long-term defense is education' — สอนให้คนตั้งคำถาม ตรวจสอบข้อเท็จจริง"
+        },
+        { id: "RD3-49", tag: "Inference",
+          question: "Why is removing false content described as raising 'hard questions'?",
+          questionTH: "เหตุใดการลบเนื้อหาเท็จจึงถูกบรรยายว่าก่อให้เกิด 'คำถามยาก'?",
+          choices: ["It involves deciding who determines what is true and limits free expression", "It is too easy", "It always works perfectly", "It is free of cost"],
+          choicesTH: ["มันเกี่ยวกับการตัดสินว่าใครชี้ขาดความจริงและจำกัดเสรีภาพการแสดงออก", "มันง่ายเกินไป", "มันได้ผลสมบูรณ์เสมอ", "มันไม่มีค่าใช้จ่าย"],
+          answer: 0,
+          explanation: "ย่อหน้า 4: ลบเนื้อหาเท็จ 'raises hard questions about who decides what is true and where free expression ends' — เป็นประเด็นเรื่องอำนาจตัดสินความจริงกับเสรีภาพ"
+        },
+        { id: "RD3-50", tag: "Purpose",
+          question: "What does the author imply in the final sentence about critical thinking?",
+          questionTH: "ผู้เขียนสื่ออะไรในประโยคสุดท้ายเกี่ยวกับการคิดเชิงวิพากษ์?",
+          choices: ["It is the most valuable skill in an age of information overload", "It is no longer needed", "It is only for scientists", "It slows people down too much"],
+          choicesTH: ["เป็นทักษะที่มีค่าที่สุดในยุคข้อมูลท่วมท้น", "ไม่จำเป็นอีกต่อไป", "มีไว้สำหรับนักวิทยาศาสตร์เท่านั้น", "ทำให้คนช้าเกินไป"],
+          answer: 0,
+          explanation: "ประโยคปิด: 'the ability to think critically may be the most valuable skill of all' — ผู้เขียนยกย่องการคิดวิเคราะห์ว่าสำคัญที่สุดในยุคข้อมูลล้น"
+        },
+      ]
+    },
+  ],
+});
