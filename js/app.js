@@ -215,6 +215,10 @@ function stopTimer() { if (timerHandle) { clearInterval(timerHandle); timerHandl
 
 /* ================= Views ================= */
 function show(html) { $app().innerHTML = html; window.scrollTo(0, 0); }
+// หัวหน้าแบบ eyebrow (ป้ายเล็กสีหลัก) + ชื่อหน้า — ใช้ทั่วทุกหน้าย่อย
+function pageHead(eyebrow, title) {
+  return `<div class="page-head"><div class="page-eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1></div>`;
+}
 
 function goHome() {
   if (!confirmLeaveExam()) return;
@@ -223,106 +227,126 @@ function goHome() {
 }
 
 /* ---------- HOME ---------- */
+// streak: จำนวนวันต่อเนื่องที่มีการทำข้อสอบ (นับถอยจากวันนี้/เมื่อวาน)
+function computeStreak(hist) {
+  if (!hist.length) return 0;
+  const key = d => d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+  const set = new Set(hist.map(h => key(new Date(h.date))));
+  const d = new Date();
+  if (!set.has(key(d))) { d.setDate(d.getDate() - 1); if (!set.has(key(d))) return 0; }
+  let streak = 0;
+  while (set.has(key(d))) { streak++; d.setDate(d.getDate() - 1); }
+  return streak;
+}
+function lockedExam(name) {
+  alert(name + " กำลังพัฒนาอยู่ 🚧\nตอนนี้เปิดให้ฝึก TU-GET ก่อนนะครับ");
+}
+
 function renderHome() {
   const saved = lsGet(LS.session, null);
   const wrongCount = Object.keys(lsGet(LS.wrong, {})).length;
+  const markCount = Object.keys(lsGet(LS.marks, {})).length;
   const hist = lsGet(LS.history, []);
-
-  let resumeCard = "";
-  if (saved) {
-    const answered = Object.keys(saved.answers || {}).length;
-    resumeCard = `
-      <div class="card resume" onclick="resumeSession()">
-        <div class="icon"><i class="ti ti-player-pause"></i></div>
-        <h3>ทำต่อจากที่ค้างไว้</h3>
-        <p>${esc(sessionLabel(saved))} — ตอบแล้ว ${answered} ข้อ${saved.remain != null ? " · เหลือเวลา " + fmtTime(saved.remain) : ""}</p>
-        <span class="badge">กดเพื่อทำต่อ</span>
-        <p style="margin-top:8px"><a href="javascript:void(0)" onclick="event.stopPropagation();discardSession()" style="color:var(--danger);font-size:.82rem">ลบทิ้ง</a></p>
-      </div>`;
-  }
-
-  const partCards = PART_ORDER.map(p => {
-    const info = PARTS[p];
-    return `
-      <div class="card" onclick="openSetup('${p}')">
-        <div class="icon">${info.icon}</div>
-        <h3>${info.name}</h3>
-        <p>${info.thai} · ${info.count} ข้อ · ${info.points} คะแนน · ${Math.round(info.time / 60)} นาที</p>
-        <span class="badge">${setsOf(p).length} ชุด</span>
-      </div>`;
-  }).join("");
-
   const nm = getName();
   const hello = nm
     ? `${greeting()}, <b>${esc(nm)}</b> 👋 <a href="javascript:void(0)" onclick="promptName()" class="name-edit">เปลี่ยนชื่อ</a>`
     : `${greeting()} 👋 <a href="javascript:void(0)" onclick="promptName()" class="name-edit">ตั้งชื่อที่อยากให้เว็บเรียก</a>`;
 
-  let statsRow = "";
+  // แถบทำต่อ (ถ้ามี session ค้าง)
+  let resumeBar = "";
+  if (saved) {
+    const answered = Object.keys(saved.answers || {}).length;
+    resumeBar = `
+      <div class="resume-bar" onclick="resumeSession()">
+        <div class="icon"><i class="ti ti-player-pause"></i></div>
+        <div class="rb-text"><b>ทำต่อจากที่ค้างไว้</b>
+          <small>${esc(sessionLabel(saved))} — ตอบแล้ว ${answered} ข้อ${saved.remain != null ? " · เหลือ " + fmtTime(saved.remain) : ""}</small></div>
+        <a href="javascript:void(0)" onclick="event.stopPropagation();discardSession()" class="rb-del">ลบทิ้ง</a>
+        <span class="badge">ไปต่อ <i class="ti ti-chevron-right"></i></span>
+      </div>`;
+  }
+
+  // สัปดาห์นี้ + ล่าสุด (เมื่อมีประวัติ)
+  let weekHtml = "";
   if (hist.length) {
-    const totalQ = hist.reduce((s, h) => s + h.max / PTS, 0);
-    const best = Math.max(...hist.map(h => pct(h.score, h.max)));
-    const lastH = hist[hist.length - 1];
-    statsRow = `
-      <div class="kpi-row">
-        <div class="kpi"><div class="v">${totalQ}</div><div class="l">ข้อที่ทำไปแล้ว</div></div>
-        <div class="kpi"><div class="v">${best}%</div><div class="l">คะแนนดีที่สุด</div></div>
-        <div class="kpi"><div class="v">${pct(lastH.score, lastH.max)}%</div><div class="l">ครั้งล่าสุด</div></div>
-        <div class="kpi"><div class="v">${wrongCount}</div><div class="l">สมุดข้อผิดค้างอยู่</div></div>
+    const weekAgo = Date.now() - 7 * 86400000;
+    const weekHist = hist.filter(h => new Date(h.date).getTime() >= weekAgo);
+    const avgWeek = weekHist.length ? Math.round(weekHist.reduce((s, h) => s + pct(h.score, h.max), 0) / weekHist.length) : 0;
+    const streak = computeStreak(hist);
+    const recent = hist.slice(-4).reverse().map(h => {
+      const p = pct(h.score, h.max);
+      return `<div class="recent-row" onclick="openStats()">
+        <div><b>${esc(h.label)}</b><div class="rmeta">${fmtDate(h.date)}</div></div>
+        <div style="text-align:right"><div class="rscore" style="color:${barColor(p)}">${p}%</div><div class="rmeta">${h.score / PTS} / ${h.max / PTS} ข้อ</div></div>
+      </div>`;
+    }).join("");
+    weekHtml = `
+      <div class="home-cols">
+        <div>
+          <div class="section-label">สัปดาห์นี้ · this week</div>
+          <div class="week-list">
+            <div class="week-row"><span><i class="ti ti-checkbox" style="color:var(--primary)"></i> ทำข้อสอบ</span><span class="wv">${weekHist.length} ครั้ง</span></div>
+            <div class="week-row"><span><i class="ti ti-flame" style="color:var(--accent)"></i> ทำต่อเนื่อง</span><span class="wv">${streak} วัน</span></div>
+            <div class="week-row"><span><i class="ti ti-target-arrow" style="color:var(--success)"></i> คะแนนเฉลี่ย</span><span class="wv">${avgWeek}%</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">ล่าสุด · recent</div>
+          <div class="recent-list">${recent}</div>
+        </div>
       </div>`;
   }
 
   show(`
-    <section class="hero">
+    <section class="home-hero">
       <p class="hi">${hello}</p>
-      <h1>พร้อมพิชิต TU-GET ไปด้วยกันวันนี้</h1>
-      <p class="lead">ฝึกแนวข้อสอบจริง 800 ข้อ พร้อมเฉลยอธิบายภาษาไทยทุกข้อ — เลือกทำเต็มชุดหรือเจาะรายพาร์ท</p>
-      <div class="hero-actions">
-        <button class="btn bright" onclick="openSetup('full')">เริ่มทำข้อสอบ <i class="ti ti-arrow-right"></i></button>
-        <button class="btn ghost" onclick="openStats()">ดูสถิติของฉัน</button>
-      </div>
+      <span class="eyebrow"><i class="ti ti-sparkles"></i> ENGLISH EXAM PLATFORM</span>
+      <h1>เตรียมสอบอย่างมีเป้าหมาย<br><span class="acc">สอบผ่านอย่างมั่นใจ</span></h1>
+      <p class="lead">ฝึกแนวข้อสอบจริง จับเวลา เกมคำศัพท์ และบทอ่าน พร้อมเฉลยอธิบายภาษาไทยทุกข้อ</p>
     </section>
-    ${statsRow}
-    <h2 style="margin-top:0">เลือกสิ่งที่อยากฝึก</h2>
-    <div class="card-grid">
-      ${resumeCard}
-      <div class="card" onclick="openSetup('full')">
-        <div class="icon"><i class="ti ti-clipboard-text"></i></div>
-        <h3>ทำเต็มชุด 100 ข้อ</h3>
-        <p>Structure 25 + Vocabulary 25 + Reading 50 · 3 ชั่วโมง · 1,000 คะแนน</p>
-        <span class="badge">สุ่มชุดจาก 3 พาร์ท</span>
+
+    ${resumeBar}
+
+    <div class="section-label">เลือกข้อสอบ · your exam</div>
+    <div class="exam-card featured">
+      <div class="ec-top">
+        <div class="ec-icon"><i class="ti ti-clipboard-text"></i></div>
+        <span class="ec-badge">พร้อมใช้งาน</span>
       </div>
-      ${partCards}
-      <div class="card" onclick="openTagPractice()">
-        <div class="icon"><i class="ti ti-target-arrow"></i></div>
-        <h3>ฝึกแยกตามหัวข้อ</h3>
-        <p>เจาะเฉพาะหัวข้อที่อ่อน ดึงข้อจากทุกชุดมาฝึกแบบเฉลยทันที</p>
-        <span class="badge">เจาะจุดอ่อน</span>
+      <h3>TU-GET</h3>
+      <div class="ec-sub">Thammasat University General English Test (PBT)</div>
+      <div class="skill-pills">
+        <span class="sp" onclick="openSetup('structure')">Structure</span>
+        <span class="sp" onclick="openSetup('vocabulary')">Vocabulary</span>
+        <span class="sp" onclick="openSetup('reading')">Reading</span>
       </div>
-      <div class="card" onclick="openWrongBank()">
-        <div class="icon"><i class="ti ti-refresh"></i></div>
-        <h3>สมุดข้อผิด</h3>
-        <p>ทบทวนข้อที่เคยตอบผิด ตอบถูก 2 ครั้งติดจึงหลุดจากคลัง</p>
-        <span class="badge">${wrongCount} ข้อค้างอยู่</span>
+      <div class="ec-foot">
+        <span class="ec-target"><i class="ti ti-target-arrow"></i> เป้าหมาย 550+ คะแนน · ฝึกได้ 800 ข้อ</span>
+        <button class="ec-cta" onclick="openSetup('full')">เริ่มฝึกเต็มชุด <i class="ti ti-arrow-right"></i></button>
       </div>
-      <div class="card" onclick="openVocabList()">
-        <div class="icon"><i class="ti ti-notebook"></i></div>
-        <h3>คลังคำศัพท์</h3>
-        <p>รวมคำศัพท์ทุกชุด พร้อมความหมาย ค้นหาได้ และทบทวนแบบ Flashcard</p>
-        <span class="badge">Vocab list</span>
+    </div>
+    <div class="exam-locked-grid">
+      <div class="exam-card locked" onclick="lockedExam('IELTS')">
+        <div class="ec-top"><div class="ec-icon"><i class="ti ti-world"></i></div><span class="ec-badge lock"><i class="ti ti-lock"></i> เร็วๆ นี้</span></div>
+        <h3>IELTS</h3><div class="ec-sub">International English Language Testing System</div>
       </div>
-      <div class="card" onclick="openBookmarks()">
-        <div class="icon"><i class="ti ti-bookmark"></i></div>
-        <h3>บุ๊กมาร์ก</h3>
-        <p>ข้อที่เก็บไว้ทบทวน พร้อมโน้ตส่วนตัวรายข้อ</p>
-        <span class="badge">${Object.keys(lsGet(LS.marks, {})).length} ข้อ</span>
+      <div class="exam-card locked" onclick="lockedExam('TOEFL')">
+        <div class="ec-top"><div class="ec-icon"><i class="ti ti-school"></i></div><span class="ec-badge lock"><i class="ti ti-lock"></i> เร็วๆ นี้</span></div>
+        <h3>TOEFL</h3><div class="ec-sub">Test of English as a Foreign Language</div>
       </div>
-      <div class="card" onclick="openStats()">
-        <div class="icon"><i class="ti ti-chart-line"></i></div>
-        <h3>สถิติของฉัน</h3>
-        <p>กราฟพัฒนาการ คะแนนย้อนหลัง และจุดอ่อนรายหัวข้อ</p>
-        <span class="badge">${hist.length} ครั้งที่ทำ</span>
-      </div>
-    </div>`);
+    </div>
+
+    <div class="section-label" style="margin-top:22px">เริ่มฝึก · start practicing</div>
+    <div class="action-grid">
+      <div class="action-tile" onclick="openSetup('full')"><div class="at-icon" style="background:#e3edf7;color:#2f6aa8"><i class="ti ti-clipboard-text"></i></div><b>ทำข้อสอบเต็มชุด</b><small>จับเวลาเสมือนจริง</small></div>
+      <div class="action-tile" onclick="openVocabList()"><div class="at-icon" style="background:#ece4f7;color:#7a52c2"><i class="ti ti-cards"></i></div><b>คลังคำศัพท์</b><small>เกมทาย + Flashcard</small></div>
+      <div class="action-tile" onclick="openTagPractice()"><div class="at-icon" style="background:var(--success-soft);color:var(--success)"><i class="ti ti-target-arrow"></i></div><b>ฝึกแยกหัวข้อ</b><small>เจาะจุดอ่อน</small></div>
+      <div class="action-tile" onclick="openStats()"><div class="at-icon" style="background:var(--accent-soft);color:var(--accent)"><i class="ti ti-chart-line"></i></div><b>ความก้าวหน้า</b><small>คะแนน + จุดอ่อน</small></div>
+      <div class="action-tile" onclick="openWrongBank()"><div class="at-icon" style="background:var(--danger-soft);color:var(--danger)"><i class="ti ti-refresh"></i></div><b>สมุดข้อผิด</b><small>${wrongCount} ข้อค้างอยู่</small></div>
+      <div class="action-tile" onclick="openBookmarks()"><div class="at-icon" style="background:var(--primary-soft);color:var(--primary)"><i class="ti ti-bookmark"></i></div><b>บุ๊กมาร์ก</b><small>${markCount} ข้อ</small></div>
+    </div>
+
+    ${weekHtml}`);
 }
 
 /* ---------- SETUP ---------- */
@@ -384,7 +408,41 @@ function beginFromSetup() {
   } else {
     selections = [{ part: t, set: Number(document.getElementById("set-" + t).value) }];
   }
-  startSession({ mode: t === "full" ? "full" : "part", selections, study: setupState.study });
+  const cfg = { mode: t === "full" ? "full" : "part", selections, study: setupState.study };
+  // โหมดฝึก (ไม่จับเวลา) เข้าทำเลย · โหมดสอบจับเวลา แสดงหน้าอินโทรก่อน
+  if (cfg.study) { startSession(cfg); }
+  else { pendingExam = cfg; renderExamIntro(cfg); }
+}
+
+/* ---------- หน้าอินโทรก่อนเริ่มสอบ ---------- */
+let pendingExam = null;
+function renderExamIntro(cfg) {
+  const isFull = cfg.mode === "full";
+  const part = isFull ? null : PARTS[cfg.selections[0].part];
+  const count = isFull ? 100 : part.count;
+  const mins = isFull ? 180 : Math.round(part.time / 60);
+  const perQ = Math.round(mins * 60 / count);
+  const label = isFull ? "ทำข้อสอบเต็มชุด" : (part.name + " ชุดที่ " + cfg.selections[0].set);
+  show(`
+    <div class="exam-intro">
+      <div class="ei-icon"><i class="ti ti-clipboard-text"></i></div>
+      <h1>${esc(label)}</h1>
+      <p class="sub">${count} ข้อ · จับเวลา ${mins} นาที · ส่งแล้วดูเฉลยได้ทันที</p>
+      <div class="panel ei-tips">
+        <div class="section-label">ก่อนเริ่มทำ</div>
+        <div class="ei-tip"><span class="ei-n">1</span><span>อ่านโจทย์และบทความให้ครบก่อนเลือกคำตอบ</span></div>
+        <div class="ei-tip"><span class="ei-n">2</span><span>ใช้แผงเลขข้อด้านบนข้ามไป-มาได้ และติดธงข้อที่ไม่มั่นใจไว้กลับมาดู</span></div>
+        <div class="ei-tip"><span class="ei-n">3</span><span>บริหารเวลา ~${perQ} วินาทีต่อข้อ</span></div>
+        <div class="ei-tip"><span class="ei-n">4</span><span>หมดเวลาระบบส่งให้อัตโนมัติ — หรือกด "ส่งคำตอบ" เองได้ตลอด</span></div>
+      </div>
+      <button class="btn ei-start" onclick="startExamFromIntro()">เริ่มทำข้อสอบ <i class="ti ti-arrow-right"></i></button>
+      <button class="btn secondary" onclick="renderSetup()">ย้อนกลับ</button>
+    </div>`);
+}
+function startExamFromIntro() {
+  if (!pendingExam) return;
+  const cfg = pendingExam; pendingExam = null;
+  startSession(cfg);
 }
 
 /* ---------- EXAM ---------- */
@@ -415,6 +473,7 @@ function renderExam() {
 function renderQuestion() {
   const it = S.items[S.idx];
   const q = it.q;
+  if (q.passage) { renderReadingScreen(); return; }   // Reading = โชว์ทุกคำถามของบทความเรียงกัน
   const total = S.items.length;
   const picked = S.answers[q.id];
   const locked = S.study && S.locked[q.id];
@@ -427,14 +486,14 @@ function renderQuestion() {
       else if (i === picked) cls += " wrong";
     } else if (i === picked) cls += " picked";
     const click = locked ? "" : `onclick="pickChoice(${i})"`;
-    return `<div class="${cls}" ${click}><span class="no">${i + 1}</span><span>${c}</span></div>`;
+    return `<div class="${cls}" ${click}><span class="no">${String.fromCharCode(65 + i)}</span><span>${c}</span></div>`;
   }).join("");
 
   let feedback = "";
   if (locked) {
     const ok = picked === q.answer;
     feedback = `<div class="feedback ${ok ? "good" : "bad"}">
-      <b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + (q.answer + 1)}</b>
+      <b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + String.fromCharCode(65 + q.answer)}</b>
       ${q.explanation}
     </div>`;
   }
@@ -456,38 +515,116 @@ function renderQuestion() {
         : `<button class="btn" onclick="navQ(1)">ข้อถัดไป ▶</button>`}
     </div>`;
 
-  let body;
-  if (q.passage) {
-    // Reading: บทความซ้าย (เลื่อนอ่านได้ + เลขย่อหน้า) · คำถาม/ช้อยขวา
-    const passageInner = passageParasHTML(q.passage, quotedTerms(q.question));
-    body = `
-      <div class="reading-body">
-        <div class="reading-passage">
-          <div class="passage-wrap">
-            <div class="passage-hd">
-              <span><i class="ti ti-file-text"></i> ${esc(q.passage.title)}</span>
-              <span class="scroll-hint"><i class="ti ti-arrows-vertical"></i> เลื่อนเพื่ออ่าน</span>
-            </div>
-            <div class="passage-box reading">${passageInner}</div>
-          </div>
-        </div>
-        <div class="reading-q">${qCardHtml}${navHtml}</div>
-      </div>`;
-  } else {
-    body = `<div class="single-col">${qCardHtml}${navHtml}</div>`;
-  }
-  document.getElementById("qArea").innerHTML = body;
+  document.getElementById("qArea").innerHTML = `<div class="single-col">${qCardHtml}${navHtml}</div>`;
   renderPalette();
+}
+
+/* ---------- Reading: บทความซ้าย + ทุกคำถามของบทความเรียงกันทางขวา ---------- */
+// ช่วง index ของข้อที่ใช้ passage เดียวกับข้อปัจจุบัน (ข้อในบทความเดียวกันอยู่ติดกัน)
+function readingGroup() {
+  const p = S.items[S.idx].q.passage;
+  let start = S.idx, end = S.idx;
+  while (start > 0 && S.items[start - 1].q.passage === p) start--;
+  while (end < S.items.length - 1 && S.items[end + 1].q.passage === p) end++;
+  return { p, start, end };
+}
+function readingTerms(g) {
+  let t = [];
+  for (let i = g.start; i <= g.end; i++) t = t.concat(quotedTerms(S.items[i].q.question));
+  return t;
+}
+// เนื้อหาในการ์ดคำถาม 1 ข้อ (ใช้ตอนเรนเดอร์ครั้งแรกและอัปเดต in-place)
+function readingCardInner(idx) {
+  const it = S.items[idx], q = it.q, total = S.items.length;
+  const picked = S.answers[q.id];
+  const locked = S.study && S.locked[q.id];
+  const choices = q.choices.map((c, i) => {
+    let cls = "choice";
+    if (locked) { cls += " locked"; if (i === q.answer) cls += " correct"; else if (i === picked) cls += " wrong"; }
+    else if (i === picked) cls += " picked";
+    const click = locked ? "" : `onclick="pickReading(${idx},${i})"`;
+    return `<div class="${cls}" ${click}><span class="no">${String.fromCharCode(65 + i)}</span><span>${c}</span></div>`;
+  }).join("");
+  let feedback = "";
+  if (locked) {
+    const ok = picked === q.answer;
+    feedback = `<div class="feedback ${ok ? "good" : "bad"}"><b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + String.fromCharCode(65 + q.answer)}</b>${q.explanation}</div>`;
+  }
+  const flagged = S.flags[q.id];
+  return `<div class="q-num">ข้อ ${idx + 1} / ${total}<span class="tag">${esc(PARTS[it.part].name)}${q.tag ? " · " + esc(q.tag) : ""}</span>
+      <button class="flag-mini ${flagged ? "on" : ""}" onclick="toggleFlagAt(${idx})" title="ติดธงไว้ดูทีหลัง">${flagged ? "🚩" : "🏳"}</button></div>
+    <div class="q-text">${q.question}</div>${choices}${feedback}`;
+}
+function renderReadingScreen() {
+  const g = readingGroup(), total = S.items.length;
+  let cards = "";
+  for (let i = g.start; i <= g.end; i++) cards += `<div class="q-card reading-q-card" id="qc-${i}">${readingCardInner(i)}</div>`;
+  const passageInner = passageParasHTML(g.p, readingTerms(g));
+  document.getElementById("qArea").innerHTML = `
+    <div class="reading-body">
+      <div class="reading-passage">
+        <div class="passage-wrap">
+          <div class="passage-hd">
+            <span><i class="ti ti-file-text"></i> ${esc(g.p.title)}</span>
+            <span class="scroll-hint"><i class="ti ti-arrows-vertical"></i> เลื่อนเพื่ออ่าน</span>
+          </div>
+          <div class="passage-box reading">${passageInner}</div>
+        </div>
+      </div>
+      <div class="reading-q">
+        ${cards}
+        <div class="exam-nav">
+          <button class="btn secondary" onclick="navPassage(-1)" ${g.start === 0 ? "disabled" : ""}>◀ ก่อนหน้า</button>
+          ${g.end === total - 1
+      ? `<button class="btn" onclick="trySubmit()">ส่งคำตอบ ✔</button>`
+      : `<button class="btn" onclick="navPassage(1)">บทความถัดไป ▶</button>`}
+        </div>
+      </div>
+    </div>`;
+  renderPalette();
+}
+function pickReading(idx, ci) {
+  const q = S.items[idx].q;
+  S.answers[q.id] = ci;
+  if (S.study) {
+    S.locked[q.id] = true;
+    if (S.mode === "retry") updateWrongStreak(q.id, ci === q.answer);
+    else if (ci !== q.answer) addToWrongBank(q.id);
+  }
+  saveSession();
+  const card = document.getElementById("qc-" + idx);   // อัปเดตเฉพาะการ์ดนั้น ไม่ re-render ทั้งหน้า (กัน scroll เด้ง)
+  if (card) card.innerHTML = readingCardInner(idx);
+  renderPalette();
+}
+function toggleFlagAt(idx) {
+  const q = S.items[idx].q;
+  S.flags[q.id] = !S.flags[q.id];
+  saveSession();
+  const card = document.getElementById("qc-" + idx);
+  if (card) card.innerHTML = readingCardInner(idx);
+  renderPalette();
+}
+function navPassage(dir) {
+  const g = readingGroup();
+  S.idx = Math.min(S.items.length - 1, Math.max(0, dir > 0 ? g.end + 1 : g.start - 1));
+  saveSession(); renderQuestion();
 }
 
 function renderPalette() {
   const grid = document.getElementById("palGrid");
   if (!grid) return;
+  // ไฮไลต์ "ปัจจุบัน" ทั้งกลุ่มข้อในบทความเดียวกัน (Reading) หรือข้อเดียว (อื่นๆ)
+  let gs = S.idx, ge = S.idx;
+  const cp = S.items[S.idx].q.passage;
+  if (cp) {
+    while (gs > 0 && S.items[gs - 1].q.passage === cp) gs--;
+    while (ge < S.items.length - 1 && S.items[ge + 1].q.passage === cp) ge++;
+  }
   grid.innerHTML = S.items.map((it, i) => {
     let cls = "pal-btn";
     if (S.answers[it.q.id] != null) cls += " answered";
     if (S.flags[it.q.id]) cls += " flagged";
-    if (i === S.idx) cls += " current";
+    if (i >= gs && i <= ge) cls += " current";
     return `<button class="${cls}" onclick="jumpQ(${i})">${i + 1}</button>`;
   }).join("");
   const ac = document.getElementById("answeredCount");
@@ -506,7 +643,7 @@ function pickChoice(i) {
   renderQuestion();
 }
 function navQ(d) { S.idx = Math.min(S.items.length - 1, Math.max(0, S.idx + d)); saveSession(); renderQuestion(); }
-function jumpQ(i) { S.idx = i; saveSession(); renderQuestion(); }
+function jumpQ(i) { S.idx = i; saveSession(); renderQuestion(); const el = document.getElementById("qc-" + i); if (el) el.scrollIntoView({ behavior: "smooth", block: "center" }); }
 function toggleFlag() {
   const q = S.items[S.idx].q;
   S.flags[q.id] = !S.flags[q.id];
@@ -759,7 +896,7 @@ function openWrongBank() {
   const bank = lsGet(LS.wrong, {});
   const ids = Object.keys(bank).filter(id => INDEX[id]);
   if (!ids.length) {
-    show(`<h1>🔁 สมุดข้อผิด</h1><p class="sub">ข้อที่ตอบผิดจะถูกเก็บเข้าคลังอัตโนมัติ — ตอบถูก 2 ครั้งติดจึงหลุดจากคลัง</p>
+    show(`${pageHead("ทบทวน · review", "สมุดข้อผิด")}<p class="sub">ข้อที่ตอบผิดจะถูกเก็บเข้าคลังอัตโนมัติ — ตอบถูก 2 ครั้งติดจึงหลุดจากคลัง</p>
       <div class="panel"><p class="empty">ยังไม่มีข้อผิดค้างอยู่ 🎉<br>ไปทำข้อสอบก่อน แล้วข้อที่พลาดจะมารออยู่ที่นี่</p></div>`);
     return;
   }
@@ -772,7 +909,7 @@ function openWrongBank() {
     </div>`;
   }).join("");
   show(`
-    <h1>🔁 สมุดข้อผิด</h1>
+    ${pageHead("ทบทวน · review", "สมุดข้อผิด")}
     <p class="sub">มี ${ids.length} ข้อค้างอยู่ — ทำซ้ำแบบเฉลยทันที ตอบถูก 2 ครั้งติดข้อนั้นจะหลุดจากคลัง</p>
     <div class="panel">
       <button class="btn" onclick="startRetry()">▶ เริ่มทบทวน ${ids.length} ข้อ</button>
@@ -822,7 +959,7 @@ function openTagPractice() {
     weakHtml = `<div class="notice">💡 จากสถิติของคุณ หัวข้อที่ควรเน้น: ` +
       weak.map(w => `<b>${esc(w.tag)}</b> (${w.pct}%)`).join(" · ") + `</div>`;
   }
-  let html = `<h1>🎯 ฝึกแยกตามหัวข้อ</h1>
+  let html = `${pageHead("เจาะจุดอ่อน", "ฝึกแยกตามหัวข้อ")}
     <p class="sub">เลือกหัวข้อที่อยากเจาะ — ระบบดึงข้อจากทุกชุดมาฝึกแบบสุ่ม เฉลยทันทีหลังตอบแต่ละข้อ (ไม่นับรวมในสถิติหลัก)</p>
     ${weakHtml}`;
   PART_ORDER.forEach(part => {
@@ -876,7 +1013,7 @@ function openStats() {
   stopTimer(); S = null;
   const hist = lsGet(LS.history, []);
   if (!hist.length) {
-    show(`<h1>📈 สถิติของฉัน</h1>
+    show(`${pageHead("TU-GET PROGRESS", "สถิติของฉัน")}
       <div class="panel"><p class="empty">ยังไม่มีประวัติการทำข้อสอบ<br>ทำข้อสอบชุดแรกก่อน แล้วกราฟพัฒนาการจะแสดงที่นี่</p></div>
       ${exportImportHtml()}`);
     bindImport();
@@ -886,6 +1023,29 @@ function openStats() {
   const best = Math.max(...hist.map(h => pct(h.score, h.max)));
   const last = hist[hist.length - 1];
   const totalQ = hist.reduce((s, h) => s + h.max / PTS, 0);
+
+  // เทียบครั้งล่าสุดกับครั้งก่อนหน้า
+  let lastDelta = "";
+  if (hist.length >= 2) {
+    const d = pct(last.score, last.max) - pct(hist[hist.length - 2].score, hist[hist.length - 2].max);
+    lastDelta = `<div class="kpi-delta ${d >= 0 ? "up" : "down"}">${d >= 0 ? "▲ +" : "▼ "}${d}% จากครั้งก่อน</div>`;
+  }
+  // ความแม่นยำสะสมรายพาร์ท → โปรไฟล์ทักษะ (radar)
+  const partAgg = {};
+  hist.forEach(h => Object.keys(h.perPart || {}).forEach(p => {
+    if (!partAgg[p]) partAgg[p] = { got: 0, max: 0 };
+    partAgg[p].got += h.perPart[p].got; partAgg[p].max += h.perPart[p].max;
+  }));
+  const radarData = PART_ORDER.filter(p => partAgg[p] && partAgg[p].max > 0)
+    .map(p => ({ label: PARTS[p].name, pct: pct(partAgg[p].got, partAgg[p].max) }));
+  let skillPanel = "";
+  if (radarData.length >= 3) {
+    skillPanel = `<div class="panel"><h2 style="margin-top:0">โปรไฟล์ทักษะ (ความแม่นยำสะสมรายพาร์ท)</h2>
+      <canvas id="radar" width="360" height="300" style="max-width:380px;display:block;margin:0 auto"></canvas></div>`;
+  } else if (radarData.length) {
+    const bars = radarData.map(d => `<div class="pbar"><div class="pbar-top"><span>${esc(d.label)}</span><span class="num">${d.pct}%</span></div><div class="bar-track"><i style="width:${d.pct}%;background:${barColor(d.pct)}"></i></div></div>`).join("");
+    skillPanel = `<div class="panel"><h2 style="margin-top:0">ความแม่นยำรายพาร์ท</h2><div class="part-bars">${bars}</div></div>`;
+  }
 
   // รวมความแม่นยำรายหัวข้อจากทุกครั้ง
   const tagAgg = {};
@@ -907,13 +1067,14 @@ function openStats() {
       <td class="num">${fmtTime(h.timeUsed || 0)}</td></tr>`).join("");
 
   show(`
-    <h1>📈 สถิติของฉัน</h1>
+    ${pageHead("TU-GET PROGRESS", "สถิติของฉัน")}
     <div class="kpi-row">
       <div class="kpi"><div class="v">${hist.length}</div><div class="l">ครั้งที่ทำ</div></div>
       <div class="kpi"><div class="v">${totalQ}</div><div class="l">ข้อที่ทำไปแล้ว</div></div>
       <div class="kpi"><div class="v">${best}%</div><div class="l">คะแนนดีที่สุด</div></div>
-      <div class="kpi"><div class="v">${pct(last.score, last.max)}%</div><div class="l">ครั้งล่าสุด</div></div>
+      <div class="kpi"><div class="v">${pct(last.score, last.max)}%</div><div class="l">ครั้งล่าสุด</div>${lastDelta}</div>
     </div>
+    ${skillPanel}
     <div class="panel"><h2 style="margin-top:0">กราฟพัฒนาการ (% คะแนนแต่ละครั้ง)</h2>
       <canvas id="chart" width="940" height="260"></canvas></div>
     <div class="panel"><h2 style="margin-top:0">ความแม่นยำรายหัวข้อ (สะสมทุกครั้ง · เรียงจากจุดอ่อน)</h2>
@@ -924,7 +1085,51 @@ function openStats() {
       </table></div></div>
     ${exportImportHtml()}`);
   drawChart(hist);
+  if (radarData.length >= 3) drawRadar("radar", radarData);
   bindImport();
+}
+
+// กราฟ radar โปรไฟล์ทักษะ (N แกน, N>=3)
+function drawRadar(id, data) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const W = cv.clientWidth || 360, H = 300;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.height = H + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const css = getComputedStyle(document.documentElement);
+  const cBorder = css.getPropertyValue("--border").trim() || "#ddd";
+  const cMuted = css.getPropertyValue("--muted").trim() || "#888";
+  const cText = css.getPropertyValue("--text").trim() || "#222";
+  const cPrimary = css.getPropertyValue("--primary").trim() || "#2f8f73";
+  ctx.clearRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2 + 4, R = Math.min(W, H) / 2 - 48, N = data.length;
+  const ang = i => -Math.PI / 2 + i * 2 * Math.PI / N;
+  const base = '"IBM Plex Sans", "Noto Sans Thai Looped", sans-serif';
+  // วงกริด
+  for (let r = 1; r <= 4; r++) {
+    ctx.strokeStyle = cBorder; ctx.beginPath();
+    for (let i = 0; i <= N; i++) { const a = ang(i % N), rr = R * r / 4, x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+    ctx.closePath(); ctx.stroke();
+  }
+  // แกน + ป้ายชื่อ + %
+  data.forEach((d, i) => {
+    const a = ang(i);
+    ctx.strokeStyle = cBorder; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a)); ctx.stroke();
+    const lx = cx + (R + 22) * Math.cos(a), ly = cy + (R + 18) * Math.sin(a);
+    ctx.textAlign = Math.abs(Math.cos(a)) < 0.3 ? "center" : (Math.cos(a) > 0 ? "left" : "right");
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = cText; ctx.font = "600 13px " + base; ctx.fillText(d.label, lx, ly - 7);
+    ctx.fillStyle = cPrimary; ctx.font = "700 13px " + base; ctx.fillText(d.pct + "%", lx, ly + 9);
+  });
+  // รูปข้อมูล
+  ctx.beginPath();
+  data.forEach((d, i) => { const a = ang(i), rr = R * d.pct / 100, x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+  ctx.closePath();
+  ctx.fillStyle = cPrimary + "33"; ctx.fill();
+  ctx.strokeStyle = cPrimary; ctx.lineWidth = 2; ctx.stroke();
+  data.forEach((d, i) => { const a = ang(i), rr = R * d.pct / 100; ctx.fillStyle = cPrimary; ctx.beginPath(); ctx.arc(cx + rr * Math.cos(a), cy + rr * Math.sin(a), 3.5, 0, Math.PI * 2); ctx.fill(); });
 }
 
 function drawChart(hist) {
@@ -945,7 +1150,7 @@ function drawChart(hist) {
   const cPrimary = css.getPropertyValue("--primary").trim() || "#4150b5";
   const cAccent = css.getPropertyValue("--accent").trim() || "#0e9488";
   ctx.clearRect(0, 0, W, H);
-  ctx.font = '12px "IBM Plex Sans Thai Looped", "IBM Plex Sans", sans-serif';
+  ctx.font = '12px "IBM Plex Sans", "Noto Sans Thai Looped", sans-serif';
 
   // เส้นกริดแนวนอนทุก 25%
   for (let v = 0; v <= 100; v += 25) {
@@ -969,7 +1174,7 @@ function drawChart(hist) {
     ctx.beginPath(); ctx.arc(p.x, p.y, 4.5, 0, Math.PI * 2); ctx.fill();
   });
   // คำอธิบายใต้กราฟ — ใช้สีตัวอักษรหลัก (เข้ม) + จุดสีตามคำอธิบาย ให้อ่านชัด ไม่จาง
-  ctx.font = '12.5px "IBM Plex Sans Thai Looped", "IBM Plex Sans", sans-serif';
+  ctx.font = '12.5px "IBM Plex Sans", "Noto Sans Thai Looped", sans-serif';
   let lx = padL;
   const baseY = H - 7;
   ctx.fillStyle = cAccent; ctx.fillText("●", lx, baseY); lx += ctx.measureText("● ").width;
@@ -1063,7 +1268,7 @@ function openBookmarks() {
   const marks = getMarks();
   const ids = Object.keys(marks).filter(id => INDEX[id]);
   if (!ids.length) {
-    show(`<h1>🔖 บุ๊กมาร์ก</h1>
+    show(`${pageHead("เก็บไว้ทบทวน", "บุ๊กมาร์ก")}
       <div class="panel"><p class="empty">ยังไม่มีข้อที่บุ๊กมาร์กไว้<br>ในหน้าเฉลยของแต่ละข้อ กด "☆ บุ๊กมาร์กข้อนี้" เพื่อเก็บไว้ทบทวน พร้อมจดโน้ตได้</p></div>`);
     return;
   }
@@ -1089,7 +1294,7 @@ function openBookmarks() {
       </div>
     </div>`;
   }).join("");
-  show(`<h1>🔖 บุ๊กมาร์ก</h1>
+  show(`${pageHead("เก็บไว้ทบทวน", "บุ๊กมาร์ก")}
     <p class="sub">${ids.length} ข้อที่เก็บไว้ทบทวน — แก้โน้ตได้ตลอด บันทึกอัตโนมัติ</p>
     ${items}`);
 }
@@ -1124,11 +1329,15 @@ function openVocabList() {
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   _vocabCache = buildVocabList();
-  show(`<h1>📒 คลังคำศัพท์</h1>
+  show(`${pageHead("TU-GET VOCABULARY", "คลังคำศัพท์")}
     <p class="sub">รวมคำศัพท์ ${_vocabCache.length} คำจากพาร์ท Vocabulary ทุกชุด พร้อมความหมายและประโยคตัวอย่าง</p>
     <div class="panel">
       <input type="text" id="vocabSearch" placeholder="🔍 ค้นหาคำหรือความหมาย..." oninput="renderVocabList(this.value)" style="max-width:100%">
-      <button class="btn small" style="margin-top:10px" onclick="startFlashcards()">🎮 เล่นเกมทายคำแปล</button>
+      <div class="vmode-row">
+        <button class="btn small" onclick="startFlashcardStudy()"><i class="ti ti-cards"></i> แฟลชการ์ด</button>
+        <button class="btn small secondary" onclick="startGapFill()"><i class="ti ti-pencil"></i> เติมคำ</button>
+        <button class="btn small secondary" onclick="startFlashcards()"><i class="ti ti-bulb"></i> เกมทายคำแปล</button>
+      </div>
     </div>
     <div id="vocabListBox"></div>`);
   renderVocabList("");
@@ -1216,6 +1425,121 @@ function renderGameResult() {
         <button class="btn secondary" onclick="openVocabList()">กลับคลังคำศัพท์</button>
       </div>
     </div>`);
+}
+
+/* ---- โหมดทบทวนคำศัพท์: แฟลชการ์ด (จำได้/ยังไม่แม่น) ---- */
+let fcDeck = [], fcCur = null, fcFlipped = false, fcKnown = 0, fcLearning = 0, fcTotal = 0;
+function startFlashcardStudy() {
+  fcDeck = shuffle(_vocabCache.filter(e => e.meaning).slice());
+  fcTotal = fcDeck.length; fcKnown = 0; fcLearning = 0;
+  nextFlashcard();
+}
+function nextFlashcard() {
+  if (!fcDeck.length) { renderFlashcardDone(); return; }
+  fcCur = fcDeck[0]; fcFlipped = false; renderFlashcard();
+}
+function flipFlashcard() { fcFlipped = !fcFlipped; renderFlashcard(); }
+function rateFlashcard(known) {
+  fcDeck.shift();
+  if (known) fcKnown++;
+  else { fcLearning++; fcDeck.push(fcCur); }   // ยังไม่แม่น → วนกลับมาท้ายแถว
+  nextFlashcard();
+}
+function renderFlashcard() {
+  const e = fcCur;
+  const front = `<div class="fc-hint">แตะการ์ดเพื่อดูความหมาย</div><div class="fc-word">${esc(e.word)}</div>`;
+  const back = `<div class="fc-mean">${esc(e.meaning)}</div>${e.example ? `<div class="fc-ex">${e.example}</div>` : ""}${e.exampleTH ? `<div class="vocab-ex-th">🇹🇭 ${esc(e.exampleTH)}</div>` : ""}`;
+  show(`
+    <div class="vstudy">
+      <div class="section-label">TU-GET VOCABULARY · แฟลชการ์ด</div>
+      <div class="vstudy-head">
+        <span>เหลือ ${fcDeck.length} คำ</span>
+        <span><b style="color:var(--success)">จำได้ ${fcKnown}</b> · <b style="color:var(--accent)">ยังไม่แม่น ${fcLearning}</b></span>
+      </div>
+      <div class="flashcard" onclick="flipFlashcard()"><div class="fc-face">${fcFlipped ? back : front}</div></div>
+      <div class="fc-actions">
+        <button class="btn fc-still" onclick="rateFlashcard(false)"><i class="ti ti-rotate-clockwise"></i> ยังไม่แม่น</button>
+        <button class="btn fc-got" onclick="rateFlashcard(true)"><i class="ti ti-check"></i> จำได้</button>
+      </div>
+      <button class="btn secondary" style="margin-top:10px;width:100%" onclick="openVocabList()">ออกจากการทบทวน</button>
+    </div>`);
+}
+function renderFlashcardDone() {
+  show(`<div class="panel score-hero">
+      <div class="result-label">แฟลชการ์ด — จบรอบ 🎉</div>
+      <div class="big" style="color:var(--success)">${fcKnown}<span class="of"> / ${fcTotal}</span></div>
+      <div class="pct">จำได้ครบทุกคำแล้ว!</div>
+      <div class="result-actions">
+        <button class="btn" onclick="startFlashcardStudy()"><i class="ti ti-refresh"></i> เริ่มใหม่</button>
+        <button class="btn secondary" onclick="openVocabList()"><i class="ti ti-arrow-left"></i> กลับคลังคำศัพท์</button>
+      </div></div>`);
+}
+
+/* ---- เติมคำ (Gap Fill): เติมคำที่หายไปในประโยคตัวอย่าง ---- */
+let gfDeck = [], gfIdx = 0, gfScore = 0, gfChecked = false;
+function gfBlank(e) {
+  const input = '<input class="gap-input" id="gapIn" autocomplete="off" spellcheck="false" onkeydown="if(event.key===\'Enter\')checkGap()">';
+  if (/<u>.*?<\/u>/i.test(e.example)) return e.example.replace(/<u>.*?<\/u>/i, input);
+  return e.example.replace(/_{2,}/, input);
+}
+function startGapFill() {
+  gfDeck = shuffle(_vocabCache.filter(e => e.meaning && (/<u>.*?<\/u>/i.test(e.example) || /_{2,}/.test(e.example))));
+  gfIdx = 0; gfScore = 0; renderGapFill();
+}
+function renderGapFill() {
+  if (gfIdx >= gfDeck.length) { renderGapDone(); return; }
+  gfChecked = false;
+  const e = gfDeck[gfIdx];
+  show(`
+    <div class="vstudy">
+      <div class="section-label">TU-GET VOCABULARY · เติมคำ</div>
+      <div class="vstudy-head"><span>ข้อ ${gfIdx + 1} / ${gfDeck.length}</span><span>คะแนน ${gfScore}</span></div>
+      <div class="panel">
+        <div class="gap-hint">เติมคำที่หายไป — คำใบ้: <b>${esc(e.meaning)}</b></div>
+        <div class="gap-sentence">${gfBlank(e)}</div>
+        <div id="gapFeedback"></div>
+      </div>
+      <div class="fc-actions">
+        <button class="btn secondary" onclick="revealGap()">เฉลย</button>
+        <button class="btn" onclick="checkGap()">ตรวจคำตอบ</button>
+      </div>
+      <button class="btn secondary" style="margin-top:10px;width:100%" onclick="openVocabList()">ออก</button>
+    </div>`);
+  const inp = document.getElementById("gapIn"); if (inp) inp.focus();
+}
+function gapResult(ok, e) {
+  const fb = document.getElementById("gapFeedback");
+  if (fb) fb.innerHTML = `<div class="feedback ${ok ? "good" : "bad"}" style="margin-top:14px">
+      <b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก"}</b> เฉลย: <b>${esc(e.word)}</b> — ${esc(e.meaning)}</div>
+    <button class="btn" style="margin-top:12px;width:100%" onclick="gapNext()">${gfIdx === gfDeck.length - 1 ? "ดูผล ▶" : "ข้อถัดไป ▶"}</button>`;
+  const inp = document.getElementById("gapIn"); if (inp) inp.disabled = true;
+}
+function checkGap() {
+  if (gfChecked) return;
+  const e = gfDeck[gfIdx], inp = document.getElementById("gapIn"); if (!inp) return;
+  gfChecked = true;
+  const ok = inp.value.trim().toLowerCase() === e.word.trim().toLowerCase();
+  if (ok) gfScore++;
+  gapResult(ok, e);
+}
+function revealGap() {
+  if (gfChecked) return;
+  gfChecked = true;
+  const e = gfDeck[gfIdx], inp = document.getElementById("gapIn");
+  if (inp) inp.value = e.word;
+  gapResult(false, e);
+}
+function gapNext() { gfIdx++; renderGapFill(); }
+function renderGapDone() {
+  const p = pct(gfScore, gfDeck.length);
+  show(`<div class="panel score-hero">
+      <div class="result-label">เติมคำ — จบรอบ</div>
+      <div class="big">${gfScore}<span class="of"> / ${gfDeck.length}</span></div>
+      <div class="pct">${p}% ถูกต้อง</div>
+      <div class="result-actions">
+        <button class="btn" onclick="startGapFill()"><i class="ti ti-refresh"></i> เล่นอีกครั้ง</button>
+        <button class="btn secondary" onclick="openVocabList()"><i class="ti ti-arrow-left"></i> กลับคลังคำศัพท์</button>
+      </div></div>`);
 }
 
 /* ---------- กันปิดหน้าระหว่างทำข้อสอบ ---------- */
