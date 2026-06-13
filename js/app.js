@@ -999,7 +999,7 @@ function drawChart(hist) {
   const cPrimary = css.getPropertyValue("--primary").trim() || "#4150b5";
   const cAccent = css.getPropertyValue("--accent").trim() || "#0e9488";
   ctx.clearRect(0, 0, W, H);
-  ctx.font = '12px "IBM Plex Sans Thai Looped", "IBM Plex Sans", sans-serif';
+  ctx.font = '12px "IBM Plex Sans", "Noto Sans Thai Looped", sans-serif';
 
   // เส้นกริดแนวนอนทุก 25%
   for (let v = 0; v <= 100; v += 25) {
@@ -1023,7 +1023,7 @@ function drawChart(hist) {
     ctx.beginPath(); ctx.arc(p.x, p.y, 4.5, 0, Math.PI * 2); ctx.fill();
   });
   // คำอธิบายใต้กราฟ — ใช้สีตัวอักษรหลัก (เข้ม) + จุดสีตามคำอธิบาย ให้อ่านชัด ไม่จาง
-  ctx.font = '12.5px "IBM Plex Sans Thai Looped", "IBM Plex Sans", sans-serif';
+  ctx.font = '12.5px "IBM Plex Sans", "Noto Sans Thai Looped", sans-serif';
   let lx = padL;
   const baseY = H - 7;
   ctx.fillStyle = cAccent; ctx.fillText("●", lx, baseY); lx += ctx.measureText("● ").width;
