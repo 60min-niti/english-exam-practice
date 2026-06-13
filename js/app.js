@@ -321,7 +321,7 @@ function renderHome() {
         <span class="sp" onclick="openSetup('reading')">Reading</span>
       </div>
       <div class="ec-foot">
-        <span class="ec-target"><i class="ti ti-target-arrow"></i> เป้าหมาย 550+ คะแนน · ฝึกได้ 800 ข้อ</span>
+        <span class="ec-target"><i class="ti ti-target-arrow"></i> เป้าหมาย 550+ คะแนน · ฝึกได้ 900 ข้อ</span>
         <button class="ec-cta" onclick="openSetup('full')">เริ่มฝึกเต็มชุด <i class="ti ti-arrow-right"></i></button>
       </div>
     </div>
@@ -344,6 +344,7 @@ function renderHome() {
       <div class="action-tile" onclick="openStats()"><div class="at-icon" style="background:var(--accent-soft);color:var(--accent)"><i class="ti ti-chart-line"></i></div><b>ความก้าวหน้า</b><small>คะแนน + จุดอ่อน</small></div>
       <div class="action-tile" onclick="openWrongBank()"><div class="at-icon" style="background:var(--danger-soft);color:var(--danger)"><i class="ti ti-refresh"></i></div><b>สมุดข้อผิด</b><small>${wrongCount} ข้อค้างอยู่</small></div>
       <div class="action-tile" onclick="openBookmarks()"><div class="at-icon" style="background:var(--primary-soft);color:var(--primary)"><i class="ti ti-bookmark"></i></div><b>บุ๊กมาร์ก</b><small>${markCount} ข้อ</small></div>
+      <div class="action-tile" onclick="openPrintSetup()"><div class="at-icon" style="background:#eceaf3;color:#6a5e8a"><i class="ti ti-printer"></i></div><b>พิมพ์ / บันทึก PDF</b><small>ข้อสอบฉบับกระดาษ</small></div>
     </div>
 
     ${weekHtml}`);
@@ -1540,6 +1541,114 @@ function renderGapDone() {
         <button class="btn" onclick="startGapFill()"><i class="ti ti-refresh"></i> เล่นอีกครั้ง</button>
         <button class="btn secondary" onclick="openVocabList()"><i class="ti ti-arrow-left"></i> กลับคลังคำศัพท์</button>
       </div></div>`);
+}
+
+/* ================= พิมพ์ / บันทึก PDF (print CSS) ================= */
+let printCfg = { part: "structure", set: null, withAnswers: true, header: true, notes: false };
+function plLetter(i) { return String.fromCharCode(65 + i); }
+function posFromTag(tag) { return ({ Verb: "(v.)", Adjective: "(adj.)", Noun: "(n.)", Adverb: "(adv.)" })[tag] || ""; }
+
+function openPrintSetup() {
+  if (!confirmLeaveExam()) return;
+  stopTimer(); S = null;
+  if (printCfg.set == null || setsOf(printCfg.part).indexOf(printCfg.set) < 0) printCfg.set = setsOf(printCfg.part)[0];
+  renderPrintSetup();
+}
+function readPrint() {
+  const pe = document.getElementById("printPart"); if (pe) printCfg.part = pe.value;
+  const se = document.getElementById("printSet"); if (se) printCfg.set = Number(se.value);
+  const f = document.querySelector('input[name="pfmt"]:checked'); if (f) printCfg.withAnswers = f.value === "qa";
+  const h = document.getElementById("pHeader"); if (h) printCfg.header = h.checked;
+  const n = document.getElementById("pNotes"); if (n) printCfg.notes = n.checked;
+  if (setsOf(printCfg.part).indexOf(printCfg.set) < 0) printCfg.set = setsOf(printCfg.part)[0];
+}
+function printChanged() { readPrint(); renderPrintSetup(); }
+function renderPrintSetup() {
+  show(`
+    ${pageHead("พิมพ์ / บันทึก PDF", "ข้อสอบฉบับกระดาษ")}
+    <p class="sub">เลือกชุดและรูปแบบ แล้วกด "สร้าง PDF" — ระบบจะเปิดหน้าต่างพิมพ์ของเบราว์เซอร์ให้เลือก "บันทึกเป็น PDF" ได้</p>
+    <div class="panel" style="max-width:560px">
+      <label class="field">พาร์ท</label>
+      <select id="printPart" onchange="printChanged()">
+        ${PART_ORDER.map(p => `<option value="${p}" ${p === printCfg.part ? "selected" : ""}>${PARTS[p].name} — ${esc(PARTS[p].thai)}</option>`).join("")}
+      </select>
+      <label class="field">ชุด</label>
+      <select id="printSet" onchange="readPrint()">
+        ${setsOf(printCfg.part).map(n => `<option value="${n}" ${n === printCfg.set ? "selected" : ""}>ชุดที่ ${n}</option>`).join("")}
+      </select>
+      <label class="field">รูปแบบ</label>
+      <div class="mode-pick">
+        <label class="opt ${printCfg.withAnswers ? "sel" : ""}"><input type="radio" name="pfmt" value="qa" ${printCfg.withAnswers ? "checked" : ""} onchange="printChanged()"> <b>โจทย์ + เฉลย</b><small>2 หน้า: ข้อสอบ (อังกฤษล้วน) + เฉลย (มีคำแปลไทย + คำอธิบาย)</small></label>
+        <label class="opt ${printCfg.withAnswers ? "" : "sel"}"><input type="radio" name="pfmt" value="q" ${printCfg.withAnswers ? "" : "checked"} onchange="printChanged()"> <b>โจทย์อย่างเดียว</b><small>เฉพาะหน้าข้อสอบ (อังกฤษล้วน)</small></label>
+      </div>
+      <label class="field">ตัวเลือกเสริม</label>
+      <label style="display:block;font-size:.95rem"><input type="checkbox" id="pHeader" ${printCfg.header ? "checked" : ""} onchange="readPrint()"> ใส่หัวกระดาษ (ชื่อ-สกุล / วันที่ / เวลา)</label>
+      <label style="display:block;font-size:.95rem;margin-top:6px"><input type="checkbox" id="pNotes" ${printCfg.notes ? "checked" : ""} onchange="readPrint()"> เว้นช่องว่างให้จดใต้แต่ละข้อ</label>
+      <div style="margin-top:20px">
+        <button class="btn" onclick="doPrint()"><i class="ti ti-printer"></i> สร้าง PDF / พิมพ์</button>
+        <button class="btn secondary" onclick="goHome()">ยกเลิก</button>
+      </div>
+    </div>`);
+}
+function doPrint() { readPrint(); buildPrintDoc(printCfg); window.print(); }
+
+/* ---- สร้างเอกสารสำหรับพิมพ์ลงใน #printArea (นอก #app) ---- */
+function plPassage(p) {
+  const paras = String(p.text).split(/\n\s*\n/)
+    .map((t, i) => `<p class="pa-para"><b>[${i + 1}]</b> ${esc(t)}</p>`).join("");
+  return `<div class="pa-passage"><div class="pa-passage-title">${esc(p.title)}</div>${paras}</div>`;
+}
+function plHead(cfg, page, count) {
+  const setLabel = `${PARTS[cfg.part].name} (Set ${cfg.set})`;
+  if (page === "key") {
+    return `<div class="pa-head"><div class="pa-title">Answer Key &amp; Explanations</div><div class="pa-sub">เฉลยและคำอธิบาย — ${setLabel}</div></div>`;
+  }
+  const info = cfg.header
+    ? `<div class="pa-info"><span>Name: <span class="pa-fill"></span></span><span>Date: <span class="pa-fill" style="width:70px"></span></span><span>Time: ____ min</span><span>Total: ${count}</span></div>`
+    : "";
+  return `<div class="pa-head"><div class="pa-title">TU-GET PBT Practice</div><div class="pa-sub">Practice Test — ${setLabel}</div>
+    <div class="pa-disc">Practice material — not an official exam and not affiliated with Thammasat University.</div></div>${info}`;
+}
+function plFoot(label) {
+  return `<div class="pa-foot"><span>TU-GET PBT Practice — practice material (not a real exam)</span><span>${label}</span></div>`;
+}
+function plExamBody(qs, cfg) {
+  const instr = cfg.part === "reading" ? "Read each passage and choose the best answer."
+    : (cfg.part === "vocabulary" ? "Choose the word closest in meaning that best fits each sentence."
+      : "Choose the word or phrase that best completes each sentence.");
+  let out = `<div class="pa-parthead">Part — ${PARTS[cfg.part].name}</div><div class="pa-instr">${instr}</div>`;
+  let lastP = null, n = 0;
+  qs.forEach(q => {
+    if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassage(q.passage); }
+    n++;
+    const choices = q.choices.map((c, i) => `(${plLetter(i)}) ${c}`).join("&nbsp;&nbsp;&nbsp; ");
+    out += `<div class="pa-q"><div><b>${n}.</b> ${q.question}</div><div class="pa-choices">${choices}</div>${cfg.notes ? '<div class="pa-notes"></div>' : ""}</div>`;
+  });
+  return out;
+}
+function plKeyBody(qs, cfg) {
+  const grid = qs.map((q, i) => `<span class="pa-gi"><b>${i + 1}.</b> ${plLetter(q.answer)}</span>`).join("");
+  let out = `<div class="pa-grid">${grid}</div>`;
+  let lastP = null, n = 0;
+  qs.forEach(q => {
+    if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassage(q.passage); }
+    n++;
+    const pos = posFromTag(q.tag);
+    const choices = q.choices.map((c, i) => {
+      const g = choiceTH(q, i), ok = i === q.answer;
+      return `<div class="pa-kc ${ok ? "ok" : ""}">(${plLetter(i)}) ${c}${pos ? " " + pos : ""}${g ? " " + g : ""}${ok ? " ✓" : ""}</div>`;
+    }).join("");
+    out += `<div class="pa-q"><div><b>${n}.</b> ${q.question}</div>${q.questionTH ? `<div class="pa-qth">${q.questionTH}</div>` : ""}${choices}<div class="pa-expl"><b>อธิบาย:</b> ${q.explanation}</div></div>`;
+  });
+  return out;
+}
+function buildPrintDoc(cfg) {
+  const qs = BANK[cfg.part][cfg.set] || [];
+  let html = `<section class="pa-page">${plHead(cfg, "exam", qs.length)}${plExamBody(qs, cfg)}${plFoot("แบบฝึกหัด (ไม่ใช่ข้อสอบจริง)")}</section>`;
+  if (cfg.withAnswers) html += `<section class="pa-page pa-key">${plHead(cfg, "key", qs.length)}${plKeyBody(qs, cfg)}${plFoot("เฉลย")}</section>`;
+  let pa = document.getElementById("printArea");
+  if (!pa) { pa = document.createElement("div"); pa.id = "printArea"; document.body.appendChild(pa); }
+  pa.innerHTML = html;
 }
 
 /* ---------- กันปิดหน้าระหว่างทำข้อสอบ ---------- */
