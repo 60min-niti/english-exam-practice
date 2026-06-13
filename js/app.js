@@ -220,6 +220,50 @@ function pageHead(eyebrow, title) {
   return `<div class="page-head"><div class="page-eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1></div>`;
 }
 
+/* ภาพประกอบหน้าแรกแนว Corporate Memphis / neo-flat (เป้าหมาย + เช็คลิสต์ + กราฟ) */
+function heroArtSVG() {
+  return `<svg viewBox="0 0 460 380" role="img" aria-label="ภาพประกอบการเตรียมสอบ" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="372" cy="96" r="122" fill="#e2f0ea"/>
+    <circle cx="74" cy="322" r="58" fill="#f6ecda"/>
+    <!-- การ์ดเช็คลิสต์ -->
+    <rect x="48" y="96" width="212" height="196" rx="22" fill="#ffffff" stroke="#e6e4db" stroke-width="2"/>
+    <rect x="74" y="124" width="116" height="16" rx="8" fill="#2f8f73"/>
+    <g>
+      <circle cx="90" cy="172" r="13" fill="#e2f0ea"/>
+      <path d="M84 172 l4 4 l8 -9" fill="none" stroke="#2f8f73" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="112" y="166" width="120" height="12" rx="6" fill="#ece9e0"/>
+      <circle cx="90" cy="214" r="13" fill="#e2f0ea"/>
+      <path d="M84 214 l4 4 l8 -9" fill="none" stroke="#2f8f73" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="112" y="208" width="120" height="12" rx="6" fill="#ece9e0"/>
+      <circle cx="90" cy="256" r="13" fill="#f6ecda"/>
+      <rect x="112" y="250" width="84" height="12" rx="6" fill="#ece9e0"/>
+    </g>
+    <!-- เป้าหมาย 550+ -->
+    <g transform="translate(372,72)">
+      <circle r="36" fill="#ffffff" stroke="#e6e4db" stroke-width="2"/>
+      <circle r="25" fill="#e2f0ea"/>
+      <circle r="14" fill="#2f8f73"/>
+      <circle r="5" fill="#ffffff"/>
+    </g>
+    <!-- การ์ดกราฟแท่ง -->
+    <rect x="276" y="206" width="152" height="128" rx="20" fill="#ffffff" stroke="#e6e4db" stroke-width="2"/>
+    <rect x="294" y="304" width="120" height="3" rx="1.5" fill="#e6e4db"/>
+    <rect x="300" y="258" width="28" height="46" rx="7" fill="#d6a85a"/>
+    <rect x="338" y="226" width="28" height="78" rx="7" fill="#2f8f73"/>
+    <rect x="376" y="244" width="28" height="60" rx="7" fill="#c66a50"/>
+    <!-- คอนเฟตตี Memphis -->
+    <circle cx="30" cy="58" r="16" fill="none" stroke="#c66a50" stroke-width="5"/>
+    <circle cx="442" cy="150" r="10" fill="#d6a85a"/>
+    <circle cx="255" cy="356" r="9" fill="#2f8f73"/>
+    <circle cx="40" cy="318" r="7" fill="#2f8f73"/>
+    <g stroke="#7a52c2" stroke-width="5" stroke-linecap="round">
+      <line x1="290" y1="122" x2="310" y2="122"/>
+      <line x1="300" y1="112" x2="300" y2="132"/>
+    </g>
+    <path d="M18 350 q10 -13 20 0 q10 13 20 0" fill="none" stroke="#2f8f73" stroke-width="4" stroke-linecap="round"/>
+  </svg>`;
+}
+
 function goHome() {
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
@@ -299,10 +343,13 @@ function renderHome() {
 
   show(`
     <section class="home-hero">
-      <p class="hi">${hello}</p>
-      <span class="eyebrow"><i class="ti ti-sparkles"></i> ENGLISH EXAM PLATFORM</span>
-      <h1>เตรียมสอบอย่างมีเป้าหมาย<br><span class="acc">สอบผ่านอย่างมั่นใจ</span></h1>
-      <p class="lead">ฝึกแนวข้อสอบจริง จับเวลา เกมคำศัพท์ และบทอ่าน พร้อมเฉลยอธิบายภาษาไทยทุกข้อ</p>
+      <div class="hh-text">
+        <p class="hi">${hello}</p>
+        <span class="eyebrow"><i class="ti ti-sparkles"></i> ENGLISH EXAM PLATFORM</span>
+        <h1>เตรียมสอบอย่างมีเป้าหมาย<br><span class="acc">สอบผ่านอย่างมั่นใจ</span></h1>
+        <p class="lead">ฝึกแนวข้อสอบจริง จับเวลา เกมคำศัพท์ และบทอ่าน พร้อมเฉลยอธิบายภาษาไทยทุกข้อ</p>
+      </div>
+      <div class="hh-art">${heroArtSVG()}</div>
     </section>
 
     ${resumeBar}
@@ -338,13 +385,13 @@ function renderHome() {
 
     <div class="section-label" style="margin-top:22px">เริ่มฝึก · start practicing</div>
     <div class="action-grid">
-      <div class="action-tile" onclick="openSetup('full')"><div class="at-icon" style="background:#e3edf7;color:#2f6aa8"><i class="ti ti-clipboard-text"></i></div><b>ทำข้อสอบเต็มชุด</b><small>จับเวลาเสมือนจริง</small></div>
-      <div class="action-tile" onclick="openVocabList()"><div class="at-icon" style="background:#ece4f7;color:#7a52c2"><i class="ti ti-cards"></i></div><b>คลังคำศัพท์</b><small>เกมทาย + Flashcard</small></div>
-      <div class="action-tile" onclick="openTagPractice()"><div class="at-icon" style="background:var(--success-soft);color:var(--success)"><i class="ti ti-target-arrow"></i></div><b>ฝึกแยกหัวข้อ</b><small>เจาะจุดอ่อน</small></div>
-      <div class="action-tile" onclick="openStats()"><div class="at-icon" style="background:var(--accent-soft);color:var(--accent)"><i class="ti ti-chart-line"></i></div><b>ความก้าวหน้า</b><small>คะแนน + จุดอ่อน</small></div>
-      <div class="action-tile" onclick="openWrongBank()"><div class="at-icon" style="background:var(--danger-soft);color:var(--danger)"><i class="ti ti-refresh"></i></div><b>สมุดข้อผิด</b><small>${wrongCount} ข้อค้างอยู่</small></div>
-      <div class="action-tile" onclick="openBookmarks()"><div class="at-icon" style="background:var(--primary-soft);color:var(--primary)"><i class="ti ti-bookmark"></i></div><b>บุ๊กมาร์ก</b><small>${markCount} ข้อ</small></div>
-      <div class="action-tile" onclick="openPrintSetup()"><div class="at-icon" style="background:#eceaf3;color:#6a5e8a"><i class="ti ti-printer"></i></div><b>พิมพ์ / บันทึก PDF</b><small>ข้อสอบฉบับกระดาษ</small></div>
+      <div class="action-tile" style="--tile:#2f6aa8" onclick="openSetup('full')"><div class="at-icon"><i class="ti ti-clipboard-text"></i></div><b>ทำข้อสอบเต็มชุด</b><small>จับเวลาเสมือนจริง</small></div>
+      <div class="action-tile" style="--tile:#7a52c2" onclick="openVocabList()"><div class="at-icon"><i class="ti ti-cards"></i></div><b>คลังคำศัพท์</b><small>เกมทาย + Flashcard</small></div>
+      <div class="action-tile" style="--tile:var(--success)" onclick="openTagPractice()"><div class="at-icon"><i class="ti ti-target-arrow"></i></div><b>ฝึกแยกหัวข้อ</b><small>เจาะจุดอ่อน</small></div>
+      <div class="action-tile" style="--tile:var(--accent)" onclick="openStats()"><div class="at-icon"><i class="ti ti-chart-line"></i></div><b>ความก้าวหน้า</b><small>คะแนน + จุดอ่อน</small></div>
+      <div class="action-tile" style="--tile:var(--danger)" onclick="openWrongBank()"><div class="at-icon"><i class="ti ti-refresh"></i></div><b>สมุดข้อผิด</b><small>${wrongCount} ข้อค้างอยู่</small></div>
+      <div class="action-tile" style="--tile:var(--primary)" onclick="openBookmarks()"><div class="at-icon"><i class="ti ti-bookmark"></i></div><b>บุ๊กมาร์ก</b><small>${markCount} ข้อ</small></div>
+      <div class="action-tile" style="--tile:#6a5e8a" onclick="openPrintSetup()"><div class="at-icon"><i class="ti ti-printer"></i></div><b>พิมพ์ / บันทึก PDF</b><small>ข้อสอบฉบับกระดาษ</small></div>
     </div>
 
     ${weekHtml}`);
@@ -1551,7 +1598,7 @@ function posFromTag(tag) { return ({ Verb: "(v.)", Adjective: "(adj.)", Noun: "(
 function openPrintSetup() {
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
-  if (printCfg.set == null || setsOf(printCfg.part).indexOf(printCfg.set) < 0) printCfg.set = setsOf(printCfg.part)[0];
+  if (printCfg.part !== "full" && (printCfg.set == null || setsOf(printCfg.part).indexOf(printCfg.set) < 0)) printCfg.set = setsOf(printCfg.part)[0];
   renderPrintSetup();
 }
 function readPrint() {
@@ -1560,7 +1607,7 @@ function readPrint() {
   const f = document.querySelector('input[name="pfmt"]:checked'); if (f) printCfg.withAnswers = f.value === "qa";
   const h = document.getElementById("pHeader"); if (h) printCfg.header = h.checked;
   const n = document.getElementById("pNotes"); if (n) printCfg.notes = n.checked;
-  if (setsOf(printCfg.part).indexOf(printCfg.set) < 0) printCfg.set = setsOf(printCfg.part)[0];
+  if (printCfg.part !== "full" && setsOf(printCfg.part).indexOf(printCfg.set) < 0) printCfg.set = setsOf(printCfg.part)[0];
 }
 function printChanged() { readPrint(); renderPrintSetup(); }
 function renderPrintSetup() {
@@ -1570,12 +1617,15 @@ function renderPrintSetup() {
     <div class="panel" style="max-width:560px">
       <label class="field">พาร์ท</label>
       <select id="printPart" onchange="printChanged()">
+        <option value="full" ${printCfg.part === "full" ? "selected" : ""}>เต็มชุด 100 ข้อ — คละ 3 พาร์ท</option>
         ${PART_ORDER.map(p => `<option value="${p}" ${p === printCfg.part ? "selected" : ""}>${PARTS[p].name} — ${esc(PARTS[p].thai)}</option>`).join("")}
       </select>
-      <label class="field">ชุด</label>
+      ${printCfg.part === "full"
+        ? `<div class="notice" style="margin-top:12px">🎲 ระบบจะสุ่ม 1 ชุดจากแต่ละพาร์ท (Structure 25 + Vocabulary 25 + Reading 50) รวม <b>100 ข้อ</b> เหมือนข้อสอบจริง — สุ่มใหม่ทุกครั้งที่กดสร้าง</div>`
+        : `<label class="field">ชุด</label>
       <select id="printSet" onchange="readPrint()">
         ${setsOf(printCfg.part).map(n => `<option value="${n}" ${n === printCfg.set ? "selected" : ""}>ชุดที่ ${n}</option>`).join("")}
-      </select>
+      </select>`}
       <label class="field">รูปแบบ</label>
       <div class="mode-pick">
         <label class="opt ${printCfg.withAnswers ? "sel" : ""}"><input type="radio" name="pfmt" value="qa" ${printCfg.withAnswers ? "checked" : ""} onchange="printChanged()"> <b>โจทย์ + เฉลย</b><small>2 หน้า: ข้อสอบ (อังกฤษล้วน) + เฉลย (มีคำแปลไทย + คำอธิบาย)</small></label>
@@ -1598,54 +1648,81 @@ function plPassage(p) {
     .map((t, i) => `<p class="pa-para"><b>[${i + 1}]</b> ${esc(t)}</p>`).join("");
   return `<div class="pa-passage"><div class="pa-passage-title">${esc(p.title)}</div>${paras}</div>`;
 }
-function plHead(cfg, page, count) {
-  const setLabel = `${PARTS[cfg.part].name} (Set ${cfg.set})`;
+function plInstr(part) {
+  return part === "reading" ? "Read each passage and choose the best answer."
+    : (part === "vocabulary" ? "Choose the word closest in meaning that best fits each sentence."
+      : "Choose the word or phrase that best completes each sentence.");
+}
+function plHead(cfg, page, count, setLabel) {
   if (page === "key") {
     return `<div class="pa-head"><div class="pa-title">Answer Key &amp; Explanations</div><div class="pa-sub">เฉลยและคำอธิบาย — ${setLabel}</div></div>`;
   }
   const info = cfg.header
     ? `<div class="pa-info"><span>Name: <span class="pa-fill"></span></span><span>Date: <span class="pa-fill" style="width:70px"></span></span><span>Time: ____ min</span><span>Total: ${count}</span></div>`
     : "";
-  return `<div class="pa-head"><div class="pa-title">TU-GET PBT Practice</div><div class="pa-sub">Practice Test — ${setLabel}</div>
+  return `<div class="pa-head"><div class="pa-title">ExamPrep</div><div class="pa-sub">Practice Test — ${setLabel}</div>
     <div class="pa-disc">Practice material — not an official exam and not affiliated with Thammasat University.</div></div>${info}`;
 }
 function plFoot(label) {
-  return `<div class="pa-foot"><span>TU-GET PBT Practice — practice material (not a real exam)</span><span>${label}</span></div>`;
+  return `<div class="pa-foot"><span>ExamPrep — practice material (not a real exam)</span><span>${label}</span></div>`;
 }
-function plExamBody(qs, cfg) {
-  const instr = cfg.part === "reading" ? "Read each passage and choose the best answer."
-    : (cfg.part === "vocabulary" ? "Choose the word closest in meaning that best fits each sentence."
-      : "Choose the word or phrase that best completes each sentence.");
-  let out = `<div class="pa-parthead">Part — ${PARTS[cfg.part].name}</div><div class="pa-instr">${instr}</div>`;
-  let lastP = null, n = 0;
-  qs.forEach(q => {
-    if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassage(q.passage); }
-    n++;
-    const choices = q.choices.map((c, i) => `(${plLetter(i)}) ${c}`).join("&nbsp;&nbsp;&nbsp; ");
-    out += `<div class="pa-q"><div><b>${n}.</b> ${q.question}</div><div class="pa-choices">${choices}</div>${cfg.notes ? '<div class="pa-notes"></div>' : ""}</div>`;
+// แสดงหัวพาร์ทเฉพาะตอนพิมพ์เต็มชุด (หลายพาร์ท); พิมพ์พาร์ทเดียวไม่ต้องซ้ำหัว
+function plExamBody(selections, cfg) {
+  let out = "", n = 0;
+  const multi = selections.length > 1;
+  selections.forEach(sel => {
+    const qs = BANK[sel.part][sel.set] || [];
+    out += `<div class="pa-parthead">Part — ${PARTS[sel.part].name}${multi ? ` (Set ${sel.set})` : ""}</div><div class="pa-instr">${plInstr(sel.part)}</div>`;
+    let lastP = null;
+    qs.forEach(q => {
+      if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassage(q.passage); }
+      n++;
+      const choices = q.choices.map((c, i) => `(${plLetter(i)}) ${c}`).join("&nbsp;&nbsp;&nbsp; ");
+      out += `<div class="pa-q"><div><b>${n}.</b> ${q.question}</div><div class="pa-choices">${choices}</div>${cfg.notes ? '<div class="pa-notes"></div>' : ""}</div>`;
+    });
   });
   return out;
 }
-function plKeyBody(qs, cfg) {
-  const grid = qs.map((q, i) => `<span class="pa-gi"><b>${i + 1}.</b> ${plLetter(q.answer)}</span>`).join("");
+function plKeyBody(selections, cfg) {
+  const all = [];
+  selections.forEach(sel => (BANK[sel.part][sel.set] || []).forEach(q => all.push(q)));
+  const grid = all.map((q, i) => `<span class="pa-gi"><b>${i + 1}.</b> ${plLetter(q.answer)}</span>`).join("");
   let out = `<div class="pa-grid">${grid}</div>`;
-  let lastP = null, n = 0;
-  qs.forEach(q => {
-    if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassage(q.passage); }
-    n++;
-    const pos = posFromTag(q.tag);
-    const choices = q.choices.map((c, i) => {
-      const g = choiceTH(q, i), ok = i === q.answer;
-      return `<div class="pa-kc ${ok ? "ok" : ""}">(${plLetter(i)}) ${c}${pos ? " " + pos : ""}${g ? " " + g : ""}${ok ? " ✓" : ""}</div>`;
-    }).join("");
-    out += `<div class="pa-q"><div><b>${n}.</b> ${q.question}</div>${q.questionTH ? `<div class="pa-qth">${q.questionTH}</div>` : ""}${choices}<div class="pa-expl"><b>อธิบาย:</b> ${q.explanation}</div></div>`;
+  let n = 0;
+  const multi = selections.length > 1;
+  selections.forEach(sel => {
+    const qs = BANK[sel.part][sel.set] || [];
+    if (multi) out += `<div class="pa-parthead">Part — ${PARTS[sel.part].name} (Set ${sel.set})</div>`;
+    let lastP = null;
+    qs.forEach(q => {
+      if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassage(q.passage); }
+      n++;
+      const pos = posFromTag(q.tag);
+      const choices = q.choices.map((c, i) => {
+        const g = choiceTH(q, i), ok = i === q.answer;
+        return `<div class="pa-kc ${ok ? "ok" : ""}">(${plLetter(i)}) ${c}${pos ? " " + pos : ""}${g ? " " + g : ""}${ok ? " ✓" : ""}</div>`;
+      }).join("");
+      out += `<div class="pa-q"><div><b>${n}.</b> ${q.question}</div>${q.questionTH ? `<div class="pa-qth">${q.questionTH}</div>` : ""}${choices}<div class="pa-expl"><b>อธิบาย:</b> ${q.explanation}</div></div>`;
+    });
   });
   return out;
 }
 function buildPrintDoc(cfg) {
-  const qs = BANK[cfg.part][cfg.set] || [];
-  let html = `<section class="pa-page">${plHead(cfg, "exam", qs.length)}${plExamBody(qs, cfg)}${plFoot("แบบฝึกหัด (ไม่ใช่ข้อสอบจริง)")}</section>`;
-  if (cfg.withAnswers) html += `<section class="pa-page pa-key">${plHead(cfg, "key", qs.length)}${plKeyBody(qs, cfg)}${plFoot("เฉลย")}</section>`;
+  let selections, setLabel;
+  if (cfg.part === "full") {
+    // สุ่ม 1 ชุดจากแต่ละพาร์ท เหมือนโหมดทำเต็มชุด 100 ข้อ
+    selections = PART_ORDER.map(p => {
+      const sets = setsOf(p);
+      return { part: p, set: sets[Math.floor(Math.random() * sets.length)] };
+    });
+    setLabel = `TU-GET Full Test · ${PART_ORDER.map(p => `${PARTS[p].name} ${selections.find(s => s.part === p).set}`).join(" + ")}`;
+  } else {
+    selections = [{ part: cfg.part, set: cfg.set }];
+    setLabel = `TU-GET ${PARTS[cfg.part].name} (Set ${cfg.set})`;
+  }
+  const total = selections.reduce((s, sel) => s + (BANK[sel.part][sel.set] || []).length, 0);
+  let html = `<section class="pa-page">${plHead(cfg, "exam", total, setLabel)}${plExamBody(selections, cfg)}${plFoot("แบบฝึกหัด (ไม่ใช่ข้อสอบจริง)")}</section>`;
+  if (cfg.withAnswers) html += `<section class="pa-page pa-key">${plHead(cfg, "key", total, setLabel)}${plKeyBody(selections, cfg)}${plFoot("เฉลย")}</section>`;
   let pa = document.getElementById("printArea");
   if (!pa) { pa = document.createElement("div"); pa.id = "printArea"; document.body.appendChild(pa); }
   pa.innerHTML = html;
