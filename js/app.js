@@ -215,6 +215,10 @@ function stopTimer() { if (timerHandle) { clearInterval(timerHandle); timerHandl
 
 /* ================= Views ================= */
 function show(html) { $app().innerHTML = html; window.scrollTo(0, 0); }
+// หัวหน้าแบบ eyebrow (ป้ายเล็กสีหลัก) + ชื่อหน้า — ใช้ทั่วทุกหน้าย่อย
+function pageHead(eyebrow, title) {
+  return `<div class="page-head"><div class="page-eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1></div>`;
+}
 
 function goHome() {
   if (!confirmLeaveExam()) return;
@@ -469,6 +473,7 @@ function renderExam() {
 function renderQuestion() {
   const it = S.items[S.idx];
   const q = it.q;
+  if (q.passage) { renderReadingScreen(); return; }   // Reading = โชว์ทุกคำถามของบทความเรียงกัน
   const total = S.items.length;
   const picked = S.answers[q.id];
   const locked = S.study && S.locked[q.id];
@@ -488,7 +493,7 @@ function renderQuestion() {
   if (locked) {
     const ok = picked === q.answer;
     feedback = `<div class="feedback ${ok ? "good" : "bad"}">
-      <b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + (q.answer + 1)}</b>
+      <b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + String.fromCharCode(65 + q.answer)}</b>
       ${q.explanation}
     </div>`;
   }
@@ -510,38 +515,116 @@ function renderQuestion() {
         : `<button class="btn" onclick="navQ(1)">ข้อถัดไป ▶</button>`}
     </div>`;
 
-  let body;
-  if (q.passage) {
-    // Reading: บทความซ้าย (เลื่อนอ่านได้ + เลขย่อหน้า) · คำถาม/ช้อยขวา
-    const passageInner = passageParasHTML(q.passage, quotedTerms(q.question));
-    body = `
-      <div class="reading-body">
-        <div class="reading-passage">
-          <div class="passage-wrap">
-            <div class="passage-hd">
-              <span><i class="ti ti-file-text"></i> ${esc(q.passage.title)}</span>
-              <span class="scroll-hint"><i class="ti ti-arrows-vertical"></i> เลื่อนเพื่ออ่าน</span>
-            </div>
-            <div class="passage-box reading">${passageInner}</div>
-          </div>
-        </div>
-        <div class="reading-q">${qCardHtml}${navHtml}</div>
-      </div>`;
-  } else {
-    body = `<div class="single-col">${qCardHtml}${navHtml}</div>`;
-  }
-  document.getElementById("qArea").innerHTML = body;
+  document.getElementById("qArea").innerHTML = `<div class="single-col">${qCardHtml}${navHtml}</div>`;
   renderPalette();
+}
+
+/* ---------- Reading: บทความซ้าย + ทุกคำถามของบทความเรียงกันทางขวา ---------- */
+// ช่วง index ของข้อที่ใช้ passage เดียวกับข้อปัจจุบัน (ข้อในบทความเดียวกันอยู่ติดกัน)
+function readingGroup() {
+  const p = S.items[S.idx].q.passage;
+  let start = S.idx, end = S.idx;
+  while (start > 0 && S.items[start - 1].q.passage === p) start--;
+  while (end < S.items.length - 1 && S.items[end + 1].q.passage === p) end++;
+  return { p, start, end };
+}
+function readingTerms(g) {
+  let t = [];
+  for (let i = g.start; i <= g.end; i++) t = t.concat(quotedTerms(S.items[i].q.question));
+  return t;
+}
+// เนื้อหาในการ์ดคำถาม 1 ข้อ (ใช้ตอนเรนเดอร์ครั้งแรกและอัปเดต in-place)
+function readingCardInner(idx) {
+  const it = S.items[idx], q = it.q, total = S.items.length;
+  const picked = S.answers[q.id];
+  const locked = S.study && S.locked[q.id];
+  const choices = q.choices.map((c, i) => {
+    let cls = "choice";
+    if (locked) { cls += " locked"; if (i === q.answer) cls += " correct"; else if (i === picked) cls += " wrong"; }
+    else if (i === picked) cls += " picked";
+    const click = locked ? "" : `onclick="pickReading(${idx},${i})"`;
+    return `<div class="${cls}" ${click}><span class="no">${String.fromCharCode(65 + i)}</span><span>${c}</span></div>`;
+  }).join("");
+  let feedback = "";
+  if (locked) {
+    const ok = picked === q.answer;
+    feedback = `<div class="feedback ${ok ? "good" : "bad"}"><b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + String.fromCharCode(65 + q.answer)}</b>${q.explanation}</div>`;
+  }
+  const flagged = S.flags[q.id];
+  return `<div class="q-num">ข้อ ${idx + 1} / ${total}<span class="tag">${esc(PARTS[it.part].name)}${q.tag ? " · " + esc(q.tag) : ""}</span>
+      <button class="flag-mini ${flagged ? "on" : ""}" onclick="toggleFlagAt(${idx})" title="ติดธงไว้ดูทีหลัง">${flagged ? "🚩" : "🏳"}</button></div>
+    <div class="q-text">${q.question}</div>${choices}${feedback}`;
+}
+function renderReadingScreen() {
+  const g = readingGroup(), total = S.items.length;
+  let cards = "";
+  for (let i = g.start; i <= g.end; i++) cards += `<div class="q-card reading-q-card" id="qc-${i}">${readingCardInner(i)}</div>`;
+  const passageInner = passageParasHTML(g.p, readingTerms(g));
+  document.getElementById("qArea").innerHTML = `
+    <div class="reading-body">
+      <div class="reading-passage">
+        <div class="passage-wrap">
+          <div class="passage-hd">
+            <span><i class="ti ti-file-text"></i> ${esc(g.p.title)}</span>
+            <span class="scroll-hint"><i class="ti ti-arrows-vertical"></i> เลื่อนเพื่ออ่าน</span>
+          </div>
+          <div class="passage-box reading">${passageInner}</div>
+        </div>
+      </div>
+      <div class="reading-q">
+        ${cards}
+        <div class="exam-nav">
+          <button class="btn secondary" onclick="navPassage(-1)" ${g.start === 0 ? "disabled" : ""}>◀ ก่อนหน้า</button>
+          ${g.end === total - 1
+      ? `<button class="btn" onclick="trySubmit()">ส่งคำตอบ ✔</button>`
+      : `<button class="btn" onclick="navPassage(1)">บทความถัดไป ▶</button>`}
+        </div>
+      </div>
+    </div>`;
+  renderPalette();
+}
+function pickReading(idx, ci) {
+  const q = S.items[idx].q;
+  S.answers[q.id] = ci;
+  if (S.study) {
+    S.locked[q.id] = true;
+    if (S.mode === "retry") updateWrongStreak(q.id, ci === q.answer);
+    else if (ci !== q.answer) addToWrongBank(q.id);
+  }
+  saveSession();
+  const card = document.getElementById("qc-" + idx);   // อัปเดตเฉพาะการ์ดนั้น ไม่ re-render ทั้งหน้า (กัน scroll เด้ง)
+  if (card) card.innerHTML = readingCardInner(idx);
+  renderPalette();
+}
+function toggleFlagAt(idx) {
+  const q = S.items[idx].q;
+  S.flags[q.id] = !S.flags[q.id];
+  saveSession();
+  const card = document.getElementById("qc-" + idx);
+  if (card) card.innerHTML = readingCardInner(idx);
+  renderPalette();
+}
+function navPassage(dir) {
+  const g = readingGroup();
+  S.idx = Math.min(S.items.length - 1, Math.max(0, dir > 0 ? g.end + 1 : g.start - 1));
+  saveSession(); renderQuestion();
 }
 
 function renderPalette() {
   const grid = document.getElementById("palGrid");
   if (!grid) return;
+  // ไฮไลต์ "ปัจจุบัน" ทั้งกลุ่มข้อในบทความเดียวกัน (Reading) หรือข้อเดียว (อื่นๆ)
+  let gs = S.idx, ge = S.idx;
+  const cp = S.items[S.idx].q.passage;
+  if (cp) {
+    while (gs > 0 && S.items[gs - 1].q.passage === cp) gs--;
+    while (ge < S.items.length - 1 && S.items[ge + 1].q.passage === cp) ge++;
+  }
   grid.innerHTML = S.items.map((it, i) => {
     let cls = "pal-btn";
     if (S.answers[it.q.id] != null) cls += " answered";
     if (S.flags[it.q.id]) cls += " flagged";
-    if (i === S.idx) cls += " current";
+    if (i >= gs && i <= ge) cls += " current";
     return `<button class="${cls}" onclick="jumpQ(${i})">${i + 1}</button>`;
   }).join("");
   const ac = document.getElementById("answeredCount");
@@ -560,7 +643,7 @@ function pickChoice(i) {
   renderQuestion();
 }
 function navQ(d) { S.idx = Math.min(S.items.length - 1, Math.max(0, S.idx + d)); saveSession(); renderQuestion(); }
-function jumpQ(i) { S.idx = i; saveSession(); renderQuestion(); }
+function jumpQ(i) { S.idx = i; saveSession(); renderQuestion(); const el = document.getElementById("qc-" + i); if (el) el.scrollIntoView({ behavior: "smooth", block: "center" }); }
 function toggleFlag() {
   const q = S.items[S.idx].q;
   S.flags[q.id] = !S.flags[q.id];
@@ -813,7 +896,7 @@ function openWrongBank() {
   const bank = lsGet(LS.wrong, {});
   const ids = Object.keys(bank).filter(id => INDEX[id]);
   if (!ids.length) {
-    show(`<h1>🔁 สมุดข้อผิด</h1><p class="sub">ข้อที่ตอบผิดจะถูกเก็บเข้าคลังอัตโนมัติ — ตอบถูก 2 ครั้งติดจึงหลุดจากคลัง</p>
+    show(`${pageHead("ทบทวน · review", "สมุดข้อผิด")}<p class="sub">ข้อที่ตอบผิดจะถูกเก็บเข้าคลังอัตโนมัติ — ตอบถูก 2 ครั้งติดจึงหลุดจากคลัง</p>
       <div class="panel"><p class="empty">ยังไม่มีข้อผิดค้างอยู่ 🎉<br>ไปทำข้อสอบก่อน แล้วข้อที่พลาดจะมารออยู่ที่นี่</p></div>`);
     return;
   }
@@ -826,7 +909,7 @@ function openWrongBank() {
     </div>`;
   }).join("");
   show(`
-    <h1>🔁 สมุดข้อผิด</h1>
+    ${pageHead("ทบทวน · review", "สมุดข้อผิด")}
     <p class="sub">มี ${ids.length} ข้อค้างอยู่ — ทำซ้ำแบบเฉลยทันที ตอบถูก 2 ครั้งติดข้อนั้นจะหลุดจากคลัง</p>
     <div class="panel">
       <button class="btn" onclick="startRetry()">▶ เริ่มทบทวน ${ids.length} ข้อ</button>
@@ -876,7 +959,7 @@ function openTagPractice() {
     weakHtml = `<div class="notice">💡 จากสถิติของคุณ หัวข้อที่ควรเน้น: ` +
       weak.map(w => `<b>${esc(w.tag)}</b> (${w.pct}%)`).join(" · ") + `</div>`;
   }
-  let html = `<h1>🎯 ฝึกแยกตามหัวข้อ</h1>
+  let html = `${pageHead("เจาะจุดอ่อน", "ฝึกแยกตามหัวข้อ")}
     <p class="sub">เลือกหัวข้อที่อยากเจาะ — ระบบดึงข้อจากทุกชุดมาฝึกแบบสุ่ม เฉลยทันทีหลังตอบแต่ละข้อ (ไม่นับรวมในสถิติหลัก)</p>
     ${weakHtml}`;
   PART_ORDER.forEach(part => {
@@ -930,7 +1013,7 @@ function openStats() {
   stopTimer(); S = null;
   const hist = lsGet(LS.history, []);
   if (!hist.length) {
-    show(`<h1>📈 สถิติของฉัน</h1>
+    show(`${pageHead("TU-GET PROGRESS", "สถิติของฉัน")}
       <div class="panel"><p class="empty">ยังไม่มีประวัติการทำข้อสอบ<br>ทำข้อสอบชุดแรกก่อน แล้วกราฟพัฒนาการจะแสดงที่นี่</p></div>
       ${exportImportHtml()}`);
     bindImport();
@@ -940,6 +1023,29 @@ function openStats() {
   const best = Math.max(...hist.map(h => pct(h.score, h.max)));
   const last = hist[hist.length - 1];
   const totalQ = hist.reduce((s, h) => s + h.max / PTS, 0);
+
+  // เทียบครั้งล่าสุดกับครั้งก่อนหน้า
+  let lastDelta = "";
+  if (hist.length >= 2) {
+    const d = pct(last.score, last.max) - pct(hist[hist.length - 2].score, hist[hist.length - 2].max);
+    lastDelta = `<div class="kpi-delta ${d >= 0 ? "up" : "down"}">${d >= 0 ? "▲ +" : "▼ "}${d}% จากครั้งก่อน</div>`;
+  }
+  // ความแม่นยำสะสมรายพาร์ท → โปรไฟล์ทักษะ (radar)
+  const partAgg = {};
+  hist.forEach(h => Object.keys(h.perPart || {}).forEach(p => {
+    if (!partAgg[p]) partAgg[p] = { got: 0, max: 0 };
+    partAgg[p].got += h.perPart[p].got; partAgg[p].max += h.perPart[p].max;
+  }));
+  const radarData = PART_ORDER.filter(p => partAgg[p] && partAgg[p].max > 0)
+    .map(p => ({ label: PARTS[p].name, pct: pct(partAgg[p].got, partAgg[p].max) }));
+  let skillPanel = "";
+  if (radarData.length >= 3) {
+    skillPanel = `<div class="panel"><h2 style="margin-top:0">โปรไฟล์ทักษะ (ความแม่นยำสะสมรายพาร์ท)</h2>
+      <canvas id="radar" width="360" height="300" style="max-width:380px;display:block;margin:0 auto"></canvas></div>`;
+  } else if (radarData.length) {
+    const bars = radarData.map(d => `<div class="pbar"><div class="pbar-top"><span>${esc(d.label)}</span><span class="num">${d.pct}%</span></div><div class="bar-track"><i style="width:${d.pct}%;background:${barColor(d.pct)}"></i></div></div>`).join("");
+    skillPanel = `<div class="panel"><h2 style="margin-top:0">ความแม่นยำรายพาร์ท</h2><div class="part-bars">${bars}</div></div>`;
+  }
 
   // รวมความแม่นยำรายหัวข้อจากทุกครั้ง
   const tagAgg = {};
@@ -961,13 +1067,14 @@ function openStats() {
       <td class="num">${fmtTime(h.timeUsed || 0)}</td></tr>`).join("");
 
   show(`
-    <h1>📈 สถิติของฉัน</h1>
+    ${pageHead("TU-GET PROGRESS", "สถิติของฉัน")}
     <div class="kpi-row">
       <div class="kpi"><div class="v">${hist.length}</div><div class="l">ครั้งที่ทำ</div></div>
       <div class="kpi"><div class="v">${totalQ}</div><div class="l">ข้อที่ทำไปแล้ว</div></div>
       <div class="kpi"><div class="v">${best}%</div><div class="l">คะแนนดีที่สุด</div></div>
-      <div class="kpi"><div class="v">${pct(last.score, last.max)}%</div><div class="l">ครั้งล่าสุด</div></div>
+      <div class="kpi"><div class="v">${pct(last.score, last.max)}%</div><div class="l">ครั้งล่าสุด</div>${lastDelta}</div>
     </div>
+    ${skillPanel}
     <div class="panel"><h2 style="margin-top:0">กราฟพัฒนาการ (% คะแนนแต่ละครั้ง)</h2>
       <canvas id="chart" width="940" height="260"></canvas></div>
     <div class="panel"><h2 style="margin-top:0">ความแม่นยำรายหัวข้อ (สะสมทุกครั้ง · เรียงจากจุดอ่อน)</h2>
@@ -978,7 +1085,51 @@ function openStats() {
       </table></div></div>
     ${exportImportHtml()}`);
   drawChart(hist);
+  if (radarData.length >= 3) drawRadar("radar", radarData);
   bindImport();
+}
+
+// กราฟ radar โปรไฟล์ทักษะ (N แกน, N>=3)
+function drawRadar(id, data) {
+  const cv = document.getElementById(id);
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  const W = cv.clientWidth || 360, H = 300;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.height = H + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const css = getComputedStyle(document.documentElement);
+  const cBorder = css.getPropertyValue("--border").trim() || "#ddd";
+  const cMuted = css.getPropertyValue("--muted").trim() || "#888";
+  const cText = css.getPropertyValue("--text").trim() || "#222";
+  const cPrimary = css.getPropertyValue("--primary").trim() || "#2f8f73";
+  ctx.clearRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2 + 4, R = Math.min(W, H) / 2 - 48, N = data.length;
+  const ang = i => -Math.PI / 2 + i * 2 * Math.PI / N;
+  const base = '"IBM Plex Sans", "Noto Sans Thai Looped", sans-serif';
+  // วงกริด
+  for (let r = 1; r <= 4; r++) {
+    ctx.strokeStyle = cBorder; ctx.beginPath();
+    for (let i = 0; i <= N; i++) { const a = ang(i % N), rr = R * r / 4, x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+    ctx.closePath(); ctx.stroke();
+  }
+  // แกน + ป้ายชื่อ + %
+  data.forEach((d, i) => {
+    const a = ang(i);
+    ctx.strokeStyle = cBorder; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a)); ctx.stroke();
+    const lx = cx + (R + 22) * Math.cos(a), ly = cy + (R + 18) * Math.sin(a);
+    ctx.textAlign = Math.abs(Math.cos(a)) < 0.3 ? "center" : (Math.cos(a) > 0 ? "left" : "right");
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = cText; ctx.font = "600 13px " + base; ctx.fillText(d.label, lx, ly - 7);
+    ctx.fillStyle = cPrimary; ctx.font = "700 13px " + base; ctx.fillText(d.pct + "%", lx, ly + 9);
+  });
+  // รูปข้อมูล
+  ctx.beginPath();
+  data.forEach((d, i) => { const a = ang(i), rr = R * d.pct / 100, x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a); i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+  ctx.closePath();
+  ctx.fillStyle = cPrimary + "33"; ctx.fill();
+  ctx.strokeStyle = cPrimary; ctx.lineWidth = 2; ctx.stroke();
+  data.forEach((d, i) => { const a = ang(i), rr = R * d.pct / 100; ctx.fillStyle = cPrimary; ctx.beginPath(); ctx.arc(cx + rr * Math.cos(a), cy + rr * Math.sin(a), 3.5, 0, Math.PI * 2); ctx.fill(); });
 }
 
 function drawChart(hist) {
@@ -1117,7 +1268,7 @@ function openBookmarks() {
   const marks = getMarks();
   const ids = Object.keys(marks).filter(id => INDEX[id]);
   if (!ids.length) {
-    show(`<h1>🔖 บุ๊กมาร์ก</h1>
+    show(`${pageHead("เก็บไว้ทบทวน", "บุ๊กมาร์ก")}
       <div class="panel"><p class="empty">ยังไม่มีข้อที่บุ๊กมาร์กไว้<br>ในหน้าเฉลยของแต่ละข้อ กด "☆ บุ๊กมาร์กข้อนี้" เพื่อเก็บไว้ทบทวน พร้อมจดโน้ตได้</p></div>`);
     return;
   }
@@ -1143,7 +1294,7 @@ function openBookmarks() {
       </div>
     </div>`;
   }).join("");
-  show(`<h1>🔖 บุ๊กมาร์ก</h1>
+  show(`${pageHead("เก็บไว้ทบทวน", "บุ๊กมาร์ก")}
     <p class="sub">${ids.length} ข้อที่เก็บไว้ทบทวน — แก้โน้ตได้ตลอด บันทึกอัตโนมัติ</p>
     ${items}`);
 }
@@ -1178,7 +1329,7 @@ function openVocabList() {
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   _vocabCache = buildVocabList();
-  show(`<h1>📒 คลังคำศัพท์</h1>
+  show(`${pageHead("TU-GET VOCABULARY", "คลังคำศัพท์")}
     <p class="sub">รวมคำศัพท์ ${_vocabCache.length} คำจากพาร์ท Vocabulary ทุกชุด พร้อมความหมายและประโยคตัวอย่าง</p>
     <div class="panel">
       <input type="text" id="vocabSearch" placeholder="🔍 ค้นหาคำหรือความหมาย..." oninput="renderVocabList(this.value)" style="max-width:100%">
