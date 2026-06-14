@@ -208,12 +208,16 @@ h2 { font-size: 1.2rem; margin: 26px 0 12px; }
   background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px 16px;
   cursor: pointer; transition: transform .14s, border-color .14s, box-shadow .14s;
 }
-/* หยดสีนวล ๆ มุมขวาบน (neo-flat) */
-.action-tile::before { content: ""; position: absolute; right: -28px; top: -28px; width: 98px; height: 98px; border-radius: 50%; background: var(--tile); opacity: .12; transition: transform .25s; }
+/* วงกลมสีนวลมุมขวาบน — เป็นฉากหลังของสัตว์ลายเส้น (neo-flat) */
+.action-tile::before { content: ""; position: absolute; right: 14px; top: 14px; width: 56px; height: 56px; border-radius: 50%; background: var(--tile); border: 2px solid var(--tile); opacity: .13; transition: transform .25s; }
 /* วงแหวนตกแต่งแบบ Memphis มุมขวาล่าง */
 .action-tile::after { content: ""; position: absolute; right: 16px; bottom: 14px; width: 22px; height: 22px; border-radius: 50%; border: 5px solid var(--tile); opacity: .16; }
+/* สัตว์ที่ชอบ — ลายเส้นในวงกลม (สีดึงจาก --tile ผ่าน currentColor รองรับดาร์กโหมด) */
+.action-tile .at-animal { position: absolute; top: 14px; right: 14px; width: 56px; height: 56px; color: var(--tile); transition: transform .25s; }
+.action-tile .at-animal svg { display: block; width: 100%; height: 100%; padding: 9px; }
 .action-tile:hover { transform: translateY(-4px); border-color: var(--tile); box-shadow: 0 14px 28px -14px var(--tile); }
-.action-tile:hover::before { transform: scale(1.18); }
+.action-tile:hover::before { transform: scale(1.08); }
+.action-tile:hover .at-animal { transform: scale(1.08); }
 .action-tile .at-icon {
   position: relative; width: 48px; height: 48px; border-radius: 15px;
   display: flex; align-items: center; justify-content: center; font-size: 1.45rem; margin-bottom: 12px;
@@ -497,6 +501,43 @@ table.stat td.num { font-variant-numeric: tabular-nums; }
 .kpi-delta.down { color: var(--danger); }
 canvas#chart { width: 100%; max-width: 100%; }
 .empty { text-align: center; color: var(--muted); padding: 40px 0; }
+.mascot-spot { width: 132px; margin: 8px auto 0; }
+.mascot-spot svg { width: 100%; height: auto; display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .mascot-spot svg { animation: mascotBob 3.4s ease-in-out infinite; }
+}
+@keyframes mascotBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+/* มาสคอตโต้ตอบเวลาจิ้ม */
+.mascot { position: relative; display: block; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+.mascot-art { display: block; }
+.mascot:focus-visible .mascot-art { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 14px; }
+.mascot.poke .mascot-art { animation: mascotPop .6s ease; transform-origin: 50% 92%; }
+@keyframes mascotPop {
+  0% { transform: scale(1, 1); } 25% { transform: scale(1.08, .92); }
+  50% { transform: scale(.95, 1.06); } 72% { transform: scale(1.03, .98); } 100% { transform: scale(1, 1); }
+}
+.mascot-fx { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.mascot-heart { position: absolute; bottom: 40%; font-size: 1.15rem; opacity: 0; animation: mascotHeart 1s ease-out forwards; }
+@keyframes mascotHeart {
+  0% { opacity: 0; transform: translateY(0) scale(.4); } 25% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-54px) scale(1.15); }
+}
+.mascot-bubble {
+  position: absolute; left: 50%; top: 2px; transform: translateX(-50%);
+  background: var(--surface); color: var(--text); border: 1px solid var(--border);
+  border-radius: 14px; padding: 5px 13px; font-size: .82rem; font-weight: 600;
+  white-space: nowrap; box-shadow: var(--shadow); animation: mascotBubble 1.5s ease forwards;
+}
+.mascot-bubble::after {
+  content: ""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+  border: 6px solid transparent; border-top-color: var(--surface);
+}
+@keyframes mascotBubble {
+  0% { opacity: 0; transform: translateX(-50%) translateY(8px) scale(.7); }
+  14% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  78% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-6px) scale(1); }
+}
 
 /* ---- ฝึกแยกตามหัวข้อ ---- */
 .tag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
