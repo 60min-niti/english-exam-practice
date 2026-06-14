@@ -220,48 +220,182 @@ function pageHead(eyebrow, title) {
   return `<div class="page-head"><div class="page-eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1></div>`;
 }
 
-/* ภาพประกอบหน้าแรกแนว Corporate Memphis / neo-flat (เป้าหมาย + เช็คลิสต์ + กราฟ) */
-function heroArtSVG() {
-  return `<svg viewBox="0 0 460 380" role="img" aria-label="ภาพประกอบการเตรียมสอบ" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="372" cy="96" r="122" fill="#e2f0ea"/>
-    <circle cx="74" cy="322" r="58" fill="#f6ecda"/>
-    <!-- การ์ดเช็คลิสต์ -->
-    <rect x="48" y="96" width="212" height="196" rx="22" fill="#ffffff" stroke="#e6e4db" stroke-width="2"/>
-    <rect x="74" y="124" width="116" height="16" rx="8" fill="#2f8f73"/>
-    <g>
-      <circle cx="90" cy="172" r="13" fill="#e2f0ea"/>
-      <path d="M84 172 l4 4 l8 -9" fill="none" stroke="#2f8f73" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="112" y="166" width="120" height="12" rx="6" fill="#ece9e0"/>
-      <circle cx="90" cy="214" r="13" fill="#e2f0ea"/>
-      <path d="M84 214 l4 4 l8 -9" fill="none" stroke="#2f8f73" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="112" y="208" width="120" height="12" rx="6" fill="#ece9e0"/>
-      <circle cx="90" cy="256" r="13" fill="#f6ecda"/>
-      <rect x="112" y="250" width="84" height="12" rx="6" fill="#ece9e0"/>
-    </g>
-    <!-- เป้าหมาย 550+ -->
-    <g transform="translate(372,72)">
-      <circle r="36" fill="#ffffff" stroke="#e6e4db" stroke-width="2"/>
-      <circle r="25" fill="#e2f0ea"/>
-      <circle r="14" fill="#2f8f73"/>
-      <circle r="5" fill="#ffffff"/>
-    </g>
-    <!-- การ์ดกราฟแท่ง -->
-    <rect x="276" y="206" width="152" height="128" rx="20" fill="#ffffff" stroke="#e6e4db" stroke-width="2"/>
-    <rect x="294" y="304" width="120" height="3" rx="1.5" fill="#e6e4db"/>
-    <rect x="300" y="258" width="28" height="46" rx="7" fill="#d6a85a"/>
-    <rect x="338" y="226" width="28" height="78" rx="7" fill="#2f8f73"/>
-    <rect x="376" y="244" width="28" height="60" rx="7" fill="#c66a50"/>
-    <!-- คอนเฟตตี Memphis -->
-    <circle cx="30" cy="58" r="16" fill="none" stroke="#c66a50" stroke-width="5"/>
-    <circle cx="442" cy="150" r="10" fill="#d6a85a"/>
-    <circle cx="255" cy="356" r="9" fill="#2f8f73"/>
-    <circle cx="40" cy="318" r="7" fill="#2f8f73"/>
-    <g stroke="#7a52c2" stroke-width="5" stroke-linecap="round">
-      <line x1="290" y1="122" x2="310" y2="122"/>
-      <line x1="300" y1="112" x2="300" y2="132"/>
-    </g>
-    <path d="M18 350 q10 -13 20 0 q10 13 20 0" fill="none" stroke="#2f8f73" stroke-width="4" stroke-linecap="round"/>
+/* ---------- มาสคอตคู่หู: หมี + กระต่าย (neo-flat plushie) ----------
+   สีตัวเป็น brand asset คงที่ (ครีม/ทอง อ่านออกทั้งโหมดสว่าง/มืด) — ไม่อินเวิร์ตตามธีม
+   ดีไซน์: ทรงป้อมกลม ตาหยีพริ้ม ผ้าพันคอเขียว (ปลอกคอ + ชายห้อย) */
+function mascotDuoSVG() {
+  return `<svg viewBox="96 24 486 344" role="img" aria-label="มาสคอตหมีและกระต่ายของ ExamPrep" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="215" cy="205" r="118" fill="#f6ecda"/>
+    <circle cx="460" cy="205" r="118" fill="#e2f0ea"/>
+    <circle cx="130" cy="62" r="12" fill="none" stroke="#c66a50" stroke-width="5"/>
+    <g stroke="#7a52c2" stroke-width="5" stroke-linecap="round"><line x1="340" y1="58" x2="360" y2="58"/><line x1="350" y1="48" x2="350" y2="68"/></g>
+    <circle cx="345" cy="322" r="8" fill="#d6a85a"/>
+    <circle cx="542" cy="120" r="6" fill="#2f8f73"/>
+    <path d="M232 54 q9 -11 18 0 q9 11 18 0" fill="none" stroke="#2f8f73" stroke-width="4" stroke-linecap="round"/>
+    <ellipse cx="215" cy="348" rx="84" ry="11" fill="#000000" opacity="0.06"/>
+    <ellipse cx="183" cy="340" rx="20" ry="13" fill="#b8893f"/>
+    <ellipse cx="247" cy="340" rx="20" ry="13" fill="#b8893f"/>
+    <ellipse cx="215" cy="280" rx="90" ry="76" fill="#cda06a"/>
+    <g transform="rotate(12 140 292)"><ellipse cx="140" cy="292" rx="18" ry="30" fill="#cda06a"/></g>
+    <g transform="rotate(-12 290 292)"><ellipse cx="290" cy="292" rx="18" ry="30" fill="#cda06a"/></g>
+    <ellipse cx="215" cy="292" rx="52" ry="50" fill="#e6cfa0"/>
+    <circle cx="174" cy="120" r="27" fill="#cda06a"/>
+    <circle cx="256" cy="120" r="27" fill="#cda06a"/>
+    <circle cx="174" cy="115" r="14" fill="#ddb985"/>
+    <circle cx="256" cy="115" r="14" fill="#ddb985"/>
+    <circle cx="215" cy="180" r="68" fill="#cda06a"/>
+    <ellipse cx="215" cy="202" rx="31" ry="24" fill="#efe0c2"/>
+    <ellipse cx="215" cy="192" rx="9" ry="6.5" fill="#4a3a2a"/>
+    <path d="M215 198 v6 M215 204 q-9 7 -16 1 M215 204 q9 7 16 1" fill="none" stroke="#4a3a2a" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M193 174 Q203 165 213 174" fill="none" stroke="#3a2e22" stroke-width="3" stroke-linecap="round"/>
+    <path d="M217 174 Q227 165 237 174" fill="none" stroke="#3a2e22" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="183" cy="193" r="10" fill="#e08e6e" opacity="0.32"/>
+    <circle cx="247" cy="193" r="10" fill="#e08e6e" opacity="0.32"/>
+    <path d="M209 250 L204 286 Q210 292 215 287 L215 250 Z" fill="#2f8f73"/>
+    <path d="M215 250 L215 287 Q220 292 226 286 L221 250 Z" fill="#2a8169"/>
+    <path d="M171 228 Q215 248 259 228 L263 242 Q215 266 167 242 Z" fill="#2f8f73"/>
+    <rect x="205" y="240" width="20" height="15" rx="5" fill="#267a62"/>
+    <ellipse cx="460" cy="350" rx="80" ry="11" fill="#000000" opacity="0.06"/>
+    <ellipse cx="434" cy="342" rx="19" ry="12" fill="#e7ddc9"/>
+    <ellipse cx="486" cy="342" rx="19" ry="12" fill="#e7ddc9"/>
+    <ellipse cx="460" cy="282" rx="86" ry="76" fill="#f7f4ec"/>
+    <g transform="rotate(14 390 294)"><ellipse cx="390" cy="294" rx="17" ry="29" fill="#f7f4ec"/></g>
+    <g transform="rotate(-14 530 294)"><ellipse cx="530" cy="294" rx="17" ry="29" fill="#f7f4ec"/></g>
+    <ellipse cx="460" cy="294" rx="48" ry="48" fill="#fffdf8"/>
+    <g transform="rotate(-9 426 100)"><ellipse cx="426" cy="100" rx="18" ry="55" fill="#f7f4ec"/><ellipse cx="426" cy="104" rx="9" ry="40" fill="#f0b9a4"/></g>
+    <g transform="rotate(11 496 100)"><ellipse cx="496" cy="100" rx="18" ry="55" fill="#f7f4ec"/><ellipse cx="496" cy="104" rx="9" ry="40" fill="#f0b9a4"/></g>
+    <circle cx="460" cy="182" r="66" fill="#f7f4ec"/>
+    <ellipse cx="460" cy="226" rx="38" ry="18" fill="#ece7d8" opacity="0.45"/>
+    <ellipse cx="460" cy="198" rx="8" ry="6" fill="#e3a18d"/>
+    <ellipse cx="457" cy="196" rx="2.5" ry="1.8" fill="#f4cdbf"/>
+    <path d="M460 204 v5 M460 209 q-7 6 -12 1 M460 209 q7 6 12 1" fill="none" stroke="#c08a78" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M438 176 Q448 167 458 176" fill="none" stroke="#3a2e22" stroke-width="3" stroke-linecap="round"/>
+    <path d="M462 176 Q472 167 482 176" fill="none" stroke="#3a2e22" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="428" cy="197" r="9" fill="#f3b3a0" opacity="0.45"/>
+    <circle cx="492" cy="197" r="9" fill="#f3b3a0" opacity="0.45"/>
+    <path d="M454 248 L449 284 Q455 290 460 285 L460 248 Z" fill="#2f8f73"/>
+    <path d="M460 248 L460 285 Q465 290 471 284 L466 248 Z" fill="#2a8169"/>
+    <path d="M416 226 Q460 246 504 226 L508 240 Q460 264 412 240 Z" fill="#2f8f73"/>
+    <rect x="450" y="238" width="20" height="15" rx="5" fill="#267a62"/>
   </svg>`;
+}
+
+/* มาสคอตเดี่ยวสำหรับ empty state — who: 'rabbit'|'bear', mood: 'sleepy'|'happy' */
+function mascotSpotSVG(who, mood) {
+  who = who || 'rabbit'; mood = mood || 'sleepy';
+  const R = who === 'rabbit';
+  const body = R ? '#f7f4ec' : '#cda06a';
+  const earIn = R ? '#f0b9a4' : '#ddb985';
+  const belly = R ? '#fffdf8' : '#e6cfa0';
+  const foot = R ? '#e7ddc9' : '#b8893f';
+  const cheek = R ? '#f3b3a0' : '#e08e6e';
+  const cheekOp = R ? '0.45' : '0.32';
+  const mouthC = R ? '#c08a78' : '#4a3a2a';
+  const bg = R ? '#e2f0ea' : '#f6ecda';
+  const ears = R
+    ? `<g transform="rotate(-9 74 46)"><ellipse cx="74" cy="44" rx="15" ry="38" fill="${body}"/><ellipse cx="74" cy="48" rx="7.5" ry="27" fill="${earIn}"/></g>
+       <g transform="rotate(11 126 46)"><ellipse cx="126" cy="44" rx="15" ry="38" fill="${body}"/><ellipse cx="126" cy="48" rx="7.5" ry="27" fill="${earIn}"/></g>`
+    : `<circle cx="66" cy="46" r="21" fill="${body}"/><circle cx="134" cy="46" r="21" fill="${body}"/><circle cx="66" cy="42" r="11" fill="${earIn}"/><circle cx="134" cy="42" r="11" fill="${earIn}"/>`;
+  const snout = R ? '' : `<ellipse cx="100" cy="106" rx="24" ry="18" fill="#efe0c2"/>`;
+  const nose = R
+    ? `<ellipse cx="100" cy="104" rx="7.5" ry="5.5" fill="#e3a18d"/><ellipse cx="97" cy="102" rx="2.2" ry="1.6" fill="#f4cdbf"/>`
+    : `<ellipse cx="100" cy="100" rx="8" ry="6" fill="#4a3a2a"/>`;
+  let eyes, mouth, extra = '';
+  if (mood === 'happy') {
+    eyes = `<path d="M74 84 Q84 73 94 84" fill="none" stroke="#3a2e22" stroke-width="3.4" stroke-linecap="round"/>
+            <path d="M106 84 Q116 73 126 84" fill="none" stroke="#3a2e22" stroke-width="3.4" stroke-linecap="round"/>`;
+    mouth = R
+      ? `<path d="M88 112 Q100 124 112 112" fill="none" stroke="${mouthC}" stroke-width="2" stroke-linecap="round"/>`
+      : `<path d="M84 110 Q100 124 116 110" fill="none" stroke="${mouthC}" stroke-width="2.4" stroke-linecap="round"/>`;
+    extra = `<g stroke="#d6a85a" stroke-width="3" stroke-linecap="round"><line x1="152" y1="44" x2="152" y2="56"/><line x1="146" y1="50" x2="158" y2="50"/></g>
+             <g stroke="#d6a85a" stroke-width="2.5" stroke-linecap="round"><line x1="48" y1="58" x2="48" y2="68"/><line x1="43" y1="63" x2="53" y2="63"/></g>`;
+  } else {
+    eyes = `<path d="M76 84 Q85 75 94 84" fill="none" stroke="#3a2e22" stroke-width="3.2" stroke-linecap="round"/>
+            <path d="M106 84 Q115 75 124 84" fill="none" stroke="#3a2e22" stroke-width="3.2" stroke-linecap="round"/>`;
+    mouth = R
+      ? `<path d="M100 109 v5 M100 114 q-6 5 -11 1 M100 114 q6 5 11 1" fill="none" stroke="${mouthC}" stroke-width="1.8" stroke-linecap="round"/>`
+      : `<path d="M100 106 v6 M100 112 q-8 6 -14 1 M100 112 q8 6 14 1" fill="none" stroke="${mouthC}" stroke-width="2.2" stroke-linecap="round"/>`;
+  }
+  const cy = R ? 104 : 100;
+  return `<svg viewBox="0 0 200 210" role="img" aria-label="มาสคอต${R ? 'กระต่าย' : 'หมี'}" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="112" r="94" fill="${bg}"/>
+    <ellipse cx="100" cy="197" rx="62" ry="8" fill="#000000" opacity="0.06"/>
+    <ellipse cx="82" cy="191" rx="15" ry="10" fill="${foot}"/><ellipse cx="118" cy="191" rx="15" ry="10" fill="${foot}"/>
+    <ellipse cx="100" cy="142" rx="68" ry="58" fill="${body}"/>
+    <g transform="rotate(13 48 152)"><ellipse cx="48" cy="152" rx="14" ry="24" fill="${body}"/></g>
+    <g transform="rotate(-13 152 152)"><ellipse cx="152" cy="152" rx="14" ry="24" fill="${body}"/></g>
+    <ellipse cx="100" cy="152" rx="40" ry="40" fill="${belly}"/>
+    ${ears}
+    <circle cx="100" cy="88" r="52" fill="${body}"/>
+    ${snout}
+    <path d="M94 146 L90 176 Q95 182 100 177 L100 146 Z" fill="#2f8f73"/>
+    <path d="M100 146 L100 177 Q105 182 110 176 L106 146 Z" fill="#2a8169"/>
+    <path d="M66 126 Q100 144 134 126 L137 137 Q100 158 63 137 Z" fill="#2f8f73"/>
+    <rect x="92" y="136" width="16" height="12" rx="4" fill="#267a62"/>
+    ${nose}
+    ${mouth}
+    ${eyes}
+    <circle cx="72" cy="${cy}" r="9" fill="${cheek}" opacity="${cheekOp}"/><circle cx="128" cy="${cy}" r="9" fill="${cheek}" opacity="${cheekOp}"/>
+    ${extra}
+  </svg>`;
+}
+
+/* ---------- มาสคอตโต้ตอบเวลาจิ้ม/คลิก ---------- */
+// ครอบ SVG มาสคอตให้คลิกได้ + มีเลเยอร์เอฟเฟกต์ (หัวใจ/บับเบิล)
+function mascotWrap(art, who, mood) {
+  return `<span class="mascot" role="button" tabindex="0" aria-label="จิ้มมาสคอตเล่น" data-who="${who}" data-mood="${mood}"
+    onclick="mascotPoke(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();mascotPoke(this);}"
+    ><span class="mascot-fx"></span><span class="mascot-art">${art}</span></span>`;
+}
+const MASCOT_SAY = ["สู้ๆ นะ!", "เก่งมาก! 💪", "ทำได้อยู่แล้ว!", "550+ รออยู่!", "ไปลุยข้อสอบกัน!", "จิ้มเบาๆ สิ~", "เป็นกำลังใจให้นะ", "พักสายตาบ้างน้า"];
+const MASCOT_DIZZY = ["เวียนหัวแล้ว 😵", "โอ๊ย จั๊กจี้!", "พอก่อนน้า~"];
+function mascotPoke(el) {
+  const fx = el.querySelector(".mascot-fx"), art = el.querySelector(".mascot-art");
+  if (!fx || !art) return;
+  // เด้งตัว
+  el.classList.remove("poke"); void el.offsetWidth; el.classList.add("poke");
+  clearTimeout(el._t1); el._t1 = setTimeout(() => el.classList.remove("poke"), 600);
+  // บับเบิลคำพูด (ทุก 5 ครั้ง = มึน)
+  el._pokes = (el._pokes || 0) + 1;
+  const say = (el._pokes % 5 === 0 ? MASCOT_DIZZY : MASCOT_SAY);
+  const b = document.createElement("span");
+  b.className = "mascot-bubble";
+  b.textContent = say[Math.floor(Math.random() * say.length)];
+  fx.appendChild(b); setTimeout(() => b.remove(), 1500);
+  // หัวใจ/ดาวลอยขึ้น
+  const icons = ["💚", "⭐", "✨", "💛"];
+  for (let i = 0; i < 3; i++) {
+    const h = document.createElement("span");
+    h.className = "mascot-heart";
+    h.textContent = icons[Math.floor(Math.random() * icons.length)];
+    h.style.left = (28 + Math.random() * 44) + "%";
+    h.style.animationDelay = (i * 0.08) + "s";
+    fx.appendChild(h); setTimeout(() => h.remove(), 1100);
+  }
+  // สลับหน้าเป็นดีใจชั่วครู่ (เฉพาะมาสคอตเดี่ยว — duo เป็นภาพรวมเลยแค่เด้ง)
+  const who = el.dataset.who, mood = el.dataset.mood;
+  if ((who === "rabbit" || who === "bear") && !el._reacting) {
+    el._reacting = true;
+    art.innerHTML = mascotSpotSVG(who, "happy");
+    clearTimeout(el._t2);
+    el._t2 = setTimeout(() => { art.innerHTML = mascotSpotSVG(who, mood); el._reacting = false; }, 1100);
+  }
+}
+
+/* ---------- ไอคอนสัตว์ลายเส้นในการ์ด "เริ่มฝึก" (สีดึงจาก currentColor = --tile) ---------- */
+function tileAnimalSVG(name) {
+  const A = {
+    shark: `<path d="M8 25 C15 16 31 15 41 26"/><path d="M8 25 L3 19 L5 26 L3 33 L11 30"/><path d="M41 26 C34 33 20 34 11 30"/><path d="M21 17 L25 10 L30 18"/><path d="M22 31 L20 39 L29 32"/><path d="M32 23 l-1.5 5"/><path d="M35 22.5 l-1.5 5"/><path d="M41 28 q-4 2 -7 1"/><circle cx="37" cy="24" r="1.4" fill="currentColor" stroke="none"/>`,
+    puffer: `<circle cx="23" cy="25" r="10"/><path d="M23 15 v-3.5"/><path d="M23 35 v3.5"/><path d="M16 18 l-2.5 -2.5"/><path d="M16 32 l-2.5 2.5"/><path d="M30 18 l2.5 -2.5"/><path d="M30 32 l2.5 2.5"/><path d="M13 25 h-3.5"/><path d="M33 22 L40 19 L40 31 L33 28"/><circle cx="19" cy="22.5" r="1.4" fill="currentColor" stroke="none"/><circle cx="15.5" cy="27.5" r="1.8"/>`,
+    elephant: `<path d="M16 15 Q24 11 32 15 C33 24 30 30 24 30 C18 30 15 24 16 15 Z"/><path d="M16 15 C8 13 6 25 14 28 C16 29 17 25 16 22"/><path d="M32 15 C40 13 42 25 34 28 C32 29 31 25 32 22"/><path d="M24 29 C24 35 21 37 22 41 C22.5 42 24.5 42 24 40"/><path d="M20 31 l-1 3"/><path d="M28 31 l1 3"/><circle cx="20" cy="22" r="1.4" fill="currentColor" stroke="none"/><circle cx="28" cy="22" r="1.4" fill="currentColor" stroke="none"/>`,
+    sauropod: `<path d="M13 33 C9 27 14 23 22 23 C30 23 35 27 32 33"/><path d="M17 25 C10 19 12 9 18 7"/><path d="M18 7 C15 6 14 9 16 11 C17 12 20 11 20 9 C20 7.5 19 7 18 7 Z"/><path d="M32 31 C40 30 43 22 39 17"/><path d="M19 33 v6"/><path d="M28 33 v6"/><circle cx="16.5" cy="9" r="1.1" fill="currentColor" stroke="none"/>`,
+    croc: `<path d="M6 25 C4 23 6 21 9 21 L22 20 C25 18 28 18 29 21"/><path d="M29 21 C33 21 37 23 40 27"/><path d="M30 21 l1.5 -2 l1.5 2"/><path d="M34 22 l1.5 -2 l1.5 2"/><path d="M40 27 C44 28 44 33 40 35 C39 35 38.5 34 39 32"/><path d="M6 25 C6 27 7 29 10 29 L22 29"/><path d="M22 29 C28 31 33 31 37 29"/><path d="M9 26 L11 28 L13 26 L15 28 L17 26 L19 28 L21 26"/><path d="M24 30.5 l-1.5 4"/><path d="M33 30 l1.5 4"/><circle cx="26" cy="20" r="2"/><circle cx="26" cy="20" r="0.9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="23" r="0.9" fill="currentColor" stroke="none"/>`,
+    dog: `<path d="M18 13 C11 11 8 19 11 27 C12 29 16 28 17 23"/><path d="M30 13 C37 11 40 19 37 27 C36 29 32 28 31 23"/><circle cx="24" cy="20" r="9"/><path d="M19 24 Q24 29 29 24"/><path d="M24 24 V26"/><path d="M24 26 Q21.5 27.5 20 26"/><path d="M24 26 Q26.5 27.5 28 26"/><circle cx="24" cy="22" r="2" fill="currentColor" stroke="none"/><circle cx="20" cy="18.5" r="1.5" fill="currentColor" stroke="none"/><circle cx="28" cy="18.5" r="1.5" fill="currentColor" stroke="none"/>`,
+    ray: `<path d="M24 12 C33 14 39 23 39 27 C33 25 29 29 24 31 C19 29 15 25 9 27 C9 23 15 14 24 12 Z"/><path d="M24 31 C24 38 25 42 27 45"/><circle cx="20" cy="19" r="1.3" fill="currentColor" stroke="none"/><circle cx="28" cy="19" r="1.3" fill="currentColor" stroke="none"/>`,
+  };
+  const p = A[name];
+  if (!p) return "";
+  return `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 }
 
 function goHome() {
@@ -349,7 +483,7 @@ function renderHome() {
         <h1>เตรียมสอบอย่างมีเป้าหมาย<br><span class="acc">สอบผ่านอย่างมั่นใจ</span></h1>
         <p class="lead">ฝึกแนวข้อสอบจริง จับเวลา เกมคำศัพท์ และบทอ่าน พร้อมเฉลยอธิบายภาษาไทยทุกข้อ</p>
       </div>
-      <div class="hh-art">${heroArtSVG()}</div>
+      <div class="hh-art">${mascotWrap(mascotDuoSVG(), 'duo', 'sleepy')}</div>
     </section>
 
     ${resumeBar}
@@ -385,13 +519,13 @@ function renderHome() {
 
     <div class="section-label" style="margin-top:22px">เริ่มฝึก · start practicing</div>
     <div class="action-grid">
-      <div class="action-tile" style="--tile:#2f6aa8" onclick="openSetup('full')"><div class="at-icon"><i class="ti ti-clipboard-text"></i></div><b>ทำข้อสอบเต็มชุด</b><small>จับเวลาเสมือนจริง</small></div>
-      <div class="action-tile" style="--tile:#7a52c2" onclick="openVocabList()"><div class="at-icon"><i class="ti ti-cards"></i></div><b>คลังคำศัพท์</b><small>เกมทาย + Flashcard</small></div>
-      <div class="action-tile" style="--tile:var(--success)" onclick="openTagPractice()"><div class="at-icon"><i class="ti ti-target-arrow"></i></div><b>ฝึกแยกหัวข้อ</b><small>เจาะจุดอ่อน</small></div>
-      <div class="action-tile" style="--tile:var(--accent)" onclick="openStats()"><div class="at-icon"><i class="ti ti-chart-line"></i></div><b>ความก้าวหน้า</b><small>คะแนน + จุดอ่อน</small></div>
-      <div class="action-tile" style="--tile:var(--danger)" onclick="openWrongBank()"><div class="at-icon"><i class="ti ti-refresh"></i></div><b>สมุดข้อผิด</b><small>${wrongCount} ข้อค้างอยู่</small></div>
-      <div class="action-tile" style="--tile:var(--primary)" onclick="openBookmarks()"><div class="at-icon"><i class="ti ti-bookmark"></i></div><b>บุ๊กมาร์ก</b><small>${markCount} ข้อ</small></div>
-      <div class="action-tile" style="--tile:#6a5e8a" onclick="openPrintSetup()"><div class="at-icon"><i class="ti ti-printer"></i></div><b>พิมพ์ / บันทึก PDF</b><small>ข้อสอบฉบับกระดาษ</small></div>
+      <div class="action-tile" style="--tile:#2f6aa8" onclick="openSetup('full')"><div class="at-icon"><i class="ti ti-clipboard-text"></i></div><div class="at-animal">${tileAnimalSVG('shark')}</div><b>ทำข้อสอบเต็มชุด</b><small>จับเวลาเสมือนจริง</small></div>
+      <div class="action-tile" style="--tile:#7a52c2" onclick="openVocabList()"><div class="at-icon"><i class="ti ti-cards"></i></div><div class="at-animal">${tileAnimalSVG('puffer')}</div><b>คลังคำศัพท์</b><small>เกมทาย + Flashcard</small></div>
+      <div class="action-tile" style="--tile:var(--success)" onclick="openTagPractice()"><div class="at-icon"><i class="ti ti-target-arrow"></i></div><div class="at-animal">${tileAnimalSVG('elephant')}</div><b>ฝึกแยกหัวข้อ</b><small>เจาะจุดอ่อน</small></div>
+      <div class="action-tile" style="--tile:var(--accent)" onclick="openStats()"><div class="at-icon"><i class="ti ti-chart-line"></i></div><div class="at-animal">${tileAnimalSVG('sauropod')}</div><b>ความก้าวหน้า</b><small>คะแนน + จุดอ่อน</small></div>
+      <div class="action-tile" style="--tile:var(--danger)" onclick="openWrongBank()"><div class="at-icon"><i class="ti ti-refresh"></i></div><div class="at-animal">${tileAnimalSVG('croc')}</div><b>สมุดข้อผิด</b><small>${wrongCount} ข้อค้างอยู่</small></div>
+      <div class="action-tile" style="--tile:var(--primary)" onclick="openBookmarks()"><div class="at-icon"><i class="ti ti-bookmark"></i></div><div class="at-animal">${tileAnimalSVG('dog')}</div><b>บุ๊กมาร์ก</b><small>${markCount} ข้อ</small></div>
+      <div class="action-tile" style="--tile:#6a5e8a" onclick="openPrintSetup()"><div class="at-icon"><i class="ti ti-printer"></i></div><div class="at-animal">${tileAnimalSVG('ray')}</div><b>พิมพ์ / บันทึก PDF</b><small>ข้อสอบฉบับกระดาษ</small></div>
     </div>
 
     ${weekHtml}`);
@@ -945,7 +1079,7 @@ function openWrongBank() {
   const ids = Object.keys(bank).filter(id => INDEX[id]);
   if (!ids.length) {
     show(`${pageHead("ทบทวน · review", "สมุดข้อผิด")}<p class="sub">ข้อที่ตอบผิดจะถูกเก็บเข้าคลังอัตโนมัติ — ตอบถูก 2 ครั้งติดจึงหลุดจากคลัง</p>
-      <div class="panel"><p class="empty">ยังไม่มีข้อผิดค้างอยู่ 🎉<br>ไปทำข้อสอบก่อน แล้วข้อที่พลาดจะมารออยู่ที่นี่</p></div>`);
+      <div class="panel"><div class="mascot-spot">${mascotWrap(mascotSpotSVG('rabbit', 'happy'), 'rabbit', 'happy')}</div><p class="empty">ยังไม่มีข้อผิดค้างอยู่ 🎉<br>ไปทำข้อสอบก่อน แล้วข้อที่พลาดจะมารออยู่ที่นี่</p></div>`);
     return;
   }
   const rows = ids.map(id => {
@@ -1062,7 +1196,7 @@ function openStats() {
   const hist = lsGet(LS.history, []);
   if (!hist.length) {
     show(`${pageHead("TU-GET PROGRESS", "สถิติของฉัน")}
-      <div class="panel"><p class="empty">ยังไม่มีประวัติการทำข้อสอบ<br>ทำข้อสอบชุดแรกก่อน แล้วกราฟพัฒนาการจะแสดงที่นี่</p></div>
+      <div class="panel"><div class="mascot-spot">${mascotWrap(mascotSpotSVG('bear', 'sleepy'), 'bear', 'sleepy')}</div><p class="empty">ยังไม่มีประวัติการทำข้อสอบ<br>ทำข้อสอบชุดแรกก่อน แล้วกราฟพัฒนาการจะแสดงที่นี่</p></div>
       ${exportImportHtml()}`);
     bindImport();
     return;
@@ -1317,7 +1451,7 @@ function openBookmarks() {
   const ids = Object.keys(marks).filter(id => INDEX[id]);
   if (!ids.length) {
     show(`${pageHead("เก็บไว้ทบทวน", "บุ๊กมาร์ก")}
-      <div class="panel"><p class="empty">ยังไม่มีข้อที่บุ๊กมาร์กไว้<br>ในหน้าเฉลยของแต่ละข้อ กด "☆ บุ๊กมาร์กข้อนี้" เพื่อเก็บไว้ทบทวน พร้อมจดโน้ตได้</p></div>`);
+      <div class="panel"><div class="mascot-spot">${mascotWrap(mascotSpotSVG('rabbit', 'sleepy'), 'rabbit', 'sleepy')}</div><p class="empty">ยังไม่มีข้อที่บุ๊กมาร์กไว้<br>ในหน้าเฉลยของแต่ละข้อ กด "☆ บุ๊กมาร์กข้อนี้" เพื่อเก็บไว้ทบทวน พร้อมจดโน้ตได้</p></div>`);
     return;
   }
   // เรียงตามพาร์ท > ชุด
