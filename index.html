@@ -15,19 +15,21 @@
 <header class="topbar">
   <div class="brand" onclick="goHome()"><span class="logo-mark"><i class="ti ti-checkup-list"></i></span><span class="logo-text">Exam<b>Prep</b><small>ฝึกข้อสอบ</small></span></div>
   <button class="nav-toggle" onclick="toggleNav()" aria-label="เปิด/ปิดเมนู"><i class="ti ti-menu-2"></i></button>
-  <nav id="mainNav">
-    <button onclick="goHome()">หน้าหลัก</button>
-    <button onclick="openTagPractice()">ฝึกแยกหัวข้อ</button>
-    <button onclick="openVocabList()">คลังคำศัพท์</button>
-    <button onclick="openBookmarks()">บุ๊กมาร์ก</button>
-    <button onclick="openStats()">สถิติ</button>
-    <button onclick="openWrongBank()">สมุดข้อผิด</button>
+  <nav id="mainNav" class="nav-island">
+    <button class="nav-link" data-nav="home" onclick="goHome()"><i class="ti ti-home"></i><span>หน้าหลัก</span></button>
+    <button class="nav-link" data-nav="tag" onclick="openTagPractice()"><i class="ti ti-target-arrow"></i><span>ฝึกแยกหัวข้อ</span></button>
+    <button class="nav-link" data-nav="vocab" onclick="openVocabList()"><i class="ti ti-cards"></i><span>คลังคำศัพท์</span></button>
+    <button class="nav-link" data-nav="bookmark" onclick="openBookmarks()"><i class="ti ti-bookmark"></i><span>บุ๊กมาร์ก</span></button>
+    <button class="nav-link" data-nav="stats" onclick="openStats()"><i class="ti ti-chart-line"></i><span>สถิติ</span></button>
+    <button class="nav-link" data-nav="wrong" onclick="openWrongBank()"><i class="ti ti-refresh"></i><span>สมุดข้อผิด</span></button>
+  </nav>
+  <div class="topbar-tools">
     <span class="fs-control" title="ปรับขนาดฟอนต์">
       <button onclick="changeFont(-1)" aria-label="ลดขนาดฟอนต์">A−</button>
       <button onclick="changeFont(1)" aria-label="เพิ่มขนาดฟอนต์">A+</button>
     </span>
     <button id="themeToggle" onclick="toggleTheme()" title="สลับโหมดมืด/สว่าง">🌙</button>
-  </nav>
+  </div>
 </header>
 
 <main id="app"></main>
