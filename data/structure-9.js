@@ -161,10 +161,10 @@ window.TUGET_DATA.push({
       id: "ST9-18", type: "sc", tag: "Word Choice",
       question: "If we don't leave right now, we are going to ______ the last train home.",
       questionTH: "ถ้าเราไม่ออกเดี๋ยวนี้ เราจะ ______ รถไฟเที่ยวสุดท้ายกลับบ้าน",
-      choices: ["lose", "loose", "loss", "missed"],
-      choicesTH: ["พลาด/ตกรถ (กริยา)", "หลวม (คุณศัพท์)", "การสูญเสีย (คำนาม)", "พลาด (อดีต)"],
+      choices: ["miss", "lose", "loose", "loss"],
+      choicesTH: ["พลาด/ตกรถ (กริยา)", "ทำหาย/สูญเสีย (กริยา)", "หลวม (คุณศัพท์)", "การสูญเสีย (คำนาม)"],
       answer: 0,
-      explanation: "หลัง 'going to' ต้องเป็นกริยาช่องที่ 1 → <b>lose</b> (the last train = ตกรถไฟ) — loose = หลวม (คุณศัพท์), loss = คำนาม"
+      explanation: "ตกรถไฟ/พลาดรถเที่ยวสุดท้าย ใช้ <b>miss</b> the train (คู่ตรงข้ามกับ catch the train = ขึ้นทัน) ไม่ใช่ lose — <b>lose</b> = ทำหาย/สูญเสีย, <b>loose</b> = หลวม (คุณศัพท์), <b>loss</b> = การสูญเสีย (คำนาม); หลัง going to ใช้กริยาช่องที่ 1"
     },
     {
       id: "ST9-19", type: "sc", tag: "Word Choice",
