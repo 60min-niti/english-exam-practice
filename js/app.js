@@ -215,6 +215,11 @@ function stopTimer() { if (timerHandle) { clearInterval(timerHandle); timerHandl
 
 /* ================= Views ================= */
 function show(html) { $app().innerHTML = html; window.scrollTo(0, 0); }
+// ไฮไลต์เมนูที่กำลังอยู่ใน nav island (key ตรงกับ data-nav) + ปิดเมนูมือถือ
+function setActiveNav(key) {
+  document.querySelectorAll("#mainNav .nav-link").forEach(b => b.classList.toggle("on", b.dataset.nav === key));
+  closeNav();
+}
 // หัวหน้าแบบ eyebrow (ป้ายเล็กสีหลัก) + ชื่อหน้า — ใช้ทั่วทุกหน้าย่อย
 function pageHead(eyebrow, title) {
   return `<div class="page-head"><div class="page-eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1></div>`;
@@ -421,6 +426,7 @@ function lockedExam(name) {
 }
 
 function renderHome() {
+  setActiveNav("home");
   const saved = lsGet(LS.session, null);
   const wrongCount = Object.keys(lsGet(LS.wrong, {})).length;
   const markCount = Object.keys(lsGet(LS.marks, {})).length;
@@ -534,6 +540,7 @@ function renderHome() {
 /* ---------- SETUP ---------- */
 let setupState = null;
 function openSetup(target) {
+  setActiveNav(null);
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   setupState = { target, study: false };
@@ -1073,6 +1080,7 @@ function updateWrongStreak(qid, correct) {
   lsSet(LS.wrong, bank);
 }
 function openWrongBank() {
+  setActiveNav("wrong");
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   const bank = lsGet(LS.wrong, {});
@@ -1131,6 +1139,7 @@ function collectTags() {
 }
 let _tagCache = null;
 function openTagPractice() {
+  setActiveNav("tag");
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   _tagCache = collectTags();
@@ -1191,6 +1200,7 @@ function startTagPractice(part, tag) {
 
 /* ================= Stats ================= */
 function openStats() {
+  setActiveNav("stats");
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   const hist = lsGet(LS.history, []);
@@ -1445,6 +1455,7 @@ function onToggleMark(qid) {
 }
 
 function openBookmarks() {
+  setActiveNav("bookmark");
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   const marks = getMarks();
@@ -1508,6 +1519,7 @@ function buildVocabList() {
 }
 let _vocabCache = null;
 function openVocabList() {
+  setActiveNav("vocab");
   if (!confirmLeaveExam()) return;
   stopTimer(); S = null;
   _vocabCache = buildVocabList();
