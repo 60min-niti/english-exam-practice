@@ -451,6 +451,10 @@ select, input[type="file"] {
 .flag-mini { margin-left: auto; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 3px 9px; cursor: pointer; font-size: .9rem; line-height: 1; }
 .flag-mini.on { background: var(--warn-soft); border-color: var(--warn); }
 .para-no { color: var(--primary); font-weight: 700; margin-right: 5px; font-size: .8em; }
+/* คำแปลไทยของบทความในหน้าเฉลย */
+.passage-th { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); }
+.passage-th-label { font-size: .8rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; letter-spacing: .02em; }
+.passage-th p { margin: 0 0 10px; color: var(--text); }
 @media (max-width: 860px) {
   .reading-body { grid-template-columns: 1fr; }
   .reading-passage { position: static; }
@@ -639,8 +643,10 @@ canvas#chart { width: 100%; max-width: 100%; }
 #printArea { display: none; }
 #printArea .pa-fill { display: inline-block; border-bottom: 1px dotted #999; width: 120px; }
 @media print {
+  /* บังคับพื้นหลังขาว/ตัวอักษรเข้ม ไม่ให้ธีมมืดพิมพ์ติดเป็นกระดาษดำ (โดยเฉพาะ iOS Safari) */
+  html, body { background: #fff !important; color: #1a1a1a !important; color-scheme: light !important; }
   .topbar, #app, footer, .nav-toggle { display: none !important; }
-  #printArea { display: block !important; color: #1a1a1a; font-family: "IBM Plex Sans", "Noto Sans Thai Looped", sans-serif; font-size: 11.5pt; line-height: 1.5; }
+  #printArea { display: block !important; background: #fff !important; color: #1a1a1a !important; font-family: "IBM Plex Sans", "Noto Sans Thai Looped", sans-serif; font-size: 11.5pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   @page { size: A4; margin: 15mm 14mm; }
   .pa-page { page-break-after: always; }
   .pa-page:last-child { page-break-after: auto; }
@@ -659,6 +665,8 @@ canvas#chart { width: 100%; max-width: 100%; }
   .pa-passage-title { font-weight: 700; margin-bottom: 4px; }
   .pa-para { margin: 0 0 7px; }
   .pa-para:last-child { margin-bottom: 0; }
+  .pa-passage-th { margin-top: 8px; padding-top: 7px; border-top: 1px dashed #bbb; }
+  .pa-passage-thlabel { font-weight: 700; font-size: 10pt; color: #555; margin-bottom: 4px; }
   .pa-qth { color: #555; font-size: 10.5pt; margin: 1px 0 3px 16px; }
   .pa-kc { margin-left: 16px; }
   .pa-kc.ok { font-weight: 700; }

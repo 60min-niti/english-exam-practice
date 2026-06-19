@@ -19,7 +19,7 @@ const INDEX = {}; // qid -> {part, set, q}
   let qs = [];
   if (pack.part === "reading") {
     (pack.passages || []).forEach((p, pi) => {
-      const passage = { title: p.title || ("Passage " + (pi + 1)), text: p.text };
+      const passage = { title: p.title || ("Passage " + (pi + 1)), text: p.text, textTH: p.textTH };
       p.questions.forEach(q => qs.push(Object.assign({}, q, { passage })));
     });
   } else {
@@ -116,6 +116,16 @@ function passageParasHTML(passage, terms) {
 }
 function passageHTML(passage, terms) {
   return `<h4>${esc(passage.title)}</h4>${passageParasHTML(passage, terms)}`;
+}
+// หน้าเฉลย: บทความอังกฤษ + คำแปลไทย (แสดงเมื่อมี textTH); หน้าทำข้อสอบยังคงอังกฤษล้วน
+function answerPassageHTML(passage, terms) {
+  let html = passageHTML(passage, terms);
+  if (passage.textTH && String(passage.textTH).trim()) {
+    const thParas = String(passage.textTH).split(/\n\s*\n/)
+      .map((p, i) => `<p><sup class="para-no">[${i + 1}]</sup>${esc(p)}</p>`).join("");
+    html += `<div class="passage-th"><div class="passage-th-label">คำแปลภาษาไทย</div>${thParas}</div>`;
+  }
+  return html;
 }
 function fmtTime(sec) {
   sec = Math.max(0, Math.round(sec));
@@ -1043,7 +1053,7 @@ function renderReviewList() {
       header = `<div class="part-divider">${PARTS[it.part].icon} ${PARTS[it.part].name} — ${PARTS[it.part].thai}</div>`;
       lastPart = it.part;
     }
-    const passage = q.passage ? `<details style="margin-bottom:8px"><summary style="cursor:pointer;color:var(--primary);font-size:.88rem">📖 ดู ${esc(q.passage.title)}</summary><div class="passage-box" style="margin-top:8px">${passageHTML(q.passage, quotedTerms(q.question))}</div></details>` : "";
+    const passage = q.passage ? `<details style="margin-bottom:8px"><summary style="cursor:pointer;color:var(--primary);font-size:.88rem">📖 ดู ${esc(q.passage.title)}</summary><div class="passage-box" style="margin-top:8px">${answerPassageHTML(q.passage, quotedTerms(q.question))}</div></details>` : "";
     const notAnswered = picked == null ? `<div class="ans-line" style="color:var(--muted)"><i>— ข้อนี้ไม่ได้ตอบ —</i></div>` : "";
     return header + `
       <div class="panel review-item ${ok ? "ok" : "bad"}">
@@ -1473,7 +1483,7 @@ function openBookmarks() {
   const items = ids.map(id => {
     const info = INDEX[id], q = info.q;
     const note = marks[id].note || "";
-    const passage = q.passage ? `<details style="margin-bottom:8px"><summary style="cursor:pointer;color:var(--primary);font-size:.88rem">📖 ดู ${esc(q.passage.title)}</summary><div class="passage-box" style="margin-top:8px">${passageHTML(q.passage, quotedTerms(q.question))}</div></details>` : "";
+    const passage = q.passage ? `<details style="margin-bottom:8px"><summary style="cursor:pointer;color:var(--primary);font-size:.88rem">📖 ดู ${esc(q.passage.title)}</summary><div class="passage-box" style="margin-top:8px">${answerPassageHTML(q.passage, quotedTerms(q.question))}</div></details>` : "";
     return `<div class="panel review-item ok">
       <div class="q-num">${PARTS[info.part].name} ชุด ${info.set}<span class="tag">${q.tag ? esc(q.tag) : ""}</span>
         <button class="mark-btn on" style="float:right" onclick="removeBookmark('${id}')">★ เอาออก</button></div>
@@ -1794,6 +1804,18 @@ function plPassage(p) {
     .map((t, i) => `<p class="pa-para"><b>[${i + 1}]</b> ${esc(t)}</p>`).join("");
   return `<div class="pa-passage"><div class="pa-passage-title">${esc(p.title)}</div>${paras}</div>`;
 }
+// หน้าพิมพ์เฉลย: บทความอังกฤษ + คำแปลไทย (ถ้ามี textTH); หน้าพิมพ์ข้อสอบยังคงอังกฤษล้วน
+function plPassageKey(p) {
+  const paras = String(p.text).split(/\n\s*\n/)
+    .map((t, i) => `<p class="pa-para"><b>[${i + 1}]</b> ${esc(t)}</p>`).join("");
+  let th = "";
+  if (p.textTH && String(p.textTH).trim()) {
+    const thParas = String(p.textTH).split(/\n\s*\n/)
+      .map((t, i) => `<p class="pa-para"><b>[${i + 1}]</b> ${esc(t)}</p>`).join("");
+    th = `<div class="pa-passage-th"><div class="pa-passage-thlabel">คำแปลภาษาไทย</div>${thParas}</div>`;
+  }
+  return `<div class="pa-passage"><div class="pa-passage-title">${esc(p.title)}</div>${paras}${th}</div>`;
+}
 function plInstr(part) {
   return part === "reading" ? "Read each passage and choose the best answer."
     : (part === "vocabulary" ? "Choose the word closest in meaning that best fits each sentence."
@@ -1841,7 +1863,7 @@ function plKeyBody(selections, cfg) {
     if (multi) out += `<div class="pa-parthead">Part — ${PARTS[sel.part].name} (Set ${sel.set})</div>`;
     let lastP = null;
     qs.forEach(q => {
-      if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassage(q.passage); }
+      if (q.passage && q.passage !== lastP) { lastP = q.passage; out += plPassageKey(q.passage); }
       n++;
       const pos = posFromTag(q.tag);
       const choices = q.choices.map((c, i) => {
