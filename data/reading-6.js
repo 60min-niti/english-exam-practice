@@ -14,6 +14,13 @@ The newly discovered world is roughly the same size as Earth and completes one o
 The team was careful to manage expectations. The discovery of a planet in the habitable zone, they stressed, does not mean that life has been found, or even that the planet is truly habitable. Many factors, such as whether the planet has an atmosphere and what that atmosphere contains, remain completely unknown. "We have found a promising address," one scientist remarked, "but we have not yet knocked on the door."
 
 Nevertheless, the announcement has generated considerable excitement. The next generation of space telescopes may be powerful enough to analyze the light passing through the planet's atmosphere, searching for gases that could be signs of life. For now, the planet remains a distant point of light and a tantalizing possibility. Whether it harbors life or not, its discovery is a reminder of how rapidly our ability to study other worlds is advancing.`,
+      textTH: `ในการแถลงข่าวเมื่อสัปดาห์ที่แล้ว ทีมนักดาราศาสตร์ประกาศการค้นพบดาวเคราะห์ที่อาจรองรับสิ่งมีชีวิตได้ ดาวเคราะห์ดวงนี้อยู่ห่างจากโลกประมาณสี่สิบปีแสง โคจรรอบดาวฤกษ์ขนาดเล็กที่เย็นภายในบริเวณที่นักวิทยาศาสตร์เรียกว่า "เขตที่อยู่อาศัยได้" (habitable zone) — บริเวณรอบดาวฤกษ์ที่อุณหภูมิอาจเอื้อให้มีน้ำของเหลวอยู่บนพื้นผิวดาวเคราะห์ได้ น้ำของเหลวถือเป็นหนึ่งในองค์ประกอบสำคัญของสิ่งมีชีวิตเท่าที่เรารู้จัก
+
+ดาวเคราะห์ที่เพิ่งค้นพบนี้มีขนาดราว ๆ เท่าโลก และโคจรรอบดาวฤกษ์ครบหนึ่งรอบทุกยี่สิบวัน เนื่องจากดาวฤกษ์ของมันริบหรี่กว่าดวงอาทิตย์ของเรามาก วงโคจรที่ใกล้นี้จึงทำให้ดาวเคราะห์อยู่ในระยะที่พอเหมาะ ไม่ร้อนหรือเย็นเกินไป ด้วยเทคนิคที่วัดการหรี่ลงเพียงเล็กน้อยของแสงดาวเมื่อดาวเคราะห์ผ่านหน้าดาวฤกษ์ของมัน นักวิจัยจึงสามารถประมาณขนาดของดาวเคราะห์ได้ และการสังเกตเพิ่มเติมก็บ่งชี้ว่ามันมีพื้นผิวเป็นหินมากกว่าจะเป็นก้อนก๊าซ
+
+ทีมงานระมัดระวังที่จะไม่ตั้งความหวังเกินจริง พวกเขาย้ำว่าการค้นพบดาวเคราะห์ในเขตที่อยู่อาศัยได้ไม่ได้หมายความว่าพบสิ่งมีชีวิตแล้ว หรือกระทั่งว่าดาวเคราะห์นั้นอยู่อาศัยได้จริง ปัจจัยหลายอย่าง เช่น ดาวเคราะห์มีชั้นบรรยากาศหรือไม่ และชั้นบรรยากาศนั้นมีอะไรอยู่ ยังคงไม่เป็นที่ทราบเลย "เราพบที่อยู่ที่น่าสนใจแล้ว" นักวิทยาศาสตร์คนหนึ่งกล่าว "แต่เรายังไม่ได้เคาะประตู"
+
+กระนั้น การประกาศนี้ก็สร้างความตื่นเต้นไม่น้อย กล้องโทรทรรศน์อวกาศรุ่นต่อไปอาจทรงพลังพอที่จะวิเคราะห์แสงที่ลอดผ่านชั้นบรรยากาศของดาวเคราะห์ เพื่อค้นหาก๊าซที่อาจเป็นสัญญาณของสิ่งมีชีวิต สำหรับตอนนี้ ดาวเคราะห์ดวงนี้ยังคงเป็นเพียงจุดแสงอันไกลโพ้นและความเป็นไปได้ที่ชวนให้อยากรู้ ไม่ว่ามันจะมีสิ่งมีชีวิตอยู่หรือไม่ การค้นพบของมันก็เป็นเครื่องเตือนใจว่าความสามารถในการศึกษาโลกอื่นของเรากำลังก้าวหน้าไปอย่างรวดเร็วเพียงใด`,
       questions: [
         { id: "RD6-01", tag: "Main Idea",
           question: "What is the passage mainly about?",
@@ -106,6 +113,13 @@ Supporters of the plan are enthusiastic. For years, residents have complained ab
 Not everyone is convinced, however. Some shop owners fear that customers who arrive by car will simply go elsewhere, and that deliveries will become more difficult. Residents who live just outside the proposed zone worry that the traffic banned from the center will be pushed onto their own streets, making their neighborhoods more congested. Others question whether the city's public transport, already crowded, can handle the extra passengers.
 
 The council has promised a period of public consultation before any final decision is made, and officials acknowledge that the plan's success will depend heavily on the details. Improved bus services, secure bicycle parking, and careful arrangements for deliveries will all be necessary. Whether the plan ultimately wins public support remains to be seen, but it has already sparked a lively debate about what kind of city the residents want to live in.`,
+      textTH: `สภาเทศบาลประกาศเมื่อวันจันทร์ถึงแผนอันทะเยอทะยานที่จะห้ามรถยนต์ส่วนตัวเข้าใจกลางเมืองเก่าภายในสิ้นปีหน้า ตามข้อเสนอนี้ ถนนแคบ ๆ ของย่านเมืองเก่าที่ปัจจุบันแน่นขนัดไปด้วยการจราจร จะถูกสงวนไว้สำหรับคนเดินเท้า นักปั่นจักรยาน รถบัส และรถฉุกเฉิน นายกเทศมนตรีอธิบายแผนนี้ว่าเป็น "ก้าวกล้าหาญสู่เมืองที่สะอาด เงียบสงบ และน่าอยู่ขึ้น" และชี้ไปยังโครงการคล้าย ๆ กันในหลายเมืองของยุโรปที่รายงานผลลัพธ์อันน่ายินดี
+
+ฝ่ายสนับสนุนแผนนี้กระตือรือร้นมาก หลายปีที่ผ่านมา ผู้อยู่อาศัยร้องเรียนเรื่องมลพิษทางอากาศ เสียงดัง และอันตรายที่การจราจรหนาแน่นก่อต่อคนเดินเท้า โดยเฉพาะเด็กและผู้สูงอายุ เจ้าของร้านค้าในท้องถิ่นในเมืองที่ปลอดรถไปแล้วมักรายงานถึงประโยชน์ที่ไม่คาดคิด นั่นคือ เมื่อถนนกลายเป็นพื้นที่สาธารณะที่น่ารื่นรมย์ ผู้คนก็มาเดินเล่น นั่งพัก และจับจ่ายมากขึ้น และธุรกิจก็ดีขึ้นจริง กลุ่มสิ่งแวดล้อมต่างต้อนรับการประกาศนี้ว่าเป็นสิ่งที่ควรทำมานานแล้ว
+
+อย่างไรก็ตาม ไม่ใช่ทุกคนที่เห็นด้วย เจ้าของร้านบางคนกลัวว่าลูกค้าที่มาด้วยรถยนต์จะไปที่อื่นแทน และการขนส่งสินค้าจะยากขึ้น ผู้อาศัยที่อยู่นอกเขตที่เสนอเพียงเล็กน้อยกังวลว่าการจราจรที่ถูกห้ามจากใจกลางเมืองจะถูกผลักมายังถนนของพวกเขา ทำให้ย่านของพวกเขาแออัดขึ้น บางคนตั้งคำถามว่าระบบขนส่งสาธารณะของเมืองที่แออัดอยู่แล้วจะรองรับผู้โดยสารที่เพิ่มขึ้นไหวหรือไม่
+
+สภาได้ให้คำมั่นว่าจะมีช่วงเวลารับฟังความคิดเห็นจากประชาชนก่อนตัดสินใจขั้นสุดท้าย และเจ้าหน้าที่ก็ยอมรับว่าความสำเร็จของแผนจะขึ้นอยู่กับรายละเอียดเป็นอย่างมาก ทั้งบริการรถบัสที่ดีขึ้น ที่จอดจักรยานที่ปลอดภัย และการจัดการการขนส่งสินค้าอย่างรอบคอบล้วนจำเป็นทั้งสิ้น แผนนี้จะได้รับการสนับสนุนจากประชาชนในที่สุดหรือไม่ยังต้องรอดู แต่มันก็ได้จุดประกายการถกเถียงที่คึกคักไปแล้วว่าผู้อยู่อาศัยอยากอยู่ในเมืองแบบไหน`,
       questions: [
         { id: "RD6-11", tag: "Main Idea",
           question: "What is the passage mainly about?",
@@ -198,6 +212,13 @@ The biggest obstacle to electric cars has long been their price, driven largely 
 Independent experts have responded with cautious approval. They agree that a genuinely affordable electric car could accelerate the shift away from petrol and diesel, helping to reduce both air pollution and greenhouse gas emissions. Some, however, note that the car's low price depends on producing it in very large numbers, and that the company has yet to prove it can manufacture the vehicle reliably at such a scale. The true test, they say, will come not at a glamorous launch event but on the production line.
 
 For consumers, much will depend on factors beyond the car itself. The convenience of owning an electric vehicle is closely tied to the availability of charging stations, which remain scarce in many areas. Governments, too, play a role, as subsidies and tax incentives can make a significant difference to the final price. If these pieces fall into place, the new model could mark a turning point. If they do not, even the cleverest engineering may struggle to change how most people drive.`,
+      textTH: `ผู้ผลิตรถยนต์ชั้นนำรายหนึ่งได้เปิดตัวรถยนต์ไฟฟ้ารุ่นใหม่ที่หวังว่าจะนำการขับขี่ด้วยพลังแบตเตอรี่มาสู่เอื้อมมือของครอบครัวทั่วไป รถรุ่นใหม่นี้ตั้งราคาต่ำกว่ารถยนต์ไฟฟ้าส่วนใหญ่ที่มีอยู่มาก เป็นผลจากความพยายามสี่ปีในการลดต้นทุนโดยไม่ลดทอนระยะวิ่งหรือความปลอดภัย ในงานเปิดตัว ประธานบริหารของบริษัทประกาศว่า "ยุคของรถยนต์ไฟฟ้าราคาเข้าถึงได้มาถึงแล้วในที่สุด"
+
+อุปสรรคที่ใหญ่ที่สุดของรถยนต์ไฟฟ้ามาโดยตลอดคือราคา ซึ่งส่วนใหญ่มาจากต้นทุนของแบตเตอรี่ เพื่อแก้ปัญหานี้ บริษัทจึงออกแบบแบตเตอรี่ใหม่ตั้งแต่ต้น โดยใช้วัสดุที่ถูกกว่าและหาได้ง่ายกว่า และทำให้กระบวนการผลิตเรียบง่ายขึ้น ผลลัพธ์ตามที่บริษัทระบุคือ แบตเตอรี่ที่ผลิตได้ในราคาถูกกว่ามาก แต่ยังคงทำให้รถวิ่งได้ราว 400 กิโลเมตรต่อการชาร์จหนึ่งครั้ง — มากเกินพอสำหรับความต้องการประจำวันของผู้ขับขี่ส่วนใหญ่
+
+ผู้เชี่ยวชาญอิสระตอบรับด้วยการเห็นชอบอย่างระมัดระวัง พวกเขาเห็นพ้องว่ารถยนต์ไฟฟ้าที่ราคาเข้าถึงได้จริงอาจเร่งการเปลี่ยนผ่านจากน้ำมันเบนซินและดีเซล ช่วยลดทั้งมลพิษทางอากาศและการปล่อยก๊าซเรือนกระจก อย่างไรก็ตาม บางคนตั้งข้อสังเกตว่าราคาที่ต่ำของรถขึ้นอยู่กับการผลิตในจำนวนมากมาย และบริษัทก็ยังไม่ได้พิสูจน์ว่าสามารถผลิตรถได้อย่างเชื่อถือได้ในระดับนั้น พวกเขาบอกว่าบททดสอบที่แท้จริงจะไม่ได้เกิดขึ้นในงานเปิดตัวที่หรูหรา แต่เกิดบนสายการผลิต
+
+สำหรับผู้บริโภค หลายอย่างจะขึ้นอยู่กับปัจจัยนอกเหนือจากตัวรถเอง ความสะดวกของการเป็นเจ้าของรถยนต์ไฟฟ้าผูกพันอย่างใกล้ชิดกับการมีสถานีชาร์จ ซึ่งยังหายากในหลายพื้นที่ รัฐบาลก็มีบทบาทด้วย เพราะเงินอุดหนุนและสิทธิประโยชน์ทางภาษีสามารถสร้างความแตกต่างอย่างมากต่อราคาสุดท้าย หากชิ้นส่วนเหล่านี้ลงตัว รถรุ่นใหม่นี้ก็อาจเป็นจุดเปลี่ยน แต่หากไม่เป็นเช่นนั้น แม้แต่วิศวกรรมที่ชาญฉลาดที่สุดก็อาจยากที่จะเปลี่ยนวิธีที่คนส่วนใหญ่ขับรถ`,
       questions: [
         { id: "RD6-21", tag: "Main Idea",
           question: "What is the passage mainly about?",
@@ -290,6 +311,13 @@ Confirming the painting's authenticity was a painstaking process. Experts examin
 The discovery has delighted art lovers, but it has also raised difficult questions. The family who had unknowingly owned the painting for generations suddenly found themselves in possession of an object worth a fortune. After much discussion, they decided to lend it to the museum so that it could be enjoyed by the public, rather than selling it to a private collector who might hide it away. Their decision was widely praised as generous and public-spirited.
 
 For the museum, the return of the lost portrait is a triumph. Curators hope it will not only attract visitors but also deepen scholars' understanding of the artist's development. Standing before the rediscovered work, one visitor remarked that it felt like meeting an old friend long thought dead. After more than a hundred years in the shadows, the painting has finally taken its place once again in the light, where the public can admire it.`,
+      textTH: `ภาพวาดที่หายไปนานกว่าศตวรรษถูกนำออกแสดงต่อสาธารณชนเมื่อสัปดาห์ที่แล้วที่พิพิธภัณฑ์แห่งชาติ ดึงดูดฝูงผู้มาเยือนที่อยากรู้อยากเห็น ผลงานชิ้นนี้ ซึ่งเป็นภาพเหมือนโดยศิลปินผู้มีชื่อเสียง เคยเชื่อกันมานานว่าถูกทำลายในเหตุไฟไหม้ แต่แท้จริงแล้วมันแขวนอยู่เงียบ ๆ ในบ้านส่วนตัว โดยเจ้าของไม่รู้ถึงคุณค่าที่แท้จริงของมัน จนกระทั่งพ่อค้างานศิลปะสายตาเฉียบแหลมจำมันได้ระหว่างการไปเยี่ยมบ้านตามปกติ
+
+การยืนยันความเป็นของแท้ของภาพวาดเป็นกระบวนการที่พิถีพิถัน ผู้เชี่ยวชาญตรวจสอบผ้าใบภายใต้แสงพิเศษ วิเคราะห์องค์ประกอบทางเคมีของเนื้อสี และสืบประวัติของผลงานผ่านจดหมายเก่าและบันทึกการซื้อขาย การศึกษาอย่างรอบคอบหลายเดือนในที่สุดก็ทำให้แม้แต่นักวิชาการที่ขี้สงสัยที่สุดเชื่อว่าภาพเหมือนนี้เป็นของแท้ — เป็นการเพิ่มผลงานที่หาได้ยากเข้าไปในจำนวนน้อยนิดของผลงานที่ทราบว่าหลงเหลือมาจากช่วงที่ศิลปินสร้างผลงานมากที่สุด
+
+การค้นพบนี้สร้างความยินดีให้คนรักศิลปะ แต่ก็ก่อให้เกิดคำถามยาก ๆ ด้วย ครอบครัวที่ครอบครองภาพวาดนี้มาหลายชั่วอายุคนโดยไม่รู้ตัว ก็พบว่าตนกำลังถือครองวัตถุที่มีมูลค่ามหาศาล หลังจากหารือกันมาก พวกเขาตัดสินใจให้พิพิธภัณฑ์ยืมไปเพื่อให้สาธารณชนได้ชื่นชม แทนที่จะขายให้นักสะสมส่วนตัวที่อาจเก็บมันซ่อนไว้ การตัดสินใจของพวกเขาได้รับการยกย่องอย่างกว้างขวางว่าใจกว้างและเห็นแก่ส่วนรวม
+
+สำหรับพิพิธภัณฑ์ การกลับมาของภาพเหมือนที่หายไปคือชัยชนะ ภัณฑารักษ์หวังว่ามันจะไม่เพียงดึงดูดผู้มาเยือน แต่ยังทำให้นักวิชาการเข้าใจพัฒนาการของศิลปินได้ลึกซึ้งขึ้น ผู้มาเยือนคนหนึ่งซึ่งยืนอยู่หน้าผลงานที่ถูกค้นพบใหม่กล่าวว่ามันให้ความรู้สึกเหมือนได้พบเพื่อนเก่าที่คิดว่าตายไปนานแล้ว หลังจากอยู่ในเงามืดกว่าร้อยปี ในที่สุดภาพวาดก็ได้กลับมาอยู่ในที่สว่างอีกครั้ง ที่ซึ่งสาธารณชนสามารถชื่นชมมันได้`,
       questions: [
         { id: "RD6-31", tag: "Main Idea",
           question: "What is the passage mainly about?",
@@ -382,6 +410,13 @@ The reason early detection matters so much is simple. Many cancers are far easie
 The new test works by searching the blood for tiny fragments of genetic material that tumors shed as they grow. Different cancers leave subtly different traces, and by analyzing these patterns, the test can not only detect that cancer is present but also suggest where in the body it is located. In early studies, it successfully identified a number of cancers, including some for which no routine screening currently exists.
 
 Experts have welcomed the results while urging caution. A test that occasionally misses a real cancer, or that wrongly indicates cancer in a healthy person, could do real harm — causing either false reassurance or unnecessary anxiety and treatment. Before the test can be widely used, it must be proven accurate in trials involving many thousands of people. The researchers themselves emphasize that their work is a promising beginning rather than a finished product. Still, the prospect of catching cancer early with a simple blood test offers a genuine reason for hope.`,
+      textTH: `นักวิจัยประกาศในเดือนนี้ว่าพวกเขาได้พัฒนาการตรวจเลือดที่สามารถตรวจพบมะเร็งหลายชนิดในระยะเริ่มต้นก่อนที่อาการจะปรากฏ หากการตรวจนี้พิสูจน์ได้ว่าเชื่อถือได้ในการทดลองขนาดใหญ่ มันก็อาจพลิกโฉมวิธีการวินิจฉัยมะเร็งและเพิ่มโอกาสรอดชีวิตของผู้ป่วยได้อย่างมาก การประกาศนี้ซึ่งตีพิมพ์ในวารสารทางการแพทย์ที่ได้รับการยอมรับ ได้รับการต้อนรับด้วยทั้งความตื่นเต้นและความระมัดระวังอย่างรอบคอบ
+
+เหตุผลที่การตรวจพบแต่เนิ่น ๆ สำคัญมากนั้นเรียบง่าย มะเร็งหลายชนิดรักษาได้ง่ายกว่ามากเมื่อพบเร็ว ขณะที่เนื้องอกยังเล็กและยังไม่ลุกลามไปยังส่วนอื่นของร่างกาย เมื่อถึงเวลาที่อาการปรากฏ โรคมักลุกลามไปแล้ว และการรักษาก็ยากขึ้นและมีโอกาสสำเร็จน้อยลง การตรวจที่สามารถเผยให้เห็นมะเร็งก่อนที่อาการใด ๆ จะปรากฏ จะมอบความได้เปรียบอันล้ำค่าจากการเริ่มก่อนให้แก่แพทย์
+
+การตรวจแบบใหม่นี้ทำงานโดยค้นหาชิ้นส่วนเล็ก ๆ ของสารพันธุกรรมในเลือดที่เนื้องอกปล่อยออกมาขณะเติบโต มะเร็งต่างชนิดทิ้งร่องรอยที่ต่างกันเพียงเล็กน้อย และด้วยการวิเคราะห์รูปแบบเหล่านี้ การตรวจสามารถทำได้ไม่เพียงตรวจพบว่ามีมะเร็งอยู่ แต่ยังบอกใบ้ได้ว่ามันอยู่ที่ส่วนใดของร่างกาย ในการศึกษาช่วงต้น มันระบุมะเร็งได้สำเร็จหลายชนิด รวมถึงบางชนิดที่ปัจจุบันยังไม่มีการตรวจคัดกรองตามปกติ
+
+ผู้เชี่ยวชาญต้อนรับผลลัพธ์นี้พร้อมกับเรียกร้องให้ระมัดระวัง การตรวจที่บางครั้งพลาดมะเร็งที่มีอยู่จริง หรือบ่งชี้ว่าเป็นมะเร็งผิด ๆ ในคนสุขภาพดี อาจก่อผลเสียที่แท้จริง — ไม่ว่าจะเป็นการสร้างความอุ่นใจลวง ๆ หรือความวิตกและการรักษาที่ไม่จำเป็น ก่อนที่การตรวจนี้จะถูกนำมาใช้อย่างกว้างขวาง มันต้องได้รับการพิสูจน์ว่าแม่นยำในการทดลองที่มีคนหลายพันคน นักวิจัยเองก็ย้ำว่างานของพวกเขาเป็นจุดเริ่มต้นที่มีแววมากกว่าจะเป็นผลงานที่เสร็จสมบูรณ์ กระนั้น ความเป็นไปได้ที่จะตรวจจับมะเร็งได้แต่เนิ่น ๆ ด้วยการตรวจเลือดง่าย ๆ ก็มอบเหตุผลให้มีความหวังอย่างแท้จริง`,
       questions: [
         { id: "RD6-41", tag: "Main Idea",
           question: "What is the passage mainly about?",
