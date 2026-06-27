@@ -399,6 +399,13 @@ select, input[type="file"] {
 .feedback.good { background: var(--success-soft); border: 1px solid var(--success); }
 .feedback.bad { background: var(--danger-soft); border: 1px solid var(--danger); }
 .feedback b.verdict { display: block; margin-bottom: 4px; }
+/* บล็อกเทียบคำตอบที่เลือก vs เฉลย (โหมดฝึก ตอบผิด) */
+.cmp { margin: 6px 0 10px; }
+.cmp-lab { font-size: .8rem; font-weight: 700; color: var(--muted); margin-top: 6px; }
+.cmp-row { padding: 5px 10px; border-radius: 8px; margin-top: 2px; }
+.cmp-row.pick { background: var(--danger-soft); border: 1px solid var(--danger); }
+.cmp-row.ans { background: var(--success-soft); border: 1px solid var(--success); }
+.cmp-th { color: var(--muted); }
 
 .exam-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
 .flag-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 9px 16px; cursor: pointer; color: var(--text); font-weight: 600; }
