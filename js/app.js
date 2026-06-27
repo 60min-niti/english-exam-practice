@@ -692,7 +692,8 @@ function renderQuestion() {
   if (locked) {
     const ok = picked === q.answer;
     feedback = `<div class="feedback ${ok ? "good" : "bad"}">
-      <b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + String.fromCharCode(65 + q.answer)}</b>
+      <b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก"}</b>
+      ${ok ? "" : wrongCompareHTML(q, picked)}
       ${q.explanation}
     </div>`;
   }
@@ -747,7 +748,7 @@ function readingCardInner(idx) {
   let feedback = "";
   if (locked) {
     const ok = picked === q.answer;
-    feedback = `<div class="feedback ${ok ? "good" : "bad"}"><b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก — เฉลยคือข้อ " + String.fromCharCode(65 + q.answer)}</b>${q.explanation}</div>`;
+    feedback = `<div class="feedback ${ok ? "good" : "bad"}"><b class="verdict">${ok ? "✔ ถูกต้อง!" : "✘ ยังไม่ถูก"}</b>${ok ? "" : wrongCompareHTML(q, picked)}${q.explanation}</div>`;
   }
   const flagged = S.flags[q.id];
   return `<div class="q-num">ข้อ ${idx + 1} / ${total}<span class="tag">${esc(PARTS[it.part].name)}${q.tag ? " · " + esc(q.tag) : ""}</span>
@@ -1021,6 +1022,15 @@ function choiceTH(q, i) {
   if (q.choicesTH && q.choicesTH[i]) return q.choicesTH[i];
   if (q.glosses && q.glosses[i]) return q.glosses[i];
   return "";
+}
+// โหมดฝึก ตอนตอบผิด: เทียบช้อยที่ผู้ใช้เลือกกับเฉลย (ใช้คำแปลรายช้อยที่มีอยู่)
+function wrongCompareHTML(q, picked) {
+  const L = i => String.fromCharCode(65 + i);
+  const tr = i => { const t = choiceTH(q, i); return t ? ` <span class="cmp-th">= ${t}</span>` : ""; };
+  const pickRow = picked == null ? "" :
+    `<div class="cmp-row pick"><b>${L(picked)}.</b> ${q.choices[picked]}${tr(picked)}</div>`;
+  const ansRow = `<div class="cmp-row ans"><b>${L(q.answer)}.</b> ${q.choices[q.answer]}${tr(q.answer)}</div>`;
+  return `<div class="cmp">${picked != null ? `<div class="cmp-lab">✘ คุณตอบ</div>${pickRow}` : ""}<div class="cmp-lab">✔ เฉลย</div>${ansRow}</div>`;
 }
 function choiceReviewHTML(q, picked) {
   return `<div class="rc-list">` + q.choices.map((c, i) => {
